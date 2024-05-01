@@ -1,10 +1,10 @@
-import "./App.css";
+import RootLayout from "./pages/layout";
 
 function App() {
   return (
-    <>
-      <h1>blog space</h1>
-    </>
+    <RootLayout>
+      <h1 className="text-center">blog space</h1>
+    </RootLayout>
   );
 }
 
