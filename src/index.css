@@ -8,6 +8,9 @@
     html {
         @apply font-madefor-text
     }
+    body {
+        @apply dark:bg-black dark:text-white
+    }
     h1 {
         @apply text-6xl font-bold pb-3
     }

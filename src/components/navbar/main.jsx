@@ -1,6 +1,6 @@
-import { MoonIcon } from "@heroicons/react/16/solid";
 import React from "react";
 import { CategoryDropdown } from "./categoryDrop";
+import ThemeMode from "./themeMode";
 
 const navlist = [
   {
@@ -37,7 +37,7 @@ const Navbar = () => {
                 {list.title}
               </li>
             ))}
-            <MoonIcon className="size-8" />
+            <ThemeMode />
           </ul>
         </nav>
       </section>
