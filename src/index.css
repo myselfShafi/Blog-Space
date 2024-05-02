@@ -9,7 +9,7 @@
         @apply font-madefor-text
     }
     body {
-        @apply dark:bg-black dark:text-white
+        @apply dark:bg-gray-900 dark:text-white
     }
     h1 {
         @apply text-6xl font-bold pb-3
@@ -18,16 +18,25 @@
         @apply text-5xl font-bold pb-2
     }
     h3 {
-        @apply text-3xl font-semibold pb-1
+        @apply text-4xl font-semibold pb-1
     }
     h4 {
-        @apply text-2xl font-semibold
+        @apply text-3xl font-semibold
     }
     h5 {
-        @apply text-xl font-semibold
+        @apply text-2xl font-semibold
     }
     h6 {
-        @apply text-lg font-medium;
+        @apply text-xl font-medium;
+    }
+    p {
+        @apply text-base font-normal;
+    }
+    input {
+        @apply py-2 px-4 outline-none border-2 placeholder:italic
+    }
+    button {
+        @apply py-2 px-6 hover:bg-slate-400 hover:text-slate-900 transition-colors
     }
 }
 
@@ -37,5 +46,14 @@
     }
     .nav-list {
         @apply text-xl font-medium hover:underline decoration-blue-600 underline-offset-8 decoration-2 
+    }
+    .btn-outline {
+        @apply border-2 hover:border-slate-400 dark:hover:border-slate-400
+    }
+    .footer-color {
+        @apply bg-gray-950 dark:bg-gray-200 dark:text-gray-950  text-gray-100
+    }
+    .footer-color input {
+        @apply bg-gray-950 dark:bg-gray-200 dark:border-gray-950 border-gray-200 
     }
 }

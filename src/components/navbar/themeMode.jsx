@@ -1,7 +1,7 @@
 "use client";
 
-import { LightBulbIcon, MoonIcon } from "@heroicons/react/24/solid";
 import React, { useEffect, useState } from "react";
+import { Moon, Sun } from "react-feather";
 
 const ThemeMode = () => {
   const [lightMode, setLightMode] = useState(true);
@@ -23,13 +23,9 @@ const ThemeMode = () => {
   };
 
   return (
-    <button onClick={handletheme}>
-      {lightMode ? (
-        <MoonIcon className="size-8" />
-      ) : (
-        <LightBulbIcon className="size-8" />
-      )}
-    </button>
+    <i className="cursor-pointer" onClick={handletheme}>
+      {lightMode ? <Moon /> : <Sun />}
+    </i>
   );
 };
 

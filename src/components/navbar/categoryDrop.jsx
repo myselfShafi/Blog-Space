@@ -1,5 +1,6 @@
-import { ArrowUturnRightIcon } from "@heroicons/react/16/solid";
 import React from "react";
+import { ChevronDown } from "react-feather";
+import { textConfig } from "../../config";
 import { Dropdown } from "../shared";
 
 const categorylist = [
@@ -37,25 +38,31 @@ const categorylist = [
 
 export const CategoryDropdown = () => {
   return (
-    <Dropdown
-      title={"Categories"}
-      icon={
-        <ArrowUturnRightIcon className="size-4 rotate-90 group-hover/dropdown:rotate-270 transition-transform duration-300 transform" />
-      }
-    >
-      <div className="grid  grid-cols-4 gap-10 max-h-[70vh]">
-        {categorylist.map((list) => (
-          <section
-            key={list.id}
-            className="relative border w-fit h-fit hover:shadow-2xl group/category"
-          >
-            <img src={list.img} className="w-56 h-48 " />
-            <h6 className="bg-white/75 text-center px-2 py-1 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition duration-500 group-hover/category:-translate-y-6 group-hover/category:scale-110 text-nowrap">
-              {list.title}
-            </h6>
-          </section>
-        ))}
-      </div>
-    </Dropdown>
+    <div>
+      <Dropdown
+        classes={"hidden lg:block"}
+        title={textConfig.navMenu.category}
+        icon={
+          <ChevronDown className="size-4 group-hover/dropdown:rotate-180 transition-transform duration-300 transform" />
+        }
+      >
+        <div className="grid grid-cols-4 gap-10 max-h-[70vh]">
+          {categorylist.map((list) => (
+            <section
+              key={list.id}
+              className="relative border dark:border-gray-900 w-fit h-fit hover:shadow-2xl group/category"
+            >
+              <img src={list.img} className="w-56 h-48 " />
+              <h6 className="bg-white/75 dark:bg-gray-900/75 text-center px-2 py-1 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition duration-500 group-hover/category:-translate-y-6 group-hover/category:scale-110 text-nowrap">
+                {list.title}
+              </h6>
+            </section>
+          ))}
+        </div>
+      </Dropdown>
+      <a className="lg:hidden" href={"#"}>
+        {textConfig.navMenu.category}
+      </a>
+    </div>
   );
 };
