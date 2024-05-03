@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Menu } from "react-feather";
+import { Menu, XSquare } from "react-feather";
 import { textConfig } from "../../config";
 import { CategoryDropdown } from "./categoryDrop";
 import ThemeMode from "./themeMode";
@@ -29,12 +29,9 @@ const navlist = [
 const Navbar = () => {
   const [open, setOpen] = useState(false);
 
-  const handleToggle = () => {
-    setOpen(true);
-  };
   return (
-    <header className="relative">
-      <section className="container p-3 flex justify-between items-center">
+    <header className="fixed w-full top-0 left-0 z-50 max-h-40">
+      <section className="container p-6 lg:p-3 flex justify-between items-center">
         <div className="block lg:hidden dark:invert">
           <img src="/public/icon.png" alt="Blog Sphere" />
         </div>
@@ -48,7 +45,6 @@ const Navbar = () => {
             className={`flex flex-col lg:flex-row items-center xl:gap-x-20 lg:gap-x-10 gap-y-5 absolute lg:relative top-0 left-0 right-0 p-10 bg-white/90 dark:bg-gray-900/90 dark:shadow-gray-800 shadow-lg lg:shadow-none transition-transform transform duration-200 -translate-y-full lg:translate-y-0 ${
               open && "translate-y-1"
             }`}
-            onMouseOutCapture={() => setOpen(false)}
           >
             {navlist.map((list) => (
               <li className="nav-list" key={list.id}>
@@ -56,9 +52,10 @@ const Navbar = () => {
               </li>
             ))}
             <ThemeMode />
+            <XSquare className="lg:hidden" onClick={() => setOpen(false)} />
           </ul>
         </nav>
-        <Menu onClick={handleToggle} className="cursor-pointer lg:hidden" />
+        <Menu onClick={() => setOpen(true)} className="lg:hidden" />
       </section>
     </header>
   );

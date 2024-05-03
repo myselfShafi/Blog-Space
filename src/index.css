@@ -9,7 +9,7 @@
         @apply font-madefor-text
     }
     body {
-        @apply dark:bg-gray-900 dark:text-white
+        @apply dark:bg-gray-900 dark:text-white pt-16 lg:pt-40
     }
     h1 {
         @apply text-6xl font-bold pb-3
