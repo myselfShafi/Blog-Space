@@ -30,7 +30,7 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="fixed w-full top-0 left-0 z-50 max-h-40">
+    <header className="fixed w-full top-0 left-0 z-50 max-h-40  bg-white/90 dark:bg-gray-900/90">
       <section className="container p-6 lg:p-3 flex justify-between items-center">
         <div className="block lg:hidden dark:invert">
           <img src="/public/icon.png" alt="Blog Sphere" />

@@ -5,6 +5,7 @@ export default {
   theme: {
     container: {
       center: true,
+      padding: ".75rem",
     },
     extend: {
       fontFamily: {
@@ -13,6 +14,9 @@ export default {
       },
       rotate: {
         270: "270deg",
+      },
+      width: {
+        120: "30rem",
       },
     },
   },

@@ -1,3 +1,4 @@
+import BlogCard from "./blogCard";
 import Dropdown from "./dropdown";
 
-export { Dropdown };
+export { BlogCard, Dropdown };

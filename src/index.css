@@ -9,7 +9,7 @@
         @apply font-madefor-text
     }
     body {
-        @apply dark:bg-gray-900 dark:text-white pt-16 lg:pt-40
+        @apply dark:bg-gray-900 dark:text-white pt-20 lg:pt-40
     }
     h1 {
         @apply text-6xl font-bold pb-3
@@ -55,5 +55,11 @@
     }
     .footer-color input {
         @apply bg-gray-950 dark:bg-gray-200 dark:border-gray-950 border-gray-200 
+    }
+    .divider-center {
+        @apply overflow-hidden before:h-[1px] after:h-[1px] after:bg-slate-500 
+        after:inline-block after:relative after:align-middle after:w-1/3 
+        before:bg-slate-500 before:inline-block before:relative before:align-middle 
+        before:w-1/3 before:right-2 after:left-2 p-4
     }
 }

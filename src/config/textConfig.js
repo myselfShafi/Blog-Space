@@ -7,6 +7,9 @@ const textConfig = {
     contact: "Contact Us",
     category: "Categories",
   },
+  dashboard: {
+    article: "Trending Articles",
+  },
 };
 
 export default textConfig;

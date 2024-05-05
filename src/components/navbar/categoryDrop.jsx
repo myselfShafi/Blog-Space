@@ -50,7 +50,7 @@ export const CategoryDropdown = () => {
           {categorylist.map((list) => (
             <section
               key={list.id}
-              className="relative border dark:border-gray-900 w-fit h-fit hover:shadow-2xl group/category"
+              className="relative border dark:border-gray-900 w-fit h-fit hover:shadow-2xl group/category after:content-[''] after:absolute after:top-3 after:bottom-3 after:left-3 after:right-3 hover:after:border hover:after:dark:border-gray-900"
             >
               <img src={list.img} className="w-56 h-48 " />
               <h6 className="bg-white/75 dark:bg-gray-900/75 text-center px-2 py-1 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition duration-500 group-hover/category:-translate-y-6 group-hover/category:scale-110 text-nowrap">
