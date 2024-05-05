@@ -18,6 +18,12 @@ export default {
       width: {
         120: "30rem",
       },
+      backgroundImage: {
+        "gradient-light":
+          "linear-gradient(180deg, hsla(216, 41%, 79%, 1)  0%, hsla(186, 33%, 94%, 1) 65%, rgb(255,255,255) 100%)  ",
+        "gradient-dark":
+          "linear-gradient(180deg, hsla(351, 100%, 25%, 1) 0%, hsla(9, 59%, 7%, 1) 75%, rgb(17,24,39) 100% )",
+      },
     },
   },
   plugins: [],

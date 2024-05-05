@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Menu, XSquare } from "react-feather";
 import { textConfig } from "../../config";
 import { CategoryDropdown } from "./categoryDrop";
@@ -28,9 +28,27 @@ const navlist = [
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const [scroll, setScroll] = useState(false);
+
+  const setBg = () => {
+    if (window.scrollY > 500) {
+      setScroll(true);
+    } else {
+      setScroll(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", setBg);
+    return () => window.removeEventListener("scroll", setBg);
+  }, []);
 
   return (
-    <header className="fixed w-full top-0 left-0 z-50 max-h-40  bg-white/90 dark:bg-gray-900/90">
+    <header
+      className={`fixed w-full top-0 left-0 z-50 max-h-40 ${
+        scroll && "bg-white/90 dark:bg-gray-900/90"
+      }`}
+    >
       <section className="container p-6 lg:p-3 flex justify-between items-center">
         <div className="block lg:hidden dark:invert">
           <img src="/public/icon.png" alt="Blog Sphere" />
@@ -42,8 +60,8 @@ const Navbar = () => {
 
         <nav>
           <ul
-            className={`flex flex-col lg:flex-row items-center xl:gap-x-20 lg:gap-x-10 gap-y-5 absolute lg:relative top-0 left-0 right-0 p-10 bg-white/90 dark:bg-gray-900/90 dark:shadow-gray-800 shadow-lg lg:shadow-none transition-transform transform duration-200 -translate-y-full lg:translate-y-0 ${
-              open && "translate-y-1"
+            className={`flex flex-col lg:flex-row items-center xl:gap-x-20 lg:gap-x-10 gap-y-5 absolute lg:relative top-0 left-0 right-0 p-10 bg-white/90 lg:bg-transparent dark:lg:bg-transparent dark:bg-gray-900/90  lg:shadow-none transition-transform transform duration-200 -translate-y-full lg:translate-y-0 ${
+              open && "translate-y-0 dark:shadow-gray-800 shadow-lg"
             }`}
           >
             {navlist.map((list) => (

@@ -13,7 +13,7 @@ const BlogCard = () => {
   return (
     <section
       onClick={() => alert("clicked")}
-      className="lg:flex container p-4 lg:w-11/12 xl:w-3/4 hover:shadow-lg dark:hover:shadow-gray-800 cursor-pointer"
+      className="lg:flex container p-4 lg:w-11/12 xl:w-3/4 hover:drop-shadow-lg hover:shadow-lg dark:hover:drop-shadow-gray-800 dark:hover:shadow-slate-950 cursor-pointer"
     >
       <div className="flex-none w-full h-80 lg:w-120 lg:h-80 relative">
         <img

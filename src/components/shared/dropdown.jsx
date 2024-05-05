@@ -13,7 +13,7 @@ const Dropdown = ({ children, title, icon, classes }) => {
         {icon && icon}
       </div>
       <div
-        className="absolute -right-full p-10 z-10 w-max origin-top-right border dark:border-gray-900 shadow-lg dark:shadow-gray-800 hidden group-hover/dropdown:block bg-white dark:bg-gray-900"
+        className="absolute -right-full p-10 z-10 w-max origin-top-right border dark:border-gray-900 shadow-lg dark:shadow-slate-950 hidden group-hover/dropdown:block bg-white dark:bg-gray-900"
         role="menu"
         aria-labelledby="dropdown-btn"
       >
