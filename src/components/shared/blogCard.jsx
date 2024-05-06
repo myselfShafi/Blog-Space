@@ -1,5 +1,6 @@
 import React from "react";
 import { Calendar, User } from "react-feather";
+import { textConfig } from "../../config";
 
 const BlogCard = () => {
   const string =
@@ -11,11 +12,8 @@ const BlogCard = () => {
   });
 
   return (
-    <section
-      onClick={() => alert("clicked")}
-      className="lg:flex container p-4 lg:w-11/12 xl:w-3/4 hover:drop-shadow-lg hover:shadow-lg dark:hover:drop-shadow-gray-800 dark:hover:shadow-slate-950 cursor-pointer"
-    >
-      <div className="flex-none w-full h-80 lg:w-120 lg:h-80 relative">
+    <section className="lg:flex container p-5 lg:w-11/12 xl:w-3/4 hover:drop-shadow-lg hover:shadow-lg dark:hover:drop-shadow-gray-800 dark:hover:shadow-slate-950 group/card">
+      <div className="flex-none w-full h-80 lg:w-120 lg:h-96 relative">
         <img
           src="https://images.unsplash.com/photo-1714572877777-59bf4765f462"
           alt="card-img"
@@ -27,12 +25,20 @@ const BlogCard = () => {
         <h6 className="uppercase tracking-widest text-purple-600 font-bold">
           Nature
         </h6>
-        <h5>iPad Pro M1 Chip: Bringing The MacBook Pro Power</h5>
-        <p className="leading-7 text-lg">
+        <h5 className="text-stone-700 dark:text-stone-300">
+          iPad Pro M1 Chip: Bringing The MacBook Pro Power
+        </h5>
+        <p className="leading-7 text-lg group-hover/card:text-rose-500 transition-colors delay-75">
           {string.length > 160
             ? string.substring(0, 160).concat(" ...")
-            : string}
+            : string}{" "}
         </p>
+        <button
+          onClick={() => alert("clicked")}
+          className="py-1 px-2 border border-red-600 text-red-600  lg:invisible group-hover/card:visible btn-outline"
+        >
+          {textConfig.shared.more}
+        </button>
         <div className="flex gap-x-6">
           <div className="flex items-center gap-x-2">
             <User />
