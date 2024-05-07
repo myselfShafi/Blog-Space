@@ -24,6 +24,9 @@ export default {
         "gradient-dark":
           "linear-gradient(180deg, hsla(351, 100%, 25%, 1) 0%, hsla(9, 59%, 7%, 1) 75%, rgb(17,24,39) 100% )",
       },
+      boxShadow: {
+        "inner-3xl": "inset 0 40px 80px 0 rgba(17,24,39,1)",
+      },
     },
   },
   plugins: [],

@@ -56,5 +56,17 @@
     .footer-color input {
         @apply bg-gray-950 dark:bg-gray-200 dark:border-gray-950 border-gray-200 
     }
+    .scrollbar::-webkit-scrollbar {
+        @apply w-0 lg:w-2
+    }
+    .scrollbar::-webkit-scrollbar-track {
+        @apply bg-slate-300 dark:bg-slate-700 rounded-lg
+    }
+    .scrollbar::-webkit-scrollbar-thumb {
+        @apply bg-gray-400 dark:bg-gray-800 rounded-lg hover:bg-gray-500 dark:hover:bg-gray-500
+    }
+    .post-border {
+        @apply border border-slate-500
+    }
     
 }

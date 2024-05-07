@@ -1,5 +1,6 @@
 import React from "react";
-import { textConfig } from "../../config";
+import { textConfig } from "../config";
+import { Heading } from "./shared";
 
 const DayBlog = () => {
   const date = new Date().toLocaleDateString("en-IN", {
@@ -7,15 +8,19 @@ const DayBlog = () => {
     month: "long",
     year: "numeric",
   });
+
+  const url = "https://images.unsplash.com/photo-1561154464-82e9adf32764";
+
   return (
     <div className="container p-0 overflow-hidden">
-      <h4 className="font-extrabold tracking-widest text-center">
-        {textConfig.dashboard.dayBlog}
-      </h4>
-      <a href="">
+      <Heading>{textConfig.dashboard.dayBlog}</Heading>
+      <a href="/post">
         <div className="relative my-10 h-[40rem] overflow-hidden group/wrapper">
-          <div className="h-full bg-[url(https://images.unsplash.com/photo-1714906472874-63482f7cef44)] bg-cover bg-center group-hover/wrapper:scale-105 transition-transform duration-200"></div>
-          <div className="absolute top-0 left-0 h-full w-full opacity-50 group-hover/wrapper:opacity-100 group-hover/wrapper:backdrop-blur-sm p-10 lg:p-16 flex flex-col justify-end transition delay-100">
+          <div
+            className="h-full bg-cover bg-center group-hover/wrapper:scale-105 transition-transform duration-200 shadow-inner-3xl"
+            style={{ backgroundImage: `url(${url})` }}
+          ></div>
+          <div className="absolute top-0 left-0 h-full w-full lg:opacity-50 group-hover/wrapper:opacity-100 group-hover/wrapper:backdrop-blur-sm p-10 lg:p-16 flex flex-col justify-end transition delay-100">
             <div className="text-white space-y-4">
               <h6 className="px-2 bg-red-700 w-fit uppercase font-extrabold">
                 Nature

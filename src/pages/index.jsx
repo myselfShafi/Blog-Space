@@ -1,3 +1,5 @@
+import Dashboard from "./dashboard";
 import RootLayout from "./layout";
+import Post from "./post";
 
-export { RootLayout };
+export { Dashboard, Post, RootLayout };

@@ -8,7 +8,7 @@ const navlist = [
   {
     id: 1,
     title: textConfig.navMenu.home,
-    href: "#",
+    href: "/",
   },
   {
     id: 2,
@@ -17,12 +17,12 @@ const navlist = [
   {
     id: 3,
     title: textConfig.navMenu.about,
-    href: "#",
+    href: "/about",
   },
   {
     id: 4,
     title: textConfig.navMenu.contact,
-    href: "#",
+    href: "/contact-us",
   },
 ];
 

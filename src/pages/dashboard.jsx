@@ -1,7 +1,7 @@
 import React from "react";
-import { textConfig } from "../../config";
-import { BlogCard } from "../shared";
-import DayBlog from "./dayBlog";
+import { DayBlog } from "../components";
+import { BlogCard, Heading } from "../components/shared";
+import { textConfig } from "../config";
 
 const Dashboard = () => {
   return (
@@ -33,9 +33,7 @@ const Dashboard = () => {
       </div>
       <DayBlog />
       <div className="container my-32">
-        <h4 className="font-extrabold tracking-widest text-center">
-          {textConfig.dashboard.article}
-        </h4>
+        <Heading>{textConfig.dashboard.article}</Heading>
         <div className="my-10">
           <BlogCard />
           <BlogCard />

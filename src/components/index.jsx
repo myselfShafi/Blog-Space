@@ -1,5 +1,5 @@
-import Dashboard from "./dashboard/main";
+import DayBlog from "./dayBlog";
 import Footer from "./footer/main";
 import Navbar from "./navbar/main";
 
-export { Dashboard, Footer, Navbar };
+export { DayBlog, Footer, Navbar };

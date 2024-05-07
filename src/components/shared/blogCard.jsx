@@ -1,10 +1,16 @@
 import React from "react";
 import { Calendar, User } from "react-feather";
+import { useNavigate } from "react-router-dom";
 import { textConfig } from "../../config";
+import { getTruncatedText } from "../../utilities";
 
 const BlogCard = () => {
+  const navigate = useNavigate();
+
   const string =
     "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Atque minus deleniti asperiores modi hic sed ut, recusandae labore eius unde omnis aliquid harum sint, temporibus dolorum ab blanditiis. Voluptates, explicabo.";
+
+  const TruncText = getTruncatedText(string, 160);
   const date = new Date().toLocaleDateString("en-IN", {
     day: "numeric",
     month: "long",
@@ -29,12 +35,10 @@ const BlogCard = () => {
           iPad Pro M1 Chip: Bringing The MacBook Pro Power
         </h5>
         <p className="leading-7 text-lg group-hover/card:text-rose-500 transition-colors delay-75">
-          {string.length > 160
-            ? string.substring(0, 160).concat(" ...")
-            : string}{" "}
+          {TruncText}
         </p>
         <button
-          onClick={() => alert("clicked")}
+          onClick={() => navigate("/post")}
           className="py-1 px-2 border border-red-600 text-red-600  lg:invisible group-hover/card:visible btn-outline"
         >
           {textConfig.shared.more}

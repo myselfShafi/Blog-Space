@@ -21,6 +21,7 @@ const textConfig = {
   shared: {
     more: "Read More",
   },
+  related: "Related Posts",
 };
 
 export default textConfig;
