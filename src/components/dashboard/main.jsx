@@ -1,6 +1,7 @@
 import React from "react";
 import { textConfig } from "../../config";
 import { BlogCard } from "../shared";
+import DayBlog from "./dayBlog";
 
 const Dashboard = () => {
   return (
@@ -30,9 +31,9 @@ const Dashboard = () => {
           {textConfig.dashboard.tag[2]}
         </h6>
       </div>
-
-      <div className="container">
-        <h4 className="font-bold tracking-widest text-center">
+      <DayBlog />
+      <div className="container my-32">
+        <h4 className="font-extrabold tracking-widest text-center">
           {textConfig.dashboard.article}
         </h4>
         <div className="my-10">
