@@ -1,5 +1,6 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Dashboard, Post, RootLayout } from "./pages";
+import CategoryPosts from "./pages/categoryPosts";
 
 const router = createBrowserRouter([
   {
@@ -13,6 +14,14 @@ const router = createBrowserRouter([
       {
         path: "/post",
         element: <Post />,
+      },
+      {
+        path: "/all-posts",
+        element: <Post />,
+      },
+      {
+        path: "/all-posts/:category",
+        element: <CategoryPosts />,
       },
     ],
   },
