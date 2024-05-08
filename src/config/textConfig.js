@@ -16,6 +16,7 @@ const textConfig = {
       "today.",
     ],
     dayBlog: "Blog of the Day",
+    latest: "Latest Blogs",
     article: "Trending Articles",
   },
   shared: {

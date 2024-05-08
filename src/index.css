@@ -68,5 +68,8 @@
     .post-border {
         @apply border border-slate-500
     }
+    .card-grid {
+        @apply grid lg:grid-cols-2 xl:grid-cols-4 gap-10
+    }
     
 }

@@ -54,11 +54,15 @@ const Post = () => {
           <a href="">View All</a>
         </span>
       </Heading>
-      <div className="grid lg:grid-cols-2 xl:grid-cols-4 gap-10">
-        <MiniCard />
-        <MiniCard />
-        <MiniCard />
-        <MiniCard />
+      <div className="card-grid">
+        {[1, 2, 3, 4].map((item, idx) => (
+          <MiniCard
+            key={idx}
+            imgClass={"h-72"}
+            wrapperClass={"post-border border-0 lg:border"}
+            titleClass={"group-hover/mini:text-purple-600"}
+          />
+        ))}
       </div>
     </MainContainer>
   );

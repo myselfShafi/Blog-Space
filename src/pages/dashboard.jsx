@@ -1,6 +1,6 @@
 import React from "react";
 import { DayBlog } from "../components";
-import { BlogCard, Heading } from "../components/shared";
+import { BlogCard, Heading, MiniCard } from "../components/shared";
 import { textConfig } from "../config";
 
 const Dashboard = () => {
@@ -32,6 +32,24 @@ const Dashboard = () => {
         </h6>
       </div>
       <DayBlog />
+      <div className="container my-32">
+        <Heading>{textConfig.dashboard.latest}</Heading>
+        <div className="my-10 card-grid">
+          {[
+            "https://images.unsplash.com/photo-1714409299166-de863d9598fb",
+            "https://images.unsplash.com/photo-1715090156594-aaa3ed5900b9",
+            3,
+            "https://images.unsplash.com/photo-1495615080073-6b89c9839ce0",
+          ].map((item, idx) => (
+            <MiniCard
+              key={idx}
+              data={item}
+              imgClass={"max-h-96"}
+              titleClass={"uppercase group-hover/mini:text-rose-500"}
+            />
+          ))}
+        </div>
+      </div>
       <div className="container my-32">
         <Heading>{textConfig.dashboard.article}</Heading>
         <div className="my-10">
