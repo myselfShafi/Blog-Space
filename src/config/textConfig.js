@@ -23,6 +23,7 @@ const textConfig = {
     more: "Read More",
   },
   related: "Related Posts",
+  read: "Read Article ...",
 };
 
 export default textConfig;
