@@ -1,5 +1,6 @@
 import React from "react";
 import { getTruncatedText } from "../../utilities";
+import DateNRead from "./date&Read";
 
 const MiniCard = ({ wrapperClass, imgClass, titleClass, data }) => {
   const text = "iPad Pro M1 Chip: Bringing The MacBook Pro Powersgdfh";
@@ -26,13 +27,7 @@ const MiniCard = ({ wrapperClass, imgClass, titleClass, data }) => {
           className={`w-full object-cover object-center group-hover/mini:scale-105 transition-transform duration-200 ${imgClass}`}
         />
         <div className={`p-8 transition-colors duration-200 space-y-2`}>
-          {date && (
-            <div className="flex gap-2 items-center text-gray-500 dark:text-gray-400">
-              <p>{date}</p>
-              <div className="w-1 h-1 rounded-full bg-gray-500 mx-1"></div>
-              <p>2 min read</p>
-            </div>
-          )}
+          {date && <DateNRead date={date} duration={"2 min read"} />}
           <h5 className={`${titleClass}`}>{truncText}</h5>
         </div>
       </div>

@@ -1,6 +1,11 @@
 import React from "react";
 import { Share2 } from "react-feather";
-import { Heading, MainContainer, MiniCard } from "../components/shared";
+import {
+  DateNRead,
+  Heading,
+  MainContainer,
+  MiniCard,
+} from "../components/shared";
 import { textConfig } from "../config";
 
 const Post = () => {
@@ -21,12 +26,13 @@ const Post = () => {
             />
           </div>
           <div className="px-3 py-5 lg:py-0 lg:px-14 space-y-6 overflow-y-auto lg:max-h-screen scrollbar">
-            <div className="flex gap-2 items-center text-gray-500">
-              <h6>{date}</h6>
-              <div className="w-1 h-1 rounded-full bg-gray-500 mx-1"></div>
-              <h6 className="grow">2 min read</h6>
+            <DateNRead
+              date={date}
+              duration={"2 min read"}
+              durationClass={"grow"}
+            >
               <Share2 />
-            </div>
+            </DateNRead>
             <h6 className="w-fit px-2 uppercase tracking-widest text-purple-600 border border-purple-600 font-bold">
               Nature
             </h6>
