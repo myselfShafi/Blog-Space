@@ -18,7 +18,7 @@ const CategoryCard = ({ data }) => {
 
   return (
     <a href="/">
-      <div className="bg-gray-100 dark:bg-gray-800 break-inside-avoid mb-10 lg:mb-16 group/category overflow-hidden">
+      <div className="bg-gray-100 dark:bg-gray-800 break-inside-avoid mb-10 lg:mb-16 group/category overflow-hidden hover:shadow-lg dark:hover:shadow-slate-950">
         <div className="relative group-hover/category:scale-105 transition-transform duration-300">
           <img
             src={
@@ -43,7 +43,9 @@ const CategoryCard = ({ data }) => {
           <h6 className="font-thin group-hover/category:text-rose-500 group-hover/category:transition-colors group-hover/category:duration-300">
             {truncPara}
           </h6>
-          <div className="h-[1px] bg-gray-400"></div>
+          <p className="text-center overline">
+            {textConfig.by} <span className="font-bold">John Doe</span>
+          </p>
         </div>
       </div>
     </a>

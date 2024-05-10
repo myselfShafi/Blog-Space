@@ -24,6 +24,7 @@ const textConfig = {
   },
   related: "Related Posts",
   read: "Read Article ...",
+  by: "by",
 };
 
 export default textConfig;
