@@ -12,16 +12,20 @@ const router = createBrowserRouter([
         element: <Dashboard />,
       },
       {
-        path: "/post",
-        element: <Post />,
+        path: "/all-category",
+        element: (
+          <>
+            <h1>safshdf</h1>
+          </>
+        ),
       },
       {
-        path: "/all-posts",
-        element: <Post />,
-      },
-      {
-        path: "/all-posts/:category",
+        path: "/all-category/:category",
         element: <CategoryPosts />,
+      },
+      {
+        path: "/all-category/:category/:post",
+        element: <Post />,
       },
     ],
   },

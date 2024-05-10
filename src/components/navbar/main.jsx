@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Menu, XSquare } from "react-feather";
+import { Link } from "react-router-dom";
 import { textConfig } from "../../config";
 import { CategoryDropdown } from "./categoryDrop";
 import ThemeMode from "./themeMode";
@@ -54,7 +55,9 @@ const Navbar = () => {
           <img src="/public/icon.png" alt="Blog Sphere" />
         </div>
         <div className="hidden lg:block">
-          <h1 className="text-pink-700 ">{textConfig.title}</h1>
+          <Link to={"/"}>
+            <h1 className="text-pink-700 ">{textConfig.title}</h1>
+          </Link>
           <h6 className="tagline">{textConfig.subtitle}</h6>
         </div>
 

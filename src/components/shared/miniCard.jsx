@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { getTruncatedText } from "../../utilities";
 import DateNRead from "./date&Read";
 
@@ -12,8 +13,10 @@ const MiniCard = ({ wrapperClass, imgClass, titleClass, data }) => {
     year: "numeric",
   });
 
+  const postId = "asfgsdfjghkshfghgfj";
+
   return (
-    <a href="/">
+    <Link to={`/all-category/sports/blog-${postId}`} reloadDocument>
       <div
         className={`xl:max-w-[20vw] group/mini overflow-hidden ${wrapperClass} `}
       >
@@ -31,7 +34,7 @@ const MiniCard = ({ wrapperClass, imgClass, titleClass, data }) => {
           <h5 className={`${titleClass}`}>{truncText}</h5>
         </div>
       </div>
-    </a>
+    </Link>
   );
 };
 

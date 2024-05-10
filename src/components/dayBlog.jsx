@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { textConfig } from "../config";
 import { Heading } from "./shared";
 
@@ -9,12 +10,15 @@ const DayBlog = () => {
     year: "numeric",
   });
 
+  const category = "nature";
+  const postId = "af3t4ge5gerg5fgty7k8";
+
   const url = "https://images.unsplash.com/photo-1561154464-82e9adf32764";
 
   return (
     <div className="container p-0 overflow-hidden">
       <Heading>{textConfig.dashboard.dayBlog}</Heading>
-      <a href="/post">
+      <Link to={`/all-category/${category}/${postId}`}>
         <div className="relative my-10 h-[40rem] overflow-hidden group/wrapper">
           <div
             className="h-full bg-cover bg-center group-hover/wrapper:scale-105 transition-transform duration-200 shadow-inner-3xl"
@@ -34,7 +38,7 @@ const DayBlog = () => {
             </div>
           </div>
         </div>
-      </a>
+      </Link>
     </div>
   );
 };

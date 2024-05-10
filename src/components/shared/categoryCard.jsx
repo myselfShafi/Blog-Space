@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { textConfig } from "../../config";
 import { getTruncatedText } from "../../utilities";
 import DateNRead from "./date&Read";
@@ -15,9 +16,10 @@ const CategoryCard = ({ data }) => {
     month: "long",
     year: "numeric",
   });
+  const postId = "asfgshfghgfj";
 
   return (
-    <a href="/post">
+    <Link to={`/all-category/sports/blog-${postId}`}>
       <div className="bg-gray-100 dark:bg-gray-800 break-inside-avoid mb-10 lg:mb-16 group/category overflow-hidden hover:shadow-lg dark:hover:shadow-slate-950">
         <div className="relative group-hover/category:scale-105 transition-transform duration-300">
           <img
@@ -48,7 +50,7 @@ const CategoryCard = ({ data }) => {
           </p>
         </div>
       </div>
-    </a>
+    </Link>
   );
 };
 

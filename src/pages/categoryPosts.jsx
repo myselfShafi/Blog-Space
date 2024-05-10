@@ -10,10 +10,10 @@ const CategoryPosts = () => {
     <div className="my-20 lg:my-40">
       <div
         className="w-full h-96 lg:h-[50vh] bg-cover bg-center center-element"
-        style={{ backgroundImage: `url(${state.img})` }}
+        style={{ backgroundImage: `url(${state?.img})` }}
       >
         <h2 className="mix-blend-screen center-element bg-white/75 dark:bg-gray-900/75 min-w-56 min-h-56 px-3  rounded-full font-extrabold text-center">
-          {state.title}
+          {state?.title}
         </h2>
       </div>
       <MainContainer className={"p-0"}>

@@ -9,37 +9,37 @@ const categorylist = [
     id: 1,
     img: "https://images.unsplash.com/photo-1713502359486-d3611d924f61",
     title: "Nature",
-    href: "/all-posts/nature",
+    href: "/all-category/nature",
   },
   {
     id: 2,
     img: "https://images.unsplash.com/photo-1594909122845-11baa439b7bf",
     title: "Film",
-    href: "/all-posts/film",
+    href: "/all-category/film",
   },
   {
     id: 3,
     img: "https://images.unsplash.com/photo-1688217161165-6ba7a54ec38e",
     title: "Travel",
-    href: "/all-posts/travel",
+    href: "/all-category/travel",
   },
   {
     id: 4,
     img: "https://images.unsplash.com/photo-1551225894-d26fc7d4e286",
     title: "Food & Drink",
-    href: "/all-posts/food-&-drink",
+    href: "/all-category/food-&-drink",
   },
   {
     id: 5,
     img: "https://images.unsplash.com/photo-1588596588734-3e1d408452ab",
     title: "Fashion",
-    href: "/all-posts/fashion",
+    href: "/all-category/fashion",
   },
   {
     id: 6,
     img: "https://images.unsplash.com/photo-1638193625184-fd7b6d313eb9",
     title: "Sports",
-    href: "/all-posts/sports",
+    href: "/all-category/sports",
   },
 ];
 
