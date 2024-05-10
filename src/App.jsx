@@ -1,7 +1,13 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { Dashboard, Post, RootLayout } from "./pages";
-import Category from "./pages/category";
-import CategoryPosts from "./pages/categoryPosts";
+import {
+  About,
+  Category,
+  CategoryPosts,
+  ContactUs,
+  Dashboard,
+  Post,
+  RootLayout,
+} from "./pages";
 
 const router = createBrowserRouter([
   {
@@ -11,6 +17,14 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Dashboard />,
+      },
+      {
+        path: "/about",
+        element: <About />,
+      },
+      {
+        path: "/contact-us",
+        element: <ContactUs />,
       },
       {
         path: "/all-category",
