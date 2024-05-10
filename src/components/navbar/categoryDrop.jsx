@@ -70,9 +70,13 @@ export const CategoryDropdown = () => {
           ))}
         </div>
       </Dropdown>
-      <a className="lg:hidden" href={"#"}>
+      <Link
+        className="lg:hidden"
+        to={"/all-category"}
+        state={{ list: categorylist }}
+      >
         {textConfig.navMenu.category}
-      </a>
+      </Link>
     </div>
   );
 };

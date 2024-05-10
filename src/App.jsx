@@ -1,5 +1,6 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Dashboard, Post, RootLayout } from "./pages";
+import Category from "./pages/category";
 import CategoryPosts from "./pages/categoryPosts";
 
 const router = createBrowserRouter([
@@ -13,11 +14,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/all-category",
-        element: (
-          <>
-            <h1>safshdf</h1>
-          </>
-        ),
+        element: <Category />,
       },
       {
         path: "/all-category/:category",
