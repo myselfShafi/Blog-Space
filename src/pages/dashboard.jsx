@@ -1,9 +1,11 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { DayBlog } from "../components";
 import { BlogCard, Heading, MiniCard } from "../components/shared";
 import { textConfig } from "../config";
 
 const Dashboard = () => {
+  const navigate = useNavigate();
   return (
     <div>
       <div className="h-[calc(100vh-5rem)] bg-gradient-light dark:bg-gradient-dark pt-20 lg:pt-40 flex flex-col items-center justify-center text-center px-3">
@@ -56,6 +58,14 @@ const Dashboard = () => {
           <BlogCard />
           <BlogCard />
           <BlogCard />
+        </div>
+        <div className="center-element">
+          <button
+            className="uppercase font-extrabold btn-contain"
+            onClick={() => navigate("/all-category")}
+          >
+            All Posts
+          </button>
         </div>
       </div>
     </div>

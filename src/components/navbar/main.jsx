@@ -51,9 +51,9 @@ const Navbar = () => {
       }`}
     >
       <section className="container p-6 lg:p-3 flex justify-between items-center">
-        <div className="block lg:hidden dark:invert">
+        <Link to={"/"} className="block lg:hidden dark:invert">
           <img src="/public/icon.png" alt="Blog Sphere" />
-        </div>
+        </Link>
         <div className="hidden lg:block">
           <Link to={"/"}>
             <h1 className="text-pink-700 ">{textConfig.title}</h1>

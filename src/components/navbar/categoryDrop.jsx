@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { textConfig } from "../../config";
 import { Dropdown } from "../shared";
 
-const categorylist = [
+export const categorylist = [
   {
     id: 1,
     img: "https://images.unsplash.com/photo-1713502359486-d3611d924f61",

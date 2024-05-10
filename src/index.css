@@ -36,7 +36,7 @@
         @apply py-2 px-4 outline-none border-2 placeholder:italic
     }
     button {
-        @apply py-2 px-6 hover:bg-red-700 hover:text-white transition-colors delay-75
+        @apply py-2 px-6 transition-colors delay-75
     }
 }
 
@@ -48,7 +48,10 @@
         @apply text-xl font-medium hover:underline decoration-blue-600 underline-offset-8 decoration-2 
     }
     .btn-outline {
-        @apply border-2 hover:border-red-700 dark:hover:border-red-700
+        @apply border-2 hover:border-red-700 dark:hover:border-red-700  hover:bg-red-700 hover:text-white
+    }
+    .btn-contain {
+        @apply bg-gray-900 text-white dark:bg-white dark:text-gray-900 rounded-md hover:opacity-80
     }
     .footer-color {
         @apply bg-gray-950 dark:bg-gray-200 dark:text-gray-950  text-gray-100
