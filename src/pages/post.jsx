@@ -57,7 +57,7 @@ const Post = () => {
       <Heading className={"relative"}>
         {textConfig.related}
         <span className="absolute right-2 lg:right-0 top-1/2 -translate-y-1/2 text-base font-extralight post-border px-2 py-1">
-          <a href="">View All</a>
+          <a href="/">{textConfig.view}</a>
         </span>
       </Heading>
       <div className="card-grid">

@@ -23,6 +23,7 @@ const textConfig = {
     more: "Read More",
   },
   related: "Related Posts",
+  view: "View All",
   read: "Read Article ...",
   by: "by",
 };

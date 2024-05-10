@@ -17,7 +17,7 @@ const CategoryCard = ({ data }) => {
   });
 
   return (
-    <a href="/">
+    <a href="/post">
       <div className="bg-gray-100 dark:bg-gray-800 break-inside-avoid mb-10 lg:mb-16 group/category overflow-hidden hover:shadow-lg dark:hover:shadow-slate-950">
         <div className="relative group-hover/category:scale-105 transition-transform duration-300">
           <img
