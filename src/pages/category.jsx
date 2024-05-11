@@ -2,11 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { categorylist } from "../components/navbar/categoryDrop";
 import { MainContainer } from "../components/shared";
+import { textConfig } from "../config";
 
 const Category = () => {
   return (
     <MainContainer>
-      <h3 className="text-center font-extrabold">All Categories</h3>
+      <h3 className="text-center font-extrabold">{textConfig.allcategory}</h3>
       <div className="my-10 lg:my-20 grid lg:grid-cols-2 xl:grid-cols-3 gap-3 lg:gap-10">
         {categorylist.map((list) => (
           <Link

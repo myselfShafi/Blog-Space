@@ -17,9 +17,7 @@ const MiniCard = ({ wrapperClass, imgClass, titleClass, data }) => {
 
   return (
     <Link to={`/all-category/sports/blog-${postId}`} reloadDocument>
-      <div
-        className={`xl:max-w-[20vw] group/mini overflow-hidden ${wrapperClass} `}
-      >
+      <div className={`group/mini overflow-hidden ${wrapperClass} `}>
         <img
           src={
             typeof data === "string"

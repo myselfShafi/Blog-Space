@@ -20,7 +20,7 @@ const CategoryCard = ({ data }) => {
 
   return (
     <Link to={`/all-category/sports/blog-${postId}`}>
-      <div className="bg-gray-100 dark:bg-gray-800 break-inside-avoid mb-10 lg:mb-16 group/category overflow-hidden hover:shadow-lg dark:hover:shadow-slate-950">
+      <div className="bg-shade break-inside-avoid mb-10 lg:mb-16 group/category overflow-hidden hover:shadow-lg dark:hover:shadow-slate-950">
         <div className="relative group-hover/category:scale-105 transition-transform duration-300">
           <img
             src={

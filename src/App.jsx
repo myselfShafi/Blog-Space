@@ -1,12 +1,11 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import {
-  About,
   Category,
   CategoryPosts,
-  ContactUs,
   Dashboard,
   Post,
   RootLayout,
+  UserPosts,
 } from "./pages";
 
 const router = createBrowserRouter([
@@ -19,12 +18,8 @@ const router = createBrowserRouter([
         element: <Dashboard />,
       },
       {
-        path: "/about",
-        element: <About />,
-      },
-      {
-        path: "/contact-us",
-        element: <ContactUs />,
+        path: "/my-blogs",
+        element: <UserPosts />,
       },
       {
         path: "/all-category",

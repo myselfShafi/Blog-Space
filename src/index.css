@@ -51,13 +51,16 @@
         @apply border-2 hover:border-red-700 dark:hover:border-red-700  hover:bg-red-700 hover:text-white
     }
     .btn-contain {
-        @apply bg-gray-900 text-white dark:bg-white dark:text-gray-900 rounded-md hover:opacity-80
+        @apply bg-gray-900 text-white dark:bg-white dark:text-gray-900 rounded-md hover:opacity-80 font-bold
     }
     .footer-color {
         @apply bg-gray-950 dark:bg-gray-200 dark:text-gray-950  text-gray-100
     }
     .footer-color input {
         @apply bg-gray-950 dark:bg-gray-200 dark:border-gray-950 border-gray-200 
+    }
+    .bg-shade {
+        @apply bg-gray-100 dark:bg-gray-800
     }
     .scrollbar::-webkit-scrollbar {
         @apply w-0 lg:w-2

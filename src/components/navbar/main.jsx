@@ -17,13 +17,8 @@ const navlist = [
   },
   {
     id: 3,
-    title: textConfig.navMenu.about,
-    href: "/about",
-  },
-  {
-    id: 4,
-    title: textConfig.navMenu.contact,
-    href: "/contact-us",
+    title: textConfig.navMenu.myblog,
+    href: "/my-blogs",
   },
 ];
 

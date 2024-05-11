@@ -3,8 +3,7 @@ const textConfig = {
   subtitle: "Your Space for Endless Stories.",
   navMenu: {
     home: "Home",
-    about: "About",
-    contact: "Contact Us",
+    myblog: "My Blogs",
     category: "Categories",
   },
   dashboard: {
@@ -19,6 +18,10 @@ const textConfig = {
     latest: "Latest Blogs",
     article: "Trending Articles",
   },
+  user: {
+    total: "Total Posts",
+    addPost: "Add a New Post",
+  },
   shared: {
     more: "Read More",
   },
@@ -26,6 +29,7 @@ const textConfig = {
   view: "View All",
   read: "Read Article ...",
   by: "by",
+  allcategory: "All Categories",
 };
 
 export default textConfig;

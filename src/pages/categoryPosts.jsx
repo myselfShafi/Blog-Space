@@ -1,6 +1,6 @@
 import React from "react";
-import { Loader } from "react-feather";
 import { useLocation } from "react-router-dom";
+import { CardLoader } from "../components";
 import { CategoryCard, MainContainer } from "../components/shared";
 
 const CategoryPosts = () => {
@@ -29,9 +29,7 @@ const CategoryPosts = () => {
           ].map((item, idx) => (
             <CategoryCard key={idx} data={item} />
           ))}
-          <div className="center-element w-full h-52 animate-pulse bg-gray-50 dark:bg-gray-950 mt-10 lg:mt-16">
-            <Loader className="animate-spin size-10" />
-          </div>
+          <CardLoader />
         </div>
       </MainContainer>
     </div>
