@@ -1,11 +1,18 @@
 import React from "react";
-import { Edit3, Link2 } from "react-feather";
-import { CardLoader } from "../components";
+import { CardLoader, UserDetail } from "../components";
 import { MainContainer, MiniCard } from "../components/shared";
 import { textConfig } from "../config";
 
 const UserPosts = () => {
   const img = "https://images.unsplash.com/photo-1531891437562-4301cf35b7e4";
+
+  const data = {
+    name: "John Doe",
+    work: "UI/UX Designer",
+    org: "abc Org",
+    link: "https://github.com/myselfShafi",
+    posts: "20",
+  };
   return (
     <MainContainer>
       <div className="bg-shade p-10  xl:px-52 flex flex-col lg:flex-row  gap-5 lg:gap-10  mb-20">
@@ -16,31 +23,7 @@ const UserPosts = () => {
             className="w-36 h-36 lg:w-48 lg:h-48 rounded-full object-cover object-center"
           />
         </div>
-        <div className="relative grow center-element flex-col gap-y-2">
-          <i className="absolute right-0 top-0">
-            <Edit3 />
-          </i>
-          <h5 className="font-bold">John Doe</h5>
-          <h6 className="font-thin">
-            UI/UX designer @ <span className="font-bold">abc org</span>
-          </h6>
-          <div className="flex gap-x-3">
-            <Link2 className="hidden lg:block" />
-            <a
-              target="_blank"
-              href="https://github.com/myselfShafi"
-              className="hover:underline underline-offset-4 text-lg font-semibold"
-            >
-              https://github.com/myselfShafi
-            </a>
-          </div>
-          <h6 className="font-bold my-4 lg:mt-10">
-            {textConfig.user.total}
-            <span className="font-normal footer-color p-1.5 rounded-full ml-2">
-              20
-            </span>
-          </h6>
-        </div>
+        <UserDetail data={data} />
         <div className="center-element">
           <button className="btn-contain">{textConfig.user.addPost}</button>
         </div>

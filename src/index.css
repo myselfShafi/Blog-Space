@@ -80,5 +80,7 @@
     .center-element {
         @apply flex items-center justify-center
     }
-    
+    .user-input {
+        @apply dark:bg-gray-900 dark:border-gray-600
+    }
 }

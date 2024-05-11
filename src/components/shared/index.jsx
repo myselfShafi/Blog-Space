@@ -4,6 +4,7 @@ import MainContainer from "./container";
 import DateNRead from "./date&Read";
 import Dropdown from "./dropdown";
 import Heading from "./heading";
+import IconInput from "./iconInput";
 import MiniCard from "./miniCard";
 
 export {
@@ -12,6 +13,7 @@ export {
   DateNRead,
   Dropdown,
   Heading,
+  IconInput,
   MainContainer,
   MiniCard,
 };

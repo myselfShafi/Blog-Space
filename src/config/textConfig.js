@@ -19,6 +19,7 @@ const textConfig = {
     article: "Trending Articles",
   },
   user: {
+    save: "Save",
     total: "Total Posts",
     addPost: "Add a New Post",
   },
