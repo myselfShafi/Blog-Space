@@ -1,6 +1,6 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import { Footer, Navbar } from "../../components";
+import { AuthBanner, Footer, Navbar } from "../../components";
 
 const RootLayout = () => {
   return (
@@ -9,6 +9,7 @@ const RootLayout = () => {
       <div className="grow">
         <Outlet />
       </div>
+      <AuthBanner />
       <Footer />
     </div>
   );

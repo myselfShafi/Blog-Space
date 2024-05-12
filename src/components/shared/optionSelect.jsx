@@ -11,8 +11,9 @@ const OptionSelect = ({ label, list = [] }) => {
   const otherInput = () => {
     if (newCategory.match(/[^A-Za-z\s]/g)) {
       alert("Post Category: special chars and no. not allowed");
+    } else {
+      setSelected(newCategory), setOpen(!open);
     }
-    setSelected(newCategory), setOpen(!open);
   };
 
   return (

@@ -32,6 +32,12 @@ const Dashboard = () => {
           </span>
           {textConfig.dashboard.tag[2]}
         </h6>
+        <button
+          onClick={() => navigate("/login", { replace: true })}
+          className="my-4 btn-contain text-2xl font-extrabold py-3 px-8 uppercase font-comic-neue"
+        >
+          {textConfig.auth.login2}
+        </button>
       </div>
       <DayBlog />
       <div className="container my-32">

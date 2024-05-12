@@ -18,6 +18,11 @@ const textConfig = {
     latest: "Latest Blogs",
     article: "Trending Articles",
   },
+  auth: {
+    login: "Login",
+    signup: "Sign up",
+    login2: "Login Now ...",
+  },
   user: {
     save: "Save",
     total: "Total Posts",
@@ -40,6 +45,10 @@ const textConfig = {
     save: "Save Post",
     option: "select option",
     other: "Other :",
+  },
+  banner: {
+    line1: '"Why just read when you can write?',
+    line2: 'now to share your own stories"',
   },
 };
 
