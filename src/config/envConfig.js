@@ -7,6 +7,8 @@ const envConfig = {
   appWriteDBId: String(import.meta.env.VITE_APPWRITE_DB_ID),
   appWriteCollectionId: String(import.meta.env.VITE_APPWRITE_COLLECTION_ID),
   appWriteBucketId: String(import.meta.env.VITE_APPWRITE_BUCKET_ID),
+
+  tinymceApi: String(import.meta.env.VITE_TINYMCE_API),
 };
 
 export default envConfig;

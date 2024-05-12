@@ -31,6 +31,7 @@ const textConfig = {
   read: "Read Article ...",
   by: "by",
   allcategory: "All Categories",
+  content: "Content :",
 };
 
 export default textConfig;

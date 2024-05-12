@@ -27,14 +27,18 @@ const UserDetail = ({ data }) => {
       onSubmit={handleSubmit(onSubmit)}
     >
       {edit ? (
-        <IconInput icon={<User />} {...register("name")} />
+        <IconInput id={"name"} icon={<User />} {...register("name")} />
       ) : (
         <h5 className="font-bold">{tempData.name}</h5>
       )}
       {edit ? (
         <div className="lg:flex gap-x-3">
-          <IconInput icon={<Briefcase />} {...register("work")} />
-          <IconInput icon={<AtSign />} {...register("company")} />
+          <IconInput id={"work"} icon={<Briefcase />} {...register("work")} />
+          <IconInput
+            id={"company"}
+            icon={<AtSign />}
+            {...register("company")}
+          />
         </div>
       ) : (
         <h6 className="font-thin">
@@ -43,7 +47,7 @@ const UserDetail = ({ data }) => {
         </h6>
       )}
       {edit ? (
-        <IconInput icon={<Link />} {...register("link")} />
+        <IconInput id={"link"} icon={<Link />} {...register("link")} />
       ) : (
         <div className="flex gap-x-3">
           <Link2 className="hidden lg:block" />

@@ -3,6 +3,7 @@ import {
   Category,
   CategoryPosts,
   Dashboard,
+  EditPost,
   Post,
   RootLayout,
   UserPosts,
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: "/all-category/:category/:post",
         element: <Post />,
+      },
+      {
+        path: "/edit-post",
+        element: <EditPost />,
       },
     ],
   },

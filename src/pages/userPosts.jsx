@@ -1,9 +1,11 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { CardLoader, UserDetail } from "../components";
 import { MainContainer, MiniCard } from "../components/shared";
 import { textConfig } from "../config";
 
 const UserPosts = () => {
+  const navigate = useNavigate();
   const img = "https://images.unsplash.com/photo-1531891437562-4301cf35b7e4";
 
   const data = {
@@ -20,12 +22,17 @@ const UserPosts = () => {
           <img
             src={img ? img : "/public/placeholder.jpg"}
             alt="profile-image"
-            className="w-36 h-36 lg:w-48 lg:h-48 rounded-full object-cover object-center"
+            className="w-36 h-36 lg:w-52 lg:h-52 rounded-full object-cover object-center"
           />
         </div>
         <UserDetail data={data} />
         <div className="center-element">
-          <button className="btn-contain">{textConfig.user.addPost}</button>
+          <button
+            onClick={() => navigate("/edit-post")}
+            className="btn-contain"
+          >
+            {textConfig.user.addPost}
+          </button>
         </div>
       </div>
       <div className="p-3 gap-10 lg:gap-16 lg:columns-2 xl:columns-3">
