@@ -31,7 +31,16 @@ const textConfig = {
   read: "Read Article ...",
   by: "by",
   allcategory: "All Categories",
-  content: "Content :",
+  postEdit: {
+    title: "Post Title :",
+    content: "Post Content :",
+    category: "Post Category :",
+    img: "Featured Image :",
+    format: "Unsupported file format! Select valid image",
+    save: "Save Post",
+    option: "select option",
+    other: "Other :",
+  },
 };
 
 export default textConfig;

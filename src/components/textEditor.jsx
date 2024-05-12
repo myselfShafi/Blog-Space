@@ -9,7 +9,7 @@ const TextEditor = ({ defaultValue = "" }) => {
         htmlFor={"text-editor"}
         className="font-bold text-2xl inline-block mb-1.5"
       >
-        {textConfig.content}
+        {textConfig.postEdit.content}
       </label>
       <Editor
         id="text-editor"

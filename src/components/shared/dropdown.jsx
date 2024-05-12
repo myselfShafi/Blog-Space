@@ -1,21 +1,34 @@
 import React from "react";
 
-const Dropdown = ({ children, title, icon, classes }) => {
+const Dropdown = ({
+  id = "dropdown-btn",
+  children,
+  title,
+  icon,
+  classes,
+  optionClass,
+  isOpen,
+  hover = false,
+}) => {
   return (
-    <div className={`relative group/dropdown ${classes}`}>
+    <div className={`relative ${hover && "group/dropdown"} ${classes}`}>
       <div
         className="flex items-center gap-x-2"
-        id="dropdown-btn"
+        id={id}
         role="button"
         aria-haspopup={true}
       >
-        <h6>{title}</h6>
+        {typeof title === "string" ? <h6>{title}</h6> : title}
         {icon && icon}
       </div>
       <div
-        className="absolute -right-full p-10 z-10 w-max origin-top-right border dark:border-gray-900 shadow-lg dark:shadow-slate-950 hidden group-hover/dropdown:block bg-white dark:bg-gray-900"
+        className={`absolute z-10 origin-top-right border dark:border-gray-900 shadow-lg dark:shadow-slate-950 ${
+          !isOpen && "hidden"
+        }  bg-white dark:bg-gray-900  ${
+          hover && "hidden group-hover/dropdown:block"
+        } ${optionClass}`}
         role="menu"
-        aria-labelledby="dropdown-btn"
+        aria-labelledby={id}
       >
         {children}
       </div>

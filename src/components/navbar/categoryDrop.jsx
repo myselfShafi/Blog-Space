@@ -52,8 +52,10 @@ export const CategoryDropdown = () => {
         icon={
           <ChevronDown className="size-4 group-hover/dropdown:rotate-180 transition-transform duration-300 transform" />
         }
+        hover={true}
+        optionClass={"w-max -right-full"}
       >
-        <div className="grid grid-cols-4 gap-10 max-h-[70vh]">
+        <div className=" p-10 grid grid-cols-4 gap-10 max-h-[70vh]">
           {categorylist.map((list) => (
             <Link
               to={list.href}

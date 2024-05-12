@@ -6,6 +6,7 @@ import Dropdown from "./dropdown";
 import Heading from "./heading";
 import IconInput from "./iconInput";
 import MiniCard from "./miniCard";
+import OptionSelect from "./optionSelect";
 
 export {
   BlogCard,
@@ -16,4 +17,5 @@ export {
   IconInput,
   MainContainer,
   MiniCard,
+  OptionSelect,
 };
