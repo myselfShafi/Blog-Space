@@ -1,3 +1,4 @@
+import { Provider } from "react-redux";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import {
   Category,
@@ -10,6 +11,7 @@ import {
   SignupPanel,
   UserPosts,
 } from "./pages";
+import store from "./store/store";
 
 const router = createBrowserRouter([
   {
@@ -53,7 +55,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
+  );
 }
 
 export default App;
