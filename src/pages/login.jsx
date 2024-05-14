@@ -13,7 +13,7 @@ const LoginPanel = () => {
 
   return (
     <AuthWrapper>
-      <div className="bg-blue-200 p-10 center-element flex-col gap-4">
+      <div className="bg-auth-1 p-10 center-element flex-col gap-4">
         <h2>{textConfig.auth.login}</h2>
         <input
           type="email"
@@ -32,9 +32,9 @@ const LoginPanel = () => {
           {textConfig.auth.fgtpwd}
         </a>
       </div>
-      <div className="bg-gray-800 p-10 text-center center-element flex-col gap-4">
-        <h2>{textConfig.auth.tag3}</h2>
-        <p>{textConfig.auth.tag4}</p>
+      <div className="bg-auth-2 p-10 text-center center-element flex-col gap-4">
+        <h2 className="hidden md:block">{textConfig.auth.tag3}</h2>
+        <h6>{textConfig.auth.tag4}</h6>
         <button className="btn-auth" onClick={() => navigate("/signup")}>
           {textConfig.auth.signup}
         </button>
