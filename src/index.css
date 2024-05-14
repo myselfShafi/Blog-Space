@@ -33,7 +33,7 @@
         @apply text-base font-normal;
     }
     input {
-        @apply py-2 px-4 outline-none border-2 placeholder:italic 
+        @apply py-2 px-4 outline-none border-2 placeholder:italic dark:text-gray-900
     }
     input[type='file'] {
         @apply dark:border-gray-600
@@ -55,6 +55,9 @@
     }
     .btn-contain {
         @apply bg-gray-900 text-white dark:bg-white dark:text-gray-900 rounded-md hover:opacity-80 font-bold
+    }
+    .btn-auth {
+        @apply bg-rose-500 text-white uppercase font-bold rounded-full w-2/5 py-3
     }
     .footer-color {
         @apply bg-gray-950 dark:bg-gray-200 dark:text-gray-950  text-gray-100
@@ -84,6 +87,6 @@
         @apply flex items-center justify-center
     }
     .user-input {
-        @apply dark:bg-gray-900 dark:border-gray-600
+        @apply dark:bg-gray-900 dark:border-gray-600 dark:text-white
     }
 }

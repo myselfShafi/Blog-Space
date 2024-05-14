@@ -4,8 +4,10 @@ import {
   CategoryPosts,
   Dashboard,
   EditPost,
+  LoginPanel,
   Post,
   RootLayout,
+  SignupPanel,
   UserPosts,
 } from "./pages";
 
@@ -39,6 +41,14 @@ const router = createBrowserRouter([
         element: <EditPost />,
       },
     ],
+  },
+  {
+    path: "/login",
+    element: <LoginPanel />,
+  },
+  {
+    path: "/signup",
+    element: <SignupPanel />,
   },
 ]);
 

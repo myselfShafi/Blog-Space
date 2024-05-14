@@ -64,7 +64,11 @@ const Navbar = () => {
           >
             {navlist.map((list) => (
               <li className="nav-list" key={list.id}>
-                {list.href ? <a href={list.href}>{list.title}</a> : list.title}
+                {list.href ? (
+                  <Link to={list.href}>{list.title}</Link>
+                ) : (
+                  list.title
+                )}
               </li>
             ))}
             <ThemeMode />

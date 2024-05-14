@@ -8,7 +8,7 @@ const Dashboard = () => {
   const navigate = useNavigate();
   return (
     <div>
-      <div className="h-[calc(100vh-5rem)] bg-gradient-light dark:bg-gradient-dark pt-20 lg:pt-40 flex flex-col items-center justify-center text-center px-3">
+      <div className="h-[calc(100vh-5rem)] bg-gradient-light dark:bg-gradient-dark pt-20 lg:pt-40 center-element flex-col text-center px-3">
         <h5 className=" font-bold leading-[3] text-stone-800 dark:text-violet-200">
           {textConfig.dashboard.title[0]}
           <span className=" text-6xl lg:text-8xl font-extrabold">

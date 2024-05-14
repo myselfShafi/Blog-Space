@@ -38,7 +38,7 @@ const BlogCard = () => {
           {TruncText}
         </p>
         <button
-          onClick={() => navigate("/post")}
+          onClick={() => navigate("/all-category/nature/blog-asfg")}
           className="py-1 px-2 border border-red-600 text-red-600  lg:invisible group-hover/card:visible btn-outline"
         >
           {textConfig.shared.more}

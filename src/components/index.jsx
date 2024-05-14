@@ -1,3 +1,4 @@
+import AuthWrapper from "./authWrapper";
 import AuthBanner from "./banner/main";
 import DayBlog from "./dayBlog";
 import Footer from "./footer/main";
@@ -8,6 +9,7 @@ import UserDetail from "./userDetail";
 
 export {
   AuthBanner,
+  AuthWrapper,
   CardLoader,
   DayBlog,
   Footer,

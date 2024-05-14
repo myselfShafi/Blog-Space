@@ -19,9 +19,10 @@ const textConfig = {
     article: "Trending Articles",
   },
   auth: {
-    login: "Login",
-    signup: "Sign up",
+    login: "Log In",
+    signup: "Sign Up",
     login2: "Login Now ...",
+    fgtpwd: "Forgot your password?",
   },
   user: {
     save: "Save",
