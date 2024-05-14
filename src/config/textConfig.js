@@ -23,6 +23,11 @@ const textConfig = {
     signup: "Sign Up",
     login2: "Login Now ...",
     fgtpwd: "Forgot your password?",
+    create: "Create Account",
+    tag1: "Hello, Friend!",
+    tag2: "Already have a account? Your Creative Space Awaits. Get started ..",
+    tag3: "Welcome Back!",
+    tag4: "Dont have an account? Connect with us and share your stories ..",
   },
   user: {
     save: "Save",
