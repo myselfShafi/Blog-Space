@@ -12,7 +12,7 @@ const AuthWrapper = ({ children, ...props }) => {
       </Link>
       <div className={"grow center-element"}>
         <div
-          className="lg:h-full rounded-lg overflow-hidden max-w-[60rem] lg:max-h-[32rem] grid lg:grid-cols-2"
+          className="lg:h-full rounded-lg overflow-hidden lg:max-w-[60rem] lg:max-h-[32rem] grid lg:grid-cols-2"
           {...props}
         >
           {children}

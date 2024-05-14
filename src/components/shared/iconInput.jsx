@@ -21,26 +21,27 @@ const IconInput = (
     <div className={wrapperClass}>
       {label && (
         <label htmlFor={id} className="font-bold text-2xl inline-block mb-1.5">
-          {label} :
+          {label}
         </label>
       )}
       <div className="relative">
-        <div
-          className={`absolute top-1/2 ${
-            endIcon ? "right-2" : "left-2"
-          } center-element -translate-y-1/2 w-7 h-7 text-gray-500`}
-        >
-          {icon && icon}
-          {pwdInput && (
-            <button onClick={() => setMask(!mask)}>
-              {mask ? (
-                <EyeOff className="size-4" />
-              ) : (
-                <Eye className="size-4" />
-              )}
-            </button>
-          )}
-        </div>
+        {icon && (
+          <div
+            className={`absolute top-1/2 ${
+              endIcon ? "right-2" : "left-2"
+            } center-element -translate-y-1/2 w-7 h-7 text-gray-500`}
+          >
+            {icon}
+          </div>
+        )}
+        {pwdInput && (
+          <button
+            className={`absolute top-1/2 right-4 -translate-y-1/2 p-0 text-gray-600`}
+            onClick={() => setMask(!mask)}
+          >
+            {mask ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
+          </button>
+        )}
         <input
           id={id}
           type={type || (pwdInput && (mask ? "password" : "text"))}

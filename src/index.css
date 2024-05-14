@@ -57,7 +57,7 @@
         @apply bg-gray-900 text-white dark:bg-white dark:text-gray-900 rounded-md hover:opacity-80 font-bold
     }
     .btn-auth {
-        @apply bg-teal-800/80 hover:bg-teal-900 dark:bg-amber-600/95 dark:hover:bg-amber-800 text-white uppercase font-bold rounded-full w-2/5 py-3
+        @apply bg-teal-800/80 hover:bg-teal-900 dark:bg-amber-600/95 dark:hover:bg-amber-800 text-white uppercase font-bold rounded-full w-2/5 py-3 disabled:opacity-60 dark:disabled:opacity-60 
     }
     .footer-color {
         @apply bg-gray-950 dark:bg-gray-200 dark:text-gray-950  text-gray-100
@@ -76,6 +76,9 @@
     }
     .bg-auth-2 {
         @apply bg-sky-800/50 text-gray-100 dark:bg-fuchsia-900/50 dark:text-gray-100
+    }
+    .auth-div {
+        @apply p-10 flex flex-col justify-center items-center gap-4
     }
     .scrollbar::-webkit-scrollbar {
         @apply w-0 lg:w-2
