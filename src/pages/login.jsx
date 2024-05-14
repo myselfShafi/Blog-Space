@@ -1,48 +1,85 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { ArrowDownCircle, Key, Mail } from "react-feather";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { AuthWrapper } from "../components";
+import authService from "../appWriteService/auth.service";
+import { AuthWrapper, LoadBtn } from "../components";
+import { Error } from "../components/shared";
 import IconInput from "../components/shared/iconInput";
-import { textConfig } from "../config";
+import { formValidate, textConfig } from "../config";
 
 const LoginPanel = () => {
-  const [sidePanel, setSidePanel] = useState(false);
   const navigate = useNavigate();
-  const ref = useRef(null);
-  useEffect(() => {
-    ref?.current.focus();
-  }, []);
+  const [sidePanel, setSidePanel] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const togglefgtPwd = () => setSidePanel(!sidePanel);
 
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm({ email: "", password: "" });
+
+  const onLogin = async (data) => {
+    setLoading(true);
+    try {
+      const resp = await authService.login(data);
+      console.log({ resp });
+    } catch (error) {
+      setError(error.message);
+    }
+    setLoading(false);
+  };
+
   return (
     <AuthWrapper>
-      <div className="bg-auth-1 auth-div">
+      <form
+        noValidate
+        autoComplete="off"
+        className="bg-auth-1 auth-div"
+        onSubmit={handleSubmit(onLogin)}
+      >
         <h2>{textConfig.auth.login}</h2>
         <IconInput
           type="email"
           placeholder="email address"
           wrapperClass="w-full"
-          ref={ref}
-          disabled={sidePanel}
           icon={<Mail />}
+          {...register("email", {
+            ...formValidate.email,
+            disabled: sidePanel,
+          })}
         />
         <IconInput
           placeholder="password"
           wrapperClass="w-full"
           pwdInput
           icon={<Key className="rotate-90" />}
-          disabled={sidePanel}
+          {...register("password", {
+            ...formValidate.password,
+            disabled: sidePanel,
+          })}
         />
-        <button className="btn-auth" disabled={sidePanel}>
+        <LoadBtn
+          isloading={loading}
+          className={`btn-auth`}
+          type="submit"
+          disabled={sidePanel}
+        >
           {textConfig.auth.login}
-        </button>
+        </LoadBtn>
+
+        <Error showError={Object.entries(errors).length != 0}>
+          {Object.values(errors)[0]?.message}
+        </Error>
+
         <button onClick={togglefgtPwd}>
           <h6 className="hover:underline underline-offset-8">
             {textConfig.auth.fgtpwd}
           </h6>
         </button>
-      </div>
+      </form>
       <div className="relative bg-auth-2 text-center auth-div">
         <h2 className="hidden md:block">{textConfig.auth.tag3}</h2>
         <h6>{textConfig.auth.tag4}</h6>
@@ -65,9 +102,9 @@ const LoginPanel = () => {
               className={"text-gray-900"}
               label={<p>{textConfig.auth.resetemail}</p>}
             />
-            <button tabIndex={"-1"} className="btn-auth">
+            <LoadBtn tabIndex={"-1"} className="btn-auth">
               {textConfig.auth.continue}
-            </button>
+            </LoadBtn>
           </div>
           <button tabIndex={"-1"} onClick={togglefgtPwd}>
             <ArrowDownCircle />

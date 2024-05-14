@@ -6,7 +6,7 @@ class AuthService {
   account;
 
   constructor() {
-    client = this.client
+    this.client
       .setEndpoint(envConfig.appWriteURL)
       .setProject(envConfig.appWriteProjectId);
     this.account = new Account(this.client);
@@ -27,6 +27,7 @@ class AuthService {
       }
     } catch (error) {
       console.error("Appwrite error ++ account create ++", error);
+      return error.response.message;
     }
   }
 
@@ -36,6 +37,7 @@ class AuthService {
       // handle err in frontend comp.
     } catch (error) {
       console.error("Appwrite error ++ session Login ++", error);
+      return error.response.message;
     }
   }
 
@@ -46,6 +48,7 @@ class AuthService {
       // handle err in frontend comp.
     } catch (error) {
       console.error("Appwrite error ++ session Logout ++", error);
+      return error.response.message;
     }
   }
 
