@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import { Key, Mail, User } from "react-feather";
 import { useNavigate } from "react-router-dom";
 import { AuthWrapper } from "../components";
 import { IconInput } from "../components/shared";
@@ -15,24 +16,31 @@ const SignupPanel = () => {
     <AuthWrapper>
       <div className="bg-auth-1 auth-div text-center md:order-2">
         <h2>{textConfig.auth.create}</h2>
-        <input
+        <IconInput
           type="text"
+          icon={<User />}
           placeholder="full name"
-          className="w-full"
+          wrapperClass="w-full"
           ref={ref}
         />
-        <input type="email" placeholder="email address" className="w-full" />
+        <IconInput
+          type="email"
+          placeholder={"email address"}
+          icon={<Mail />}
+          wrapperClass={"w-full text-left"}
+          className={"text-gray-900"}
+        />
         <IconInput
           placeholder="password"
           wrapperClass="w-full"
-          endIcon
           pwdInput
+          icon={<Key className="rotate-90" />}
         />
         <IconInput
           placeholder="confirm password"
           wrapperClass="w-full"
-          endIcon
           pwdInput
+          icon={<Key className="rotate-90" />}
         />
         <button className="btn-auth">{textConfig.auth.signup}</button>
       </div>

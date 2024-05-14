@@ -60,13 +60,16 @@ const LoginPanel = () => {
               type="email"
               placeholder={"email address"}
               icon={<Mail />}
+              tabIndex={"-1"}
               wrapperClass={"w-full text-left"}
               className={"text-gray-900"}
               label={<p>{textConfig.auth.resetemail}</p>}
             />
-            <button className="btn-auth">{textConfig.auth.continue}</button>
+            <button tabIndex={"-1"} className="btn-auth">
+              {textConfig.auth.continue}
+            </button>
           </div>
-          <button onClick={togglefgtPwd}>
+          <button tabIndex={"-1"} onClick={togglefgtPwd}>
             <ArrowDownCircle />
           </button>
         </div>
