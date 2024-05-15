@@ -19,17 +19,28 @@ const LoginPanel = () => {
     handleSubmit,
     register,
     formState: { errors },
-  } = useForm({ email: "", password: "" });
+    clearErrors,
+    setError,
+  } = useForm({
+    defaultValues: { email: "abc@gmail.com", password: "qwertyuiop" },
+  });
 
   const onLogin = async (data) => {
+    clearErrors();
     setLoading(true);
     try {
       const resp = await authService.login(data);
       console.log({ resp });
+      if (resp.success) {
+        console.log("success", resp);
+      } else {
+        setError("root", { type: "manual", message: resp });
+      }
     } catch (error) {
-      setError(error.message);
+      setError("server", { type: "manual", message: error.message });
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   return (
@@ -65,7 +76,7 @@ const LoginPanel = () => {
           isloading={loading}
           className={`btn-auth`}
           type="submit"
-          disabled={sidePanel}
+          disabled={loading || sidePanel}
         >
           {textConfig.auth.login}
         </LoadBtn>

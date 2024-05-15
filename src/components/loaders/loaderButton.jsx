@@ -1,12 +1,9 @@
 import React from "react";
 import { Loader } from "react-feather";
 
-const LoadBtn = ({ children, className, isloading, ...props }) => {
+const LoadBtn = ({ children, isloading, ...props }) => {
   return (
-    <button
-      className={`${isloading && "pointer-events-none"} ${className}`}
-      {...props}
-    >
+    <button {...props}>
       {isloading ? <Loader className="animate-spin mx-auto" /> : children}
     </button>
   );
