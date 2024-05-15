@@ -22,6 +22,7 @@ class AuthService {
       );
       if (resp) {
         this.login({ email, password });
+        return resp;
       } else {
         console.error("Appwrite error ++ account creation resp failed!");
       }

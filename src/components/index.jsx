@@ -1,3 +1,4 @@
+import AuthRoute from "./authRoutes";
 import AuthWrapper from "./authWrapper";
 import AuthBanner from "./banner/main";
 import DayBlog from "./dayBlog";
@@ -10,6 +11,7 @@ import UserDetail from "./userDetail";
 
 export {
   AuthBanner,
+  AuthRoute,
   AuthWrapper,
   CardLoader,
   DayBlog,

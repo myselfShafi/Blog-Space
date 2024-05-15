@@ -101,4 +101,11 @@
     .user-input {
         @apply dark:bg-gray-900 dark:border-gray-600 dark:text-white
     }
+    .load {
+        @apply h-[50px] w-[50px] scale-150 animate-rotate before:animate-ball-red dark:before:bg-white before:bg-gray-900 before:shadow-loader before:mb-[10px] dark:after:animate-ball-light after:animate-ball-dark after:bg-red-600 after:shadow-loader dark:after:shadow-white after:shadow-gray-900 
+    }  
+    .load::before, .load::after {
+        @apply rounded-full content-[''] block h-5 w-5
+    }
 }
+

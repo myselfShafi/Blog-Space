@@ -1,5 +1,6 @@
 import { Provider } from "react-redux";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { AuthRoute } from "./components";
 import {
   Category,
   CategoryPosts,
@@ -24,7 +25,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/my-blogs",
-        element: <UserPosts />,
+        element: (
+          <AuthRoute authenticated>
+            <UserPosts />
+          </AuthRoute>
+        ),
       },
       {
         path: "/all-category",
@@ -40,17 +45,29 @@ const router = createBrowserRouter([
       },
       {
         path: "/edit-post",
-        element: <EditPost />,
+        element: (
+          <AuthRoute authenticated>
+            <EditPost />
+          </AuthRoute>
+        ),
       },
     ],
   },
   {
     path: "/login",
-    element: <LoginPanel />,
+    element: (
+      <AuthRoute authenticated={false}>
+        <LoginPanel />
+      </AuthRoute>
+    ),
   },
   {
     path: "/signup",
-    element: <SignupPanel />,
+    element: (
+      <AuthRoute authenticated={false}>
+        <SignupPanel />
+      </AuthRoute>
+    ),
   },
 ]);
 

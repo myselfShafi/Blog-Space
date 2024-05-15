@@ -26,12 +26,15 @@ const SignupPanel = () => {
 
   const onSignup = async (data) => {
     setLoading(true);
+    data = { name: data.fullname, email: data.email, password: data.password };
     try {
       const resp = await authService.createAccount(data);
       if (resp) {
         const userData = await authService.getCurrentUser();
-        if (userData) dispatch(authlogin(userData));
-        navigate("/my-blogs", { replace: true });
+        if (userData) {
+          dispatch(authlogin(userData));
+          navigate("/my-blogs", { replace: true });
+        }
       } else {
         setError("root", { type: "manual", message: resp || "server error" });
       }
