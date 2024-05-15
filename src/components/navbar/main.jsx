@@ -1,30 +1,48 @@
 import React, { useEffect, useState } from "react";
 import { Menu, XSquare } from "react-feather";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { textConfig } from "../../config";
 import { CategoryDropdown } from "./categoryDrop";
+import LogoutBtn from "./logoutBtn";
 import ThemeMode from "./themeMode";
 
-const navlist = [
-  {
-    id: 1,
-    title: textConfig.navMenu.home,
-    href: "/",
-  },
-  {
-    id: 2,
-    title: <CategoryDropdown />,
-  },
-  {
-    id: 3,
-    title: textConfig.navMenu.myblog,
-    href: "/my-blogs",
-  },
-];
-
 const Navbar = () => {
+  const loginStatus = useSelector((state) => state.auth.status);
+
   const [open, setOpen] = useState(false);
   const [scroll, setScroll] = useState(false);
+
+  const navlist = [
+    {
+      id: 1,
+      title: textConfig.navMenu.home,
+      href: "/",
+      access: true,
+    },
+    {
+      id: 2,
+      title: <CategoryDropdown />,
+      access: true,
+    },
+    {
+      id: 3,
+      title: textConfig.navMenu.myblog,
+      href: "/my-blogs",
+      access: loginStatus,
+    },
+    {
+      id: 4,
+      title: <LogoutBtn />,
+      access: loginStatus,
+    },
+    {
+      id: 5,
+      title: textConfig.navMenu.auth,
+      href: "/login",
+      access: !loginStatus,
+    },
+  ];
 
   const setBg = () => {
     if (window.scrollY > 250) {
@@ -62,15 +80,17 @@ const Navbar = () => {
               open && "translate-y-0 dark:shadow-gray-800 shadow-lg"
             }`}
           >
-            {navlist.map((list) => (
-              <li className="nav-list" key={list.id}>
-                {list.href ? (
-                  <Link to={list.href}>{list.title}</Link>
-                ) : (
-                  list.title
-                )}
-              </li>
-            ))}
+            {navlist.map((list) =>
+              list.access ? (
+                <li className="nav-list" key={list.id}>
+                  {list.href ? (
+                    <Link to={list.href}>{list.title}</Link>
+                  ) : (
+                    list.title
+                  )}
+                </li>
+              ) : null
+            )}
             <ThemeMode />
             <XSquare className="lg:hidden" onClick={() => setOpen(false)} />
           </ul>

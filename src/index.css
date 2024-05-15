@@ -72,7 +72,7 @@
         @apply bg-stone-50 text-gray-500 dark:bg-fuchsia-100/50 dark:text-gray-100
     }
     .bg-auth-1 input {
-        @apply dark:bg-violet-50 dark:border-violet-50 text-violet-950 placeholder-violet-950
+        @apply dark:bg-violet-50 text-violet-950 placeholder-violet-950
     }
     .bg-auth-2 {
         @apply bg-sky-800/50 text-gray-100 dark:bg-fuchsia-900/50 dark:text-gray-100

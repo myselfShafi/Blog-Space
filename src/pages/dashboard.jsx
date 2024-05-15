@@ -1,14 +1,26 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { DayBlog } from "../components";
 import { BlogCard, Heading, MiniCard } from "../components/shared";
 import { textConfig } from "../config";
 
 const Dashboard = () => {
+  const { status, userData } = useSelector((state) => state.auth);
+
+  console.log({ userData, status });
   const navigate = useNavigate();
   return (
     <div>
       <div className="h-[calc(100vh-5rem)] bg-gradient-light dark:bg-gradient-dark pt-20 lg:pt-40 center-element flex-col text-center px-3">
+        {status && (
+          <h4 className="mb-6">
+            Welcome{" "}
+            <span className="capitalize font-bold">
+              {String(userData?.name)}
+            </span>
+          </h4>
+        )}
         <h5 className=" font-bold leading-[3] text-stone-800 dark:text-violet-200">
           {textConfig.dashboard.title[0]}
           <span className=" text-6xl lg:text-8xl font-extrabold">
@@ -32,12 +44,14 @@ const Dashboard = () => {
           </span>
           {textConfig.dashboard.tag[2]}
         </h6>
-        <button
-          onClick={() => navigate("/login", { replace: true })}
-          className="my-4 btn-contain text-2xl font-extrabold py-3 px-8 uppercase font-comic-neue"
-        >
-          {textConfig.auth.login2}
-        </button>
+        {!status && (
+          <button
+            onClick={() => navigate("/login", { replace: true })}
+            className="my-4 btn-contain text-2xl font-extrabold py-3 px-8 uppercase font-comic-neue"
+          >
+            {textConfig.auth.login2}
+          </button>
+        )}
       </div>
       <DayBlog />
       <div className="container my-32">
@@ -70,7 +84,7 @@ const Dashboard = () => {
             className="uppercase font-extrabold btn-contain"
             onClick={() => navigate("/all-category")}
           >
-            All Posts
+            {textConfig.dashboard.all}
           </button>
         </div>
       </div>

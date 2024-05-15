@@ -9,6 +9,7 @@ const IconInput = (
     type,
     pwdInput,
     endIcon,
+    hasError,
     className,
     wrapperClass,
     ...props
@@ -48,7 +49,9 @@ const IconInput = (
           type={type || (pwdInput && (mask ? "password" : "text"))}
           className={`${
             (pwdInput || icon) && endIcon ? "pr-10" : "pl-10"
-          } w-full ${className}`}
+          } w-full ${className} ${
+            hasError && "border-rose-400 dark:border-rose-400"
+          }`}
           ref={ref}
           {...props}
         />

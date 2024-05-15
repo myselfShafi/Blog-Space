@@ -20,8 +20,8 @@ const formValidate = {
   },
   textOnly: {
     pattern: {
-      value: /^[A-Za-z]+$/i,
-      message: "Incorrect pattern",
+      value: /^[A-Za-z ]+$/i,
+      message: "Incorrect input pattern",
     },
   },
 };

@@ -5,6 +5,7 @@ const textConfig = {
     home: "Home",
     myblog: "My Blogs",
     category: "Categories",
+    auth: "Login | Signup",
   },
   dashboard: {
     title: ["From", "Thoughts", "To", "Words", "..."],
@@ -17,6 +18,7 @@ const textConfig = {
     dayBlog: "Blog of the Day",
     latest: "Latest Blogs",
     article: "Trending Articles",
+    all: "All Posts",
   },
   auth: {
     login: "Log In",
