@@ -33,6 +33,9 @@ const textConfig = {
     tag4: "Dont have an account? Connect with us and share your stories ..",
     resetemail: "Enter your registered email to get back on track.",
     continue: "Continue",
+    resend: "Resend Email",
+    inbox: "Check your Inbox",
+    check: "Didn't receive the email? check spam folder or",
   },
   user: {
     save: "Save",

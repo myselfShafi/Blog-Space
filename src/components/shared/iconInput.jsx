@@ -11,6 +11,7 @@ const IconInput = (
     endIcon,
     hasError,
     className,
+    disabled,
     wrapperClass,
     ...props
   },
@@ -37,6 +38,7 @@ const IconInput = (
         )}
         {pwdInput && (
           <button
+            disabled={disabled}
             tabIndex={"-1"}
             className={`absolute top-1/2 right-4 -translate-y-1/2 p-0 text-gray-600`}
             onClick={() => setMask(!mask)}
@@ -53,6 +55,7 @@ const IconInput = (
             hasError && "border-rose-400 dark:border-rose-400"
           }`}
           ref={ref}
+          disabled={disabled}
           {...props}
         />
       </div>

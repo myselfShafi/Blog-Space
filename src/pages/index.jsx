@@ -5,6 +5,7 @@ import EditPost from "./editPost";
 import RootLayout from "./layout";
 import LoginPanel from "./login";
 import Post from "./post";
+import ResetPass from "./resetPwd";
 import SignupPanel from "./signup";
 import UserPosts from "./userPosts";
 
@@ -15,6 +16,7 @@ export {
   EditPost,
   LoginPanel,
   Post,
+  ResetPass,
   RootLayout,
   SignupPanel,
   UserPosts,

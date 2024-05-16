@@ -9,6 +9,8 @@ const envConfig = {
   appWriteBucketId: String(import.meta.env.VITE_APPWRITE_BUCKET_ID),
 
   tinymceApi: String(import.meta.env.VITE_TINYMCE_API),
+
+  resetURL: String(import.meta.env.VITE_RESET_URL),
 };
 
 export default envConfig;

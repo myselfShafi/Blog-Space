@@ -79,6 +79,7 @@ const LoginPanel = () => {
             placeholder="password"
             wrapperClass="w-full"
             pwdInput
+            disabled={sidePanel}
             icon={<Key className="rotate-90" />}
             hasError={errors.password}
             {...register("password", {

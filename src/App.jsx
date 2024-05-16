@@ -8,6 +8,7 @@ import {
   EditPost,
   LoginPanel,
   Post,
+  ResetPass,
   RootLayout,
   SignupPanel,
   UserPosts,
@@ -66,6 +67,14 @@ const router = createBrowserRouter([
     element: (
       <AuthRoute authenticated={false}>
         <SignupPanel />
+      </AuthRoute>
+    ),
+  },
+  {
+    path: "/reset-password",
+    element: (
+      <AuthRoute authenticated={false}>
+        <ResetPass />
       </AuthRoute>
     ),
   },
