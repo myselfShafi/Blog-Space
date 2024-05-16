@@ -1,20 +1,24 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { CardLoader, UserDetail } from "../components";
 import { MainContainer, MiniCard } from "../components/shared";
 import { textConfig } from "../config";
 
 const UserPosts = () => {
-  const navigate = useNavigate();
-  const img = "https://images.unsplash.com/photo-1531891437562-4301cf35b7e4";
+  const data = useSelector((state) => state.auth.userData);
 
-  const data = {
-    name: "John Doe",
-    work: "UI/UX Designer",
-    org: "abc Org",
-    link: "https://github.com/myselfShafi",
-    posts: "20",
-  };
+  const navigate = useNavigate();
+  const img = data?.img;
+  // const img = "https://images.unsplash.com/photo-1531891437562-4301cf35b7e4";
+
+  // const data = {
+  //   name: "John Doe",
+  //   work: "UI/UX Designer",
+  //   org: "abc Org",
+  //   link: "https://github.com/myselfShafi",
+  //   posts: "20",
+  // };
   return (
     <MainContainer>
       <div className="bg-shade p-10  xl:px-52 flex flex-col lg:flex-row  gap-5 lg:gap-10  mb-20">

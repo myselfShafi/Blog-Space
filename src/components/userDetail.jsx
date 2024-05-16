@@ -34,7 +34,7 @@ const UserDetail = ({ data }) => {
           {...register("name")}
         />
       ) : (
-        <h5 className="font-bold">{tempData.name}</h5>
+        <h5 className="font-bold capitalize">{tempData.name}</h5>
       )}
       {edit ? (
         <div className="lg:flex gap-x-3">
@@ -42,19 +42,23 @@ const UserDetail = ({ data }) => {
             id={"work"}
             className={"user-input"}
             icon={<Briefcase />}
+            placeholder={"type your profession"}
             {...register("work")}
           />
           <IconInput
             id={"company"}
             className={"user-input"}
             icon={<AtSign />}
+            placeholder={"company|org name"}
             {...register("company")}
           />
         </div>
       ) : (
         <h6 className="font-thin">
-          {tempData.work} @{" "}
-          <span className="font-bold">{tempData.company}</span>
+          {tempData.work || "Your profession"} @{" "}
+          <span className="font-bold">
+            {tempData.company || "company/organisation"}
+          </span>
         </h6>
       )}
       {edit ? (
@@ -62,6 +66,7 @@ const UserDetail = ({ data }) => {
           id={"link"}
           className={"user-input"}
           icon={<Link />}
+          placeholder={"enter website URL"}
           {...register("link")}
         />
       ) : (
@@ -72,7 +77,7 @@ const UserDetail = ({ data }) => {
             href={data.link}
             className="hover:underline underline-offset-4 text-lg font-semibold"
           >
-            {tempData.link}
+            {tempData.link || "website Link"}
           </a>
         </div>
       )}
