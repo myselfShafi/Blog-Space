@@ -21,14 +21,14 @@ class AuthService {
         name
       );
       if (resp) {
-        this.login({ email, password });
-        return resp;
+        return this.login({ email, password });
       } else {
         console.error("Appwrite error ++ account creation resp failed!");
+        return resp;
       }
     } catch (error) {
       console.error("Appwrite error ++ account create ++", error);
-      return error.response.message;
+      throw error;
     }
   }
 
@@ -38,7 +38,7 @@ class AuthService {
       // handle err in frontend comp.
     } catch (error) {
       console.error("Appwrite error ++ session Login ++", error);
-      return error.response.message;
+      throw error;
     }
   }
 
@@ -49,7 +49,7 @@ class AuthService {
       // handle err in frontend comp.
     } catch (error) {
       console.error("Appwrite error ++ session Logout ++", error);
-      return error.response.message;
+      throw error;
     }
   }
 
@@ -59,6 +59,17 @@ class AuthService {
       // handle err in frontend comp.
     } catch (error) {
       console.error("Appwrite error ++ currently loggedIn ++", error);
+      throw error;
+    }
+  }
+
+  async resetEmail({ email, resetURL }) {
+    try {
+      return await this.account.createRecovery(email, resetURL);
+      // handle err in frontend comp.
+    } catch (error) {
+      console.error("Appwrite error ++ reset-pwd email ++", error);
+      throw error;
     }
   }
 }

@@ -21,7 +21,7 @@ const UserPosts = () => {
   // };
   return (
     <MainContainer>
-      <div className="bg-shade p-10  xl:px-52 flex flex-col lg:flex-row  gap-5 lg:gap-10  mb-20">
+      <div className="bg-shade p-10  lg:px-20 flex flex-col lg:flex-row  gap-5 lg:gap-10  mb-20">
         <div className="center-element flex-col gap-4">
           <img
             src={img ? img : "/public/placeholder.jpg"}

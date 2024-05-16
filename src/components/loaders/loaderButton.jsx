@@ -1,9 +1,12 @@
 import React from "react";
 import { Loader } from "react-feather";
 
-const LoadBtn = ({ children, isloading, ...props }) => {
+const LoadBtn = ({ children, className, isloading, ...props }) => {
   return (
-    <button {...props}>
+    <button
+      className={`${className} ${isloading && "animate-pulse"}`}
+      {...props}
+    >
       {isloading ? <Loader className="animate-spin mx-auto" /> : children}
     </button>
   );

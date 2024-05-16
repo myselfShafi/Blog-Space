@@ -1,6 +1,5 @@
-import React from "react";
 import { Link } from "react-router-dom";
-import { textConfig } from "../config";
+import { textConfig } from "../../config";
 
 const AuthWrapper = ({ children, ...props }) => {
   return (

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { ArrowDownCircle, Key, Mail } from "react-feather";
+import { Key, Mail } from "react-feather";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import authService from "../appWriteService/auth.service";
-import { AuthWrapper, LoadBtn } from "../components";
+import { AuthWrapper, ForgotPass, LoadBtn } from "../components";
 import { Error } from "../components/shared";
 import IconInput from "../components/shared/iconInput";
 import { formValidate, textConfig } from "../config";
@@ -36,13 +36,10 @@ const LoginPanel = () => {
     setLoading(true);
     try {
       const resp = await authService.login(data);
-      console.log({ resp });
       if (resp) {
-        console.log("success", resp);
         const userData = await authService.getCurrentUser();
         setLoading(false);
         if (userData) {
-          console.log("user data", userData);
           dispatch(authlogin(userData));
           navigate("/", { replace: true });
         }
@@ -75,6 +72,7 @@ const LoginPanel = () => {
             {...register("email", {
               ...formValidate.email,
               disabled: sidePanel,
+              onBlur: () => clearErrors(),
             })}
           />
           <IconInput
@@ -86,6 +84,7 @@ const LoginPanel = () => {
             {...register("password", {
               ...formValidate.password,
               disabled: sidePanel,
+              onBlur: () => clearErrors(),
             })}
           />
           <LoadBtn
@@ -113,30 +112,7 @@ const LoginPanel = () => {
         <button className="btn-auth" onClick={() => navigate("/signup")}>
           {textConfig.auth.signup}
         </button>
-        <div
-          className={`absolute w-full h-fit lg:h-full bottom-0 left-0 text-center auth-div bg-sky-800 dark:bg-fuchsia-950 transition-transform duration-200 ${
-            sidePanel ? "-translate-y-1" : "translate-y-full"
-          }`}
-        >
-          <div className="grow w-full auth-div p-0">
-            <h2>{textConfig.auth.fgtpwd2}</h2>
-            <IconInput
-              type="email"
-              placeholder={"email address"}
-              icon={<Mail />}
-              tabIndex={"-1"}
-              wrapperClass={"w-full text-left"}
-              className={"text-gray-900"}
-              label={<p>{textConfig.auth.resetemail}</p>}
-            />
-            <LoadBtn tabIndex={"-1"} className="btn-auth">
-              {textConfig.auth.continue}
-            </LoadBtn>
-          </div>
-          <button tabIndex={"-1"} onClick={togglefgtPwd}>
-            <ArrowDownCircle />
-          </button>
-        </div>
+        <ForgotPass sidePanel={sidePanel} togglefgtPwd={togglefgtPwd} />
       </div>
     </AuthWrapper>
   );

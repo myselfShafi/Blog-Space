@@ -1,5 +1,6 @@
+import AuthWrapper from "./auth/authWrapper";
+import ForgotPass from "./auth/fgtPwd";
 import AuthRoute from "./authRoutes";
-import AuthWrapper from "./authWrapper";
 import AuthBanner from "./banner/main";
 import DayBlog from "./dayBlog";
 import Footer from "./footer/main";
@@ -16,6 +17,7 @@ export {
   CardLoader,
   DayBlog,
   Footer,
+  ForgotPass,
   LoadBtn,
   Navbar,
   TextEditor,

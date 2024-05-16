@@ -4,6 +4,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 @layer base {
     html {
         @apply font-madefor-text
@@ -12,22 +13,22 @@
         @apply dark:bg-gray-900 dark:text-white
     }
     h1 {
-        @apply text-6xl font-bold pb-3
+        @apply text-5xl font-bold pb-3
     }
     h2 {
-        @apply text-5xl font-bold pb-2
+        @apply text-4xl font-bold pb-2
     }
     h3 {
-        @apply text-4xl font-semibold pb-1
+        @apply text-3xl font-semibold pb-1
     }
     h4 {
-        @apply text-3xl font-semibold
-    }
-    h5 {
         @apply text-2xl font-semibold
     }
+    h5 {
+        @apply text-xl font-semibold
+    }
     h6 {
-        @apply text-xl font-medium;
+        @apply text-lg font-medium;
     }
     p {
         @apply text-base font-normal;
@@ -108,4 +109,6 @@
         @apply rounded-full content-[''] block h-5 w-5
     }
 }
+
+
 
