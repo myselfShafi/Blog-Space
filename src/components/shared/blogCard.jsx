@@ -18,8 +18,8 @@ const BlogCard = () => {
   });
 
   return (
-    <section className="lg:flex container p-5 lg:w-11/12 xl:w-3/4 hover:drop-shadow-lg hover:shadow-lg dark:hover:drop-shadow-gray-800 dark:hover:shadow-slate-950 group/card">
-      <div className="flex-none w-full h-80 lg:w-120 lg:h-96 relative">
+    <section className="lg:flex container p-5 lg:w-11/12 2xl:w-full hover:drop-shadow-lg hover:shadow-lg dark:hover:drop-shadow-gray-800 dark:hover:shadow-slate-950 group/card">
+      <div className="flex-none w-full h-80 lg:w-120 lg:h-96 2xl:h-[22rem] relative">
         <img
           src="https://images.unsplash.com/photo-1714572877777-59bf4765f462"
           alt="card-img"

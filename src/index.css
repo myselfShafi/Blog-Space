@@ -110,5 +110,9 @@
     }
 }
 
-
+@layer utilities {
+    .container {
+        @apply 2xl:max-w-[80%]
+    }
+}
 

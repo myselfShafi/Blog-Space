@@ -16,7 +16,7 @@ const DayBlog = () => {
   const url = "https://images.unsplash.com/photo-1561154464-82e9adf32764";
 
   return (
-    <div className="container p-0 overflow-hidden">
+    <div className="p-0 overflow-hidden">
       <Heading>{textConfig.dashboard.dayBlog}</Heading>
       <Link to={`/all-category/${category}/${postId}`}>
         <div className="relative my-10 h-[40rem] overflow-hidden group/wrapper">
