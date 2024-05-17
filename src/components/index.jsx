@@ -1,3 +1,4 @@
+import AnimationIcon from "./animationPlayer";
 import AuthWrapper from "./auth/authWrapper";
 import ForgotPass from "./auth/fgtPwd";
 import AuthRoute from "./authRoutes";
@@ -12,6 +13,7 @@ import TextEditor from "./textEditor";
 import UserDetail from "./userDetail";
 
 export {
+  AnimationIcon,
   AuthBanner,
   AuthRoute,
   AuthWrapper,

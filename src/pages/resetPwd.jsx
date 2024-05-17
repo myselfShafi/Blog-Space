@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Key } from "react-feather";
 import { useForm } from "react-hook-form";
 import { useLocation, useNavigate } from "react-router-dom";
 import authService from "../appWriteService/auth.service";
-import { AuthWrapper, LoadBtn, LoaderPage } from "../components";
+import { AnimationIcon, AuthWrapper, LoadBtn, LoaderPage } from "../components";
 import { Error, IconInput } from "../components/shared";
 import { formValidate, textConfig } from "../config";
 
@@ -16,7 +16,8 @@ const ResetPass = () => {
 
   const [loading, setLoading] = useState(false);
   const [noAccess, setNoAccess] = useState(true);
-  const [success, setSuccess] = useState(true);
+  const [success, setSuccess] = useState(false);
+  const checkRef = useRef(null);
 
   useEffect(() => {
     if (!userID || !secret) {
@@ -120,8 +121,21 @@ const ResetPass = () => {
             </LoadBtn>
           </form>
         ) : (
-          <div className="w-full text-center text-green-700 auth-div p-0">
-            <h2>{textConfig.auth.success}</h2>
+          <div className="w-full text-center  auth-div p-0">
+            <AnimationIcon
+              src={"/src/assets/check.json"}
+              ref={checkRef}
+              speed={0.4}
+              loop
+              className={"w-36 h-36"}
+            />
+            <h2 className="text-teal-500">{textConfig.auth.success}</h2>
+            <button
+              className="btn-auth w-fit"
+              onClick={() => navigate("/login", { replace: true })}
+            >
+              {textConfig.auth.login2}
+            </button>
           </div>
         )}
       </div>
