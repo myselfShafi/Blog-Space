@@ -10,6 +10,14 @@ const Dashboard = () => {
 
   console.log({ userData, status });
   const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   const run = async () => {
+  //     await authService.logout();
+  //   };
+  //   run();
+  // }, []);
+
   return (
     <div>
       <div className="h-[calc(100vh-5rem)] bg-gradient-light dark:bg-gradient-dark pt-20 lg:pt-40 center-element flex-col text-center px-3">

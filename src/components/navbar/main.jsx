@@ -84,7 +84,9 @@ const Navbar = () => {
               list.access ? (
                 <li className="nav-list" key={list.id}>
                   {list.href ? (
-                    <Link to={list.href}>{list.title}</Link>
+                    <Link to={list.href} className="text-lg">
+                      {list.title}
+                    </Link>
                   ) : (
                     list.title
                   )}

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import LoaderPage from "./loaders/screenLoad";
 
 const AuthRoute = ({ authenticated, children }) => {
   const loginStatus = useSelector((state) => state.auth.status);
@@ -16,13 +17,7 @@ const AuthRoute = ({ authenticated, children }) => {
     setLoader(false);
   }, [loader, loginStatus, authenticated]);
 
-  return loader ? (
-    <div className="center-element h-screen">
-      <span className="load"></span>
-    </div>
-  ) : (
-    <React.Fragment>{children}</React.Fragment>
-  );
+  return loader ? <LoaderPage /> : <React.Fragment>{children}</React.Fragment>;
 };
 
 export default AuthRoute;

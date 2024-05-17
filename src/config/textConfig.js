@@ -40,6 +40,7 @@ const textConfig = {
     createPwd: "Create New Password",
     newPwd: "New Password",
     cnfPwd: "Confirm Password",
+    success: "Password Reset Successful",
     note: "Password security begins with a strong password: at least 10 characters, including uppercase letters, lowercase letters, numbers, and symbols.",
   },
   user: {

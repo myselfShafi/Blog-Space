@@ -72,6 +72,21 @@ class AuthService {
       throw error;
     }
   }
+
+  async updatePwd({ userID, secret, password, cnfPassword }) {
+    try {
+      return await this.account.updateRecovery(
+        userID,
+        secret,
+        password,
+        cnfPassword
+      );
+      // handle err in frontend comp.
+    } catch (error) {
+      console.error("Appwrite error ++ password update ++", error);
+      throw error;
+    }
+  }
 }
 
 const authService = new AuthService();
