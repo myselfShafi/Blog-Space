@@ -24,7 +24,7 @@ const ThemeMode = () => {
 
   return (
     <i className="cursor-pointer" onClick={handletheme}>
-      {lightMode ? <Moon /> : <Sun />}
+      {lightMode ? <Sun /> : <Moon />}
     </i>
   );
 };

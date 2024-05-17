@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { ArrowDownCircle, Inbox, Mail } from "react-feather";
+import { ArrowDownCircle, Mail } from "react-feather";
 import { useForm } from "react-hook-form";
+import { AnimationIcon } from "..";
 import authService from "../../appWriteService/auth.service";
 import { envConfig, formValidate, textConfig } from "../../config";
 import LoadBtn from "../loaders/loaderButton";
@@ -102,15 +103,19 @@ const ForgotPass = ({ sidePanel, togglefgtPwd }) => {
       </button>
 
       <div
-        className={`absolute top-0 bg-blue-100/20 backdrop-blur-xl rounded-b-3xl auth-div p-6 lg:p-10  ${
+        className={`absolute top-0 bg-blue-100/20 backdrop-blur-xl rounded-b-3xl auth-div gap-0 p-6 pt-0 lg:pt-0  ${
           sendEmail ? "translate-y-1" : " -translate-y-full"
         } ${hide && "hidden"} transition-transform duration-150`}
       >
-        <Inbox className="size-12 animate-bounce" />
+        <AnimationIcon
+          src={"/src/assets/mailsent.json"}
+          autoPlay
+          loop
+          className={"w-32 h-32"}
+        />
         <h4>{textConfig.auth.inbox}</h4>
-        <p>
-          We've {resent ? "resent the" : "sent an"} email with password reset
-          information to{" "}
+        <p className="my-3">
+          Password reset email {resent ? "resent" : "sent"} to
           <span className="font-bold block text-rose-800 dark:text-indigo-800">
             {sendEmail || "your entered email"}
           </span>
@@ -122,7 +127,7 @@ const ForgotPass = ({ sidePanel, togglefgtPwd }) => {
           isloading={loading}
           type={"button"}
           tabIndex={"-1"}
-          className={`btn-auth w-fit`}
+          className={`btn-auth w-fit mt-3`}
           disabled={count > 0}
           onClick={handleResend}
         >
