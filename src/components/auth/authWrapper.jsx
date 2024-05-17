@@ -6,7 +6,7 @@ const AuthWrapper = ({ children, ...props }) => {
     <div
       className={`h-screen p-5 flex flex-col bg-gradient-light dark:bg-gradient-dark`}
     >
-      <Link to={"/"} className="w-fit mx-auto">
+      <Link to={"/"} replace={true} className="w-fit mx-auto">
         <h1 className="text-pink-700 text-center">{textConfig.title}</h1>
       </Link>
       <div className={"grow center-element"}>

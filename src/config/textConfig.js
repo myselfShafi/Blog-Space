@@ -36,6 +36,11 @@ const textConfig = {
     resend: "Resend Email",
     inbox: "Check your Inbox",
     check: "Didn't receive the email? check spam folder or",
+    reset: "Reset Password",
+    createPwd: "Create New Password",
+    newPwd: "New Password",
+    cnfPwd: "Confirm Password",
+    note: "Password security begins with a strong password: at least 10 characters, including uppercase letters, lowercase letters, numbers, and symbols.",
   },
   user: {
     save: "Save",

@@ -11,11 +11,11 @@ const formValidate = {
     required: "Password is required",
     minLength: {
       value: 8,
-      message: "Password must be between 8 - 15 characters",
+      message: "Password must be atleast 10 characters",
     },
     maxLength: {
       value: 15,
-      message: "Password must be between 8 - 15 characters",
+      message: "Password must be between 10 - 16 characters",
     },
   },
   textOnly: {

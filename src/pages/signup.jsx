@@ -21,7 +21,7 @@ const SignupPanel = () => {
     getValues,
     formState: { errors },
   } = useForm({
-    defaultValues: { fullname: "", email: "", password: "", cnfPasswod: "" },
+    defaultValues: { fullname: "", email: "", password: "", cnfPassword: "" },
   });
 
   const onSignup = async (data) => {
@@ -85,8 +85,8 @@ const SignupPanel = () => {
           wrapperClass="w-full"
           pwdInput
           icon={<Key className="rotate-90" />}
-          hasError={errors.cnfPasswod}
-          {...register("cnfPasswod", {
+          hasError={errors.cnfPassword}
+          {...register("cnfPassword", {
             ...formValidate.password,
             disabled: watch("password") === "",
             validate: {
