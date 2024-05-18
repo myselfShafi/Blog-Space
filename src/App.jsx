@@ -12,6 +12,7 @@ import {
   RootLayout,
   SignupPanel,
   UserPosts,
+  VerifyUser,
 } from "./pages";
 import store from "./store/store";
 
@@ -75,6 +76,14 @@ const router = createBrowserRouter([
     element: (
       <AuthRoute authenticated={false}>
         <ResetPass />
+      </AuthRoute>
+    ),
+  },
+  {
+    path: "/user-verification",
+    element: (
+      <AuthRoute authenticated={false}>
+        <VerifyUser />
       </AuthRoute>
     ),
   },

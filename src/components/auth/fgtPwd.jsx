@@ -34,6 +34,7 @@ const ForgotPass = ({ sidePanel, togglefgtPwd }) => {
 
   const passEmail = async ({ email }) => {
     setLoading(true);
+    setHide(false);
     try {
       const resp = await authService.resetEmail({
         email,
@@ -46,6 +47,7 @@ const ForgotPass = ({ sidePanel, togglefgtPwd }) => {
         setError("root", { type: "manual", message: resp });
       }
     } catch (error) {
+      setHide(true);
       setError("root", { type: "manual", message: error.message });
     }
     setLoading(false);
@@ -77,7 +79,6 @@ const ForgotPass = ({ sidePanel, togglefgtPwd }) => {
           icon={<Mail />}
           tabIndex={"-1"}
           hasError={errors.email}
-          onFocus={() => setHide(false)}
           wrapperClass={"w-full text-left"}
           className={"text-gray-900"}
           label={<p>{textConfig.auth.resetemail}</p>}

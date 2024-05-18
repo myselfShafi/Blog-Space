@@ -8,6 +8,7 @@ import Post from "./post";
 import ResetPass from "./resetPwd";
 import SignupPanel from "./signup";
 import UserPosts from "./userPosts";
+import VerifyUser from "./verifyUser";
 
 export {
   Category,
@@ -20,4 +21,5 @@ export {
   RootLayout,
   SignupPanel,
   UserPosts,
+  VerifyUser,
 };

@@ -27,8 +27,10 @@ const SignupPanel = () => {
   const onSignup = async (data) => {
     setLoading(true);
     data = { name: data.fullname, email: data.email, password: data.password };
+    console.log({ data });
     try {
       const resp = await authService.createAccount(data);
+      console.log({ resp });
       if (resp) {
         const userData = await authService.getCurrentUser();
         if (userData) {
@@ -39,7 +41,7 @@ const SignupPanel = () => {
         setError("root", { type: "manual", message: resp || "server error" });
       }
     } catch (error) {
-      setError("root", { type: "manual", message: error });
+      setError("root", { type: "manual", message: error.message });
     }
     setLoading(false);
   };

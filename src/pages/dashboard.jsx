@@ -12,13 +12,6 @@ const Dashboard = () => {
   console.log({ userData, status });
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   const run = async () => {
-  //     await authService.logout();
-  //   };
-  //   run();
-  // }, []);
-
   return (
     <div>
       <div className="h-full bg-gradient-light dark:bg-gradient-dark pt-20 lg:pt-40 center-element flex-col gap-4 text-center px-3">

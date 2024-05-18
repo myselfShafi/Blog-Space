@@ -11,6 +11,7 @@ const envConfig = {
   tinymceApi: String(import.meta.env.VITE_TINYMCE_API),
 
   resetURL: String(import.meta.env.VITE_RESET_URL),
+  verifyURL: String(import.meta.env.VITE_VERIFY_USER_URL),
 };
 
 export default envConfig;
