@@ -109,7 +109,7 @@ const ForgotPass = ({ sidePanel, togglefgtPwd }) => {
       >
         <AnimationIcon
           src={"/src/assets/mailsent.json"}
-          autoPlay
+          autoplay
           loop
           className={"w-32 h-32"}
         />

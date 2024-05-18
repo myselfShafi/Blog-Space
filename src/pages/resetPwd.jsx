@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Key } from "react-feather";
 import { useForm } from "react-hook-form";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -17,7 +17,6 @@ const ResetPass = () => {
   const [loading, setLoading] = useState(false);
   const [noAccess, setNoAccess] = useState(true);
   const [success, setSuccess] = useState(false);
-  const checkRef = useRef(null);
 
   useEffect(() => {
     if (!userID || !secret) {
@@ -124,9 +123,9 @@ const ResetPass = () => {
           <div className="w-full text-center  auth-div p-0">
             <AnimationIcon
               src={"/src/assets/check.json"}
-              ref={checkRef}
               speed={0.4}
               loop
+              autoplay
               className={"w-36 h-36"}
             />
             <h2 className="text-teal-500">{textConfig.auth.success}</h2>

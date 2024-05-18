@@ -1,25 +1,16 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Moon, Sun } from "react-feather";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleTheme } from "../../store/slices/settingSlice";
 
 const ThemeMode = () => {
-  const [lightMode, setLightMode] = useState(true);
-
-  useEffect(() => {
-    if (!lightMode) {
-      localStorage.setItem("light", false);
-      window.document.documentElement.classList.add("dark");
-    } else if (lightMode) {
-      localStorage.setItem("light", true);
-      window.document.documentElement.classList.remove("dark");
-    } else {
-      setLightMode(localStorage.getItem("light") === true);
-    }
-  }, [lightMode]);
+  const dispatch = useDispatch();
+  const lightMode = useSelector((state) => state.settings.lightMode);
 
   const handletheme = () => {
-    setLightMode(!lightMode);
+    dispatch(toggleTheme());
   };
 
   return (

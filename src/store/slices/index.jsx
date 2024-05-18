@@ -1,3 +1,4 @@
 import authSlice from "./authSlice";
+import settingsSlice from "./settingSlice";
 
-export { authSlice };
+export { authSlice, settingsSlice };
