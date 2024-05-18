@@ -65,7 +65,7 @@ const Navbar = () => {
     >
       <section className="container p-6 lg:p-3 flex justify-between items-center">
         <Link to={"/"} className="block lg:hidden dark:invert">
-          <img src="/src/assets/icon.png" alt="Blog Sphere" />
+          <img src="/icon.png" alt="Blog Sphere" />
         </Link>
         <div className="hidden lg:block">
           <Link to={"/"}>

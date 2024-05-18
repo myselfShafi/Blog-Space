@@ -24,7 +24,7 @@ const UserPosts = () => {
       <div className="bg-shade p-10  lg:px-20 flex flex-col lg:flex-row  gap-5 lg:gap-10  mb-20">
         <div className="center-element flex-col gap-4">
           <img
-            src={img ? img : "/src/assets/placeholder.jpg"}
+            src={img ? img : "/static/placeholder.jpg"}
             alt="profile-image"
             className="w-36 h-36 lg:w-52 lg:h-52 rounded-full object-cover object-center"
           />

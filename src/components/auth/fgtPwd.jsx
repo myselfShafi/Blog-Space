@@ -108,7 +108,7 @@ const ForgotPass = ({ sidePanel, togglefgtPwd }) => {
         } ${hide && "hidden"} transition-transform duration-150`}
       >
         <AnimationIcon
-          src={"/src/assets/mailsent.json"}
+          src={"/static/mailsent.json"}
           autoplay
           loop
           className={"w-32 h-32"}

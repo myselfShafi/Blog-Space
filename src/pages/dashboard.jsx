@@ -25,9 +25,7 @@ const Dashboard = () => {
         <div className="grid lg:grid-cols-2 gap-y-10">
           <div className="lg:order-2 ">
             <AnimationIcon
-              src={`/src/assets/dashboard-${
-                !lightMode ? "light" : "dark"
-              }.json`}
+              src={`/static/dashboard-${!lightMode ? "light" : "dark"}.json`}
               autoplay
               loop
               className={"w-full lg:w-[80%] h-full"}

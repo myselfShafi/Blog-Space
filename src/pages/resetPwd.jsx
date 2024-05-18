@@ -122,7 +122,7 @@ const ResetPass = () => {
         ) : (
           <div className="w-full text-center  auth-div p-0">
             <AnimationIcon
-              src={"/src/assets/check.json"}
+              src={"/static/check.json"}
               speed={0.4}
               loop
               autoplay
