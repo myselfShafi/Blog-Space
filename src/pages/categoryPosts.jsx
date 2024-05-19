@@ -1,13 +1,21 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { CardLoader } from "../components";
 import { CategoryCard, MainContainer } from "../components/shared";
 
 const CategoryPosts = () => {
+  const { status, userData } = useSelector((state) => state.auth);
   const { state } = useLocation();
 
   return (
-    <div className="my-20 lg:my-40">
+    <div
+      className={`${
+        !userData?.emailVerification && status
+          ? "mt-32 mb-20 lg:mt-52 lg:mb-40"
+          : "my-20 lg:my-40"
+      }`}
+    >
       <div
         className="w-full h-96 lg:h-[50vh] bg-cover bg-center center-element"
         style={{ backgroundImage: `url(${state?.img})` }}
@@ -16,7 +24,7 @@ const CategoryPosts = () => {
           {state?.title}
         </h2>
       </div>
-      <MainContainer className={"p-0"}>
+      <MainContainer className={"lg:mt-40 p-0"}>
         <div className="p-3 gap-10 lg:gap-16 lg:columns-2 xl:columns-3">
           {[
             "https://images.unsplash.com/photo-1714409299166-de863d9598fb",

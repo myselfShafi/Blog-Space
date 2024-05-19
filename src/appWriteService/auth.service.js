@@ -21,11 +21,9 @@ class AuthService {
         name
       );
       if (resp) {
-        const emailSent = await this.account.createVerification(
-          envConfig.verifyURL
-        );
-        if (emailSent) {
-          return this.login({ email, password });
+        const loggedIn = await this.login({ email, password });
+        if (loggedIn) {
+          return this.account.createVerification(envConfig.verifyURL);
         }
       } else {
         console.error("Appwrite error ++ account creation resp failed!");

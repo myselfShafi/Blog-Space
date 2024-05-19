@@ -4,15 +4,15 @@ import { Outlet } from "react-router-dom";
 import { AuthBanner, Footer, Navbar } from "../../components";
 
 const RootLayout = () => {
-  const loginStatus = useSelector((state) => state.auth.status);
+  const { status } = useSelector((state) => state.auth);
 
   return (
-    <div className="h-screen flex flex-col">
+    <div className="relative h-screen flex flex-col">
       <Navbar />
       <div className="grow">
         <Outlet />
       </div>
-      {!loginStatus && <AuthBanner />}
+      {!status && <AuthBanner />}
       <Footer />
     </div>
   );

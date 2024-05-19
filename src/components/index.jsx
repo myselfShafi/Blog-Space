@@ -2,6 +2,7 @@ import AnimationIcon from "./animationPlayer";
 import AuthWrapper from "./auth/authWrapper";
 import ForgotPass from "./auth/fgtPwd";
 import AuthRoute from "./authRoutes";
+import EmailVerify from "./banner/emailVerify";
 import AuthBanner from "./banner/main";
 import DayBlog from "./dayBlog";
 import Footer from "./footer/main";
@@ -19,6 +20,7 @@ export {
   AuthWrapper,
   CardLoader,
   DayBlog,
+  EmailVerify,
   Footer,
   ForgotPass,
   LoadBtn,
