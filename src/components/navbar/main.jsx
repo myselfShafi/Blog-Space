@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Menu, XSquare } from "react-feather";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { textConfig } from "../../config";
 import EmailVerify from "../banner/emailVerify";
 import { CategoryDropdown } from "./categoryDrop";
@@ -9,6 +9,7 @@ import LogoutBtn from "./logoutBtn";
 import ThemeMode from "./themeMode";
 
 const Navbar = () => {
+  const { pathname } = useLocation();
   const { status, userData } = useSelector((state) => state.auth);
 
   const [open, setOpen] = useState(false);
@@ -87,7 +88,12 @@ const Navbar = () => {
             >
               {navlist.map((list) =>
                 list.access ? (
-                  <li className="nav-list" key={list.id}>
+                  <li
+                    className={`nav-list ${
+                      pathname === list.href && "underline"
+                    }`}
+                    key={list.id}
+                  >
                     {list.href ? (
                       <Link to={list.href} className="text-lg">
                         {list.title}

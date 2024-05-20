@@ -8,16 +8,7 @@ import { textConfig } from "../config";
 const Dashboard = () => {
   const lightMode = useSelector((state) => state.settings.lightMode);
   const { status, userData } = useSelector((state) => state.auth);
-
-  console.log({ userData, status });
   const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   const run = async () => {
-  //     await authService.logout();
-  //   };
-  //   run();
-  // }, []);
 
   return (
     <div>
