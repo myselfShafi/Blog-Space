@@ -5,10 +5,10 @@ const Error = ({ children, showError }) => {
   return (
     <div
       className={`center-element text-red-600 dark:text-rose-300 ${
-        showError ? "visible" : "invisible mb-2"
+        showError ? "visible" : "invisible"
       }`}
     >
-      <AlertTriangle className="size-4 mr-2 animate-bounce" />
+      <AlertTriangle className="mr-2 animate-bounce" />
       <p className=" font-semibold">{children}</p>
     </div>
   );

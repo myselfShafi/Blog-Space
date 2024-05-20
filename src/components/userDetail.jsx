@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { textConfig } from "../config";
 import { IconInput } from "./shared";
 
-const UserDetail = ({ data }) => {
+const UserDetail = ({ data, setErr }) => {
   const [edit, setEdit] = useState(false);
 
   const [tempData, setTempData] = useState({
@@ -19,6 +19,14 @@ const UserDetail = ({ data }) => {
   const onSubmit = (userdata) => {
     console.log(data, tempData);
     setTempData(userdata);
+  };
+
+  const onEdit = () => {
+    if (!data?.emailVerification) {
+      setErr(true);
+    } else {
+      setEdit(!edit);
+    }
   };
 
   return (
@@ -84,7 +92,7 @@ const UserDetail = ({ data }) => {
       <button
         type={!edit ? "submit" : "button"}
         className="absolute right-0 top-0 p-0"
-        onClick={() => setEdit(!edit)}
+        onClick={onEdit}
       >
         {edit ? (
           <p className="font-bold underline underline-offset-2">
