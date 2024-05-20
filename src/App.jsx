@@ -1,6 +1,7 @@
 import { Provider } from "react-redux";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { AuthRoute } from "./components";
+import { PersistGate } from "redux-persist/integration/react";
+import { AuthRoute, LoaderPage } from "./components";
 import {
   Category,
   CategoryPosts,
@@ -14,7 +15,7 @@ import {
   UserPosts,
   VerifyUser,
 } from "./pages";
-import store from "./store/store";
+import store, { persistor } from "./store/store";
 
 const router = createBrowserRouter([
   {
@@ -92,7 +93,9 @@ const router = createBrowserRouter([
 function App() {
   return (
     <Provider store={store}>
-      <RouterProvider router={router} />
+      <PersistGate loading={<LoaderPage />} persistor={persistor}>
+        <RouterProvider router={router} />
+      </PersistGate>
     </Provider>
   );
 }
