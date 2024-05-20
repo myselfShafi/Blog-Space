@@ -16,7 +16,7 @@ const EmailVerify = () => {
       <p className="hidden md:block font-bold text-sm">Almost there!</p>
       <span>
         <AnimationIcon
-          src={"/public/static/email.json"}
+          src={"/static/email.json"}
           autoplay
           loop
           className={" h-10"}

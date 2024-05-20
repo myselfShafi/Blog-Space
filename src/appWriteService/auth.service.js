@@ -90,6 +90,16 @@ class AuthService {
       throw error;
     }
   }
+
+  async verifyEmail({ userID, secret }) {
+    try {
+      return await this.account.updateVerification(userID, secret);
+      // handle err in frontend comp.
+    } catch (error) {
+      console.error("Appwrite error ++ verify account ++", error);
+      throw error;
+    }
+  }
 }
 
 const authService = new AuthService();

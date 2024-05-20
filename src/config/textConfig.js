@@ -42,6 +42,9 @@ const textConfig = {
     cnfPwd: "Confirm Password",
     success: "Password Reset Successful",
     note: "Password security begins with a strong password: at least 10 characters, including uppercase letters, lowercase letters, numbers, and symbols.",
+    verifying: "Verifying your account ...",
+    verified: "Email Verified",
+    verified2: "Your account is now verified. Proceed to Login.",
   },
   user: {
     save: "Save",

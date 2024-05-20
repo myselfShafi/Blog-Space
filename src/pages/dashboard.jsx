@@ -44,7 +44,8 @@ const Dashboard = () => {
                   Welcome{" "}
                   <span className="capitalize font-bold">
                     {String(userData?.name)}
-                  </span>
+                  </span>{" "}
+                  !
                 </h4>
               )}
               <h5 className=" font-bold leading-[3] text-stone-800 dark:text-violet-200">

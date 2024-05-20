@@ -61,7 +61,7 @@ const ResetPass = () => {
   }
 
   return (
-    <AuthWrapper>
+    <AuthWrapper blockRoute>
       <div className="bg-auth-2 text-center auth-div">
         <h2 className="hidden md:block">{textConfig.auth.createPwd}</h2>
         <p>
