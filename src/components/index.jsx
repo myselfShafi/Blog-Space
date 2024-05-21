@@ -10,6 +10,7 @@ import CardLoader from "./loaders/cardLoader";
 import LoadBtn from "./loaders/loaderButton";
 import LoaderPage from "./loaders/screenLoad";
 import Navbar from "./navbar/main";
+import RadioGroup from "./shared/radioGroup";
 import TextEditor from "./textEditor";
 import UserDetail from "./userDetail";
 
@@ -26,6 +27,7 @@ export {
   LoadBtn,
   LoaderPage,
   Navbar,
+  RadioGroup,
   TextEditor,
   UserDetail,
 };

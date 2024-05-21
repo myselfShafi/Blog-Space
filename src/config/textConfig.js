@@ -65,6 +65,7 @@ const textConfig = {
     content: "Post Content :",
     category: "Post Category :",
     img: "Featured Image :",
+    status: "Post Status :",
     format: "Unsupported file format! Select valid image",
     save: "Save Post",
     option: "select option",

@@ -10,6 +10,18 @@ const Dashboard = () => {
   const { status, userData } = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
+  // useEffect(() => {
+  //   const run = async () => {
+  //     try {
+  //       const check = await dbService.getAllPosts();
+  //       console.log({ check });
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   run();
+  // }, []);
+
   return (
     <div>
       <div
