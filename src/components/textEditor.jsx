@@ -3,7 +3,14 @@ import React from "react";
 import { Controller } from "react-hook-form";
 import { envConfig, textConfig } from "../config";
 
-const TextEditor = ({ control, hasError, defaultValue = "" }) => {
+const TextEditor = ({
+  control,
+  hasError,
+  setError,
+  clearErrors,
+  disabled,
+  defaultValue = "",
+}) => {
   return (
     <div>
       <label
@@ -25,6 +32,7 @@ const TextEditor = ({ control, hasError, defaultValue = "" }) => {
               onEditorChange={onChange}
               apiKey={envConfig.tinymceApi}
               initialValue={defaultValue}
+              disabled={disabled}
               init={{
                 height: "75vh",
                 menubar: true,
@@ -54,6 +62,23 @@ const TextEditor = ({ control, hasError, defaultValue = "" }) => {
                   "undo redo | blocks | image | bold italic forecolor | alignleft aligncenter bold italic forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent |removeformat | help",
                 content_style:
                   "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+                ui_mode: "split",
+                branding: false,
+                setup: (editor) => {
+                  var maxChar = 25000;
+                  editor.on("input", (e) => {
+                    var numChar = editor.getContent({ format: "text" });
+                    if (numChar.length > maxChar) {
+                      setError("content", {
+                        type: "text",
+                        message: "Maximum " + maxChar + " characters allowed.",
+                      });
+                      editor.setContent(numChar.substring(0, maxChar));
+                      e.preventDefault();
+                      return false;
+                    }
+                  });
+                },
               }}
             />
           </div>

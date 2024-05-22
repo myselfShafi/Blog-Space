@@ -1,4 +1,4 @@
-import { Client, Databases, ID, Storage } from "appwrite";
+import { Client, Databases, ID, Query, Storage } from "appwrite";
 import { envConfig } from "../config";
 
 class DbService {
@@ -14,14 +14,28 @@ class DbService {
     this.storage = new Storage(this.client);
   }
 
-  async getAllPosts() {
+  async getAllPosts(query = [Query.equal("status", "public")]) {
     try {
       return await this.databases.listDocuments(
         envConfig.appWriteDBId,
-        envConfig.appWriteCollectionId
+        envConfig.appWriteCollectionId,
+        query
       );
     } catch (error) {
       console.error("Appwrite error ++ get all posts ++", error);
+      throw error;
+    }
+  }
+
+  async getPost(documentID) {
+    try {
+      return await this.databases.getDocument(
+        envConfig.appWriteDBId,
+        envConfig.appWriteCollectionId,
+        documentID
+      );
+    } catch (error) {
+      console.error("Appwrite error ++ get current post ++", error);
       throw error;
     }
   }
@@ -43,6 +57,28 @@ class DbService {
       );
     } catch (error) {
       console.error("Appwrite error ++ create post ++", error);
+      throw error;
+    }
+  }
+
+  async uploadFile(file) {
+    try {
+      return await this.storage.createFile(
+        envConfig.appWriteBucketId,
+        ID.unique(),
+        file
+      );
+    } catch (error) {
+      console.error("Appwrite error ++ upload file ++", error);
+      throw error;
+    }
+  }
+
+  async deleteFile(fileID) {
+    try {
+      return await this.storage.deleteFile(envConfig.appWriteBucketId, fileID);
+    } catch (error) {
+      console.error("Appwrite error ++ delete file ++", error);
       throw error;
     }
   }

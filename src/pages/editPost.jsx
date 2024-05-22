@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { CheckCircle, XCircle } from "react-feather";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import dbService from "../appWriteService/db.service";
-import { RadioGroup, TextEditor } from "../components";
+import { LoadBtn, RadioGroup, TextEditor } from "../components";
 import { categorylist } from "../components/navbar/categoryDrop";
 import { Error, MainContainer, OptionSelect } from "../components/shared";
 import IconInput from "../components/shared/iconInput";
@@ -14,8 +15,17 @@ const statusOpt = [
   { id: 2, label: "private" },
 ];
 const EditPost = () => {
+  const navigate = useNavigate();
   const { userData } = useSelector((state) => state.auth);
   const [img, setImg] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+
+  const redirect = () => {
+    setTimeout(() => {
+      navigate("/all-category/sports/blog-asfgshfghgfj", { replace: true });
+    }, 5000);
+  };
 
   const defaultValues = {
     title: "",
@@ -29,22 +39,34 @@ const EditPost = () => {
     register,
     control,
     setError,
+    clearErrors,
     formState: { errors },
     handleSubmit,
   } = useForm({ defaultValues });
 
   const onPostSave = async (data) => {
-    data = { ...data, userID: userData?.$id };
+    setLoading(true);
     try {
-      const resp = await dbService.createPost(data);
+      if (data?.thumbnail[0]) {
+        const file = await dbService.uploadFile(data?.thumbnail[0]);
+        data.thumbnail = file?.$id;
+      } else {
+        data.thumbnail = "";
+      }
+      const resp = await dbService.createPost({
+        ...data,
+        userID: userData?.$id,
+      });
       if (resp) {
-        console.log(resp);
+        setSuccess(true);
+        redirect();
       } else {
         setError("root", { type: "manual", message: resp });
       }
     } catch (error) {
       setError("root", { type: "manual", message: error.message });
     }
+    setLoading(false);
   };
 
   const onImgPick = (e) => {
@@ -75,16 +97,21 @@ const EditPost = () => {
             label={textConfig.postEdit.title}
             hasError={errors.title}
             name={"title"}
+            maxLength={300}
             className={"mb-8"}
             {...register("title", {
               ...formValidate.textOnly,
               required: "Title is required",
+              disabled: success || loading,
             })}
           />
           <TextEditor
             control={control}
+            setError={setError}
+            clearErrors={clearErrors}
             defaultValue={""}
             hasError={errors.content}
+            disabled={success || loading}
           />
         </div>
         <div>
@@ -93,9 +120,10 @@ const EditPost = () => {
             control={control}
             list={categorylist}
             hasError={errors.category}
+            disabled={success || loading}
             label={textConfig.postEdit.category}
           />
-          <h5 className="mt-8 mb-1.5">{textConfig.postEdit.img}</h5>
+          <h4 className="mt-8 mb-1.5 font-bold">{textConfig.postEdit.img}</h4>
           {img && (
             <div className="center-element">
               <img
@@ -107,33 +135,49 @@ const EditPost = () => {
           )}
           <input
             type="file"
-            className="w-full dark:text-white"
+            disabled={success || loading}
+            className={`w-full dark:text-white ${
+              errors.thumbnail && "border-2 border-rose-500"
+            }`}
             accept="image/png, image/jpg, image/jpeg, image/gif"
-            onChange={onImgPick}
             name="thumbnail"
-            {...register("thumbnail")}
+            {...register("thumbnail", {
+              ...formValidate.imageOnly,
+              onChange: (e) => onImgPick(e),
+            })}
           />
-          {img === false && (
-            <p className="text-red-600 mt-2 float-right center-element">
-              {textConfig.postEdit.format}
-              <span>
-                <XCircle className="ml-2" />
-              </span>
-            </p>
+          {img && !errors.thumbnail && (
+            <CheckCircle className="text-green-600 mt-2 float-right" />
           )}
-          {img && <CheckCircle className="text-green-600 mt-2 float-right" />}
+          {errors.thumbnail && (
+            <XCircle className="text-red-600 mt-2 float-right" />
+          )}
           <RadioGroup
+            disabled={success || loading}
             title={
-              <h5 className="mt-8 mb-1.5">{textConfig.postEdit.status}</h5>
+              <h4 className="mt-8 mb-1.5 font-bold">
+                {textConfig.postEdit.status}
+              </h4>
             }
             defaultValue={statusOpt[0].label}
             options={statusOpt}
             control={control}
             name={"status"}
           />
-          <button className="btn-contain w-full mt-8">
-            {textConfig.postEdit.save}
-          </button>
+          <LoadBtn
+            isloading={loading}
+            disabled={success}
+            className={`${
+              success ? "btn-contain-success" : "btn-contain"
+            } w-full mt-8`}
+          >
+            {success ? textConfig.postEdit.success : textConfig.postEdit.save}
+          </LoadBtn>
+          {success && (
+            <div className="border-2 text-green-500 text-center border-green-500 mt-8 p-2 lg:p-4">
+              {textConfig.postEdit.saveSuccess}
+            </div>
+          )}
           {Object.entries(errors).length != 0 && (
             <div className="border-2 border-rose-500 mt-8 p-2 lg:p-4">
               <Error showError={Object.entries(errors).length != 0}>

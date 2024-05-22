@@ -70,6 +70,8 @@ const textConfig = {
     save: "Save Post",
     option: "select option",
     other: "Other :",
+    saveSuccess: "Post saved successfully. Taking you to your post.",
+    success: "Redirecting ...",
   },
   banner: {
     line1: '"Why just read when you can write?',

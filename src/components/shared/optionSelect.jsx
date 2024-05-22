@@ -4,7 +4,14 @@ import { Controller } from "react-hook-form";
 import { textConfig } from "../../config";
 import Dropdown from "./dropdown";
 
-const OptionSelect = ({ label, list = [], name, control, hasError }) => {
+const OptionSelect = ({
+  label,
+  list = [],
+  name,
+  control,
+  hasError,
+  disabled,
+}) => {
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState(null);
   const [newCategory, setNewCategory] = useState("");
@@ -33,6 +40,7 @@ const OptionSelect = ({ label, list = [], name, control, hasError }) => {
             title={
               <button
                 type="button"
+                disabled={disabled}
                 className={`w-full outline outline-2 ${
                   hasError
                     ? "outline-rose-400"

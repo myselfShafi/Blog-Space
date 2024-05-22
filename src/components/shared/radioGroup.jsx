@@ -1,7 +1,14 @@
 import React from "react";
 import { Controller } from "react-hook-form";
 
-const RadioGroup = ({ title, control, name, options = [], defaultValue }) => {
+const RadioGroup = ({
+  title,
+  control,
+  name,
+  options = [],
+  defaultValue,
+  disabled,
+}) => {
   return (
     <div>
       {typeof title === "string" ? <h6>{title}</h6> : title}
@@ -14,6 +21,7 @@ const RadioGroup = ({ title, control, name, options = [], defaultValue }) => {
             {options?.map((list) => (
               <div key={list.id} className="flex items-center">
                 <input
+                  disabled={disabled}
                   type="radio"
                   name="post_status"
                   id={list.label}

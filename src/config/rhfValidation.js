@@ -24,6 +24,23 @@ const formValidate = {
       message: "Incorrect input pattern",
     },
   },
+  imageOnly: {
+    validate: (value) => {
+      if (value === "") {
+        return true;
+      }
+      if (
+        !["image/png", "image/jpg", "image/jpeg", "image/gif"].includes(
+          value[0]?.type
+        )
+      ) {
+        return "Invalid file format. Only jpg, jpeg, png, gif are supported.";
+      }
+      if (!(value[0]?.size / (1024 * 1024) < 10)) {
+        return "file size should be less than 10MB";
+      }
+    },
+  },
 };
 
 export default formValidate;
