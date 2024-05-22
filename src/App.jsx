@@ -8,6 +8,7 @@ import {
   Dashboard,
   EditPost,
   LoginPanel,
+  NotFound,
   Post,
   ResetPass,
   RootLayout,
@@ -87,6 +88,10 @@ const router = createBrowserRouter([
         <VerifyUser />
       </AuthRoute>
     ),
+  },
+  {
+    path: "*",
+    element: <NotFound routeErr />,
   },
 ]);
 

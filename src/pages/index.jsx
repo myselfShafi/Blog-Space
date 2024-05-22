@@ -4,6 +4,7 @@ import Dashboard from "./dashboard";
 import EditPost from "./editPost";
 import RootLayout from "./layout";
 import LoginPanel from "./login";
+import NotFound from "./notFound";
 import Post from "./post";
 import ResetPass from "./resetPwd";
 import SignupPanel from "./signup";
@@ -16,6 +17,7 @@ export {
   Dashboard,
   EditPost,
   LoginPanel,
+  NotFound,
   Post,
   ResetPass,
   RootLayout,

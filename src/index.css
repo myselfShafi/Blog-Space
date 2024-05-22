@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Wix+Madefor+Text:ital,wght@0,400..800;1,400..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&family=Poetsen+One&display=swap&family=Wix+Madefor+Text:ital,wght@0,400..800;1,400..800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -73,6 +73,9 @@
     .bg-shade {
         @apply bg-gray-100 dark:bg-gray-800
     }
+    .text-shade {
+        @apply dark:text-gray-100 text-gray-700
+    }
     .bg-auth-1 {
         @apply bg-stone-50 text-gray-500 dark:bg-fuchsia-100/50 dark:text-gray-100
     }
@@ -95,7 +98,7 @@
         @apply bg-gray-400 dark:bg-gray-800 rounded-lg hover:bg-gray-500 dark:hover:bg-gray-500
     }
     .post-border {
-        @apply border border-slate-500
+        @apply border border-slate-500 bg-shade
     }
     .card-grid {
         @apply grid lg:grid-cols-2 xl:grid-cols-4 gap-10

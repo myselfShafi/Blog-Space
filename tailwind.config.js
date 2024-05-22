@@ -10,7 +10,7 @@ export default {
     extend: {
       fontFamily: {
         "madefor-text": ["Wix Madefor Text", "sans-serif"],
-        "comic-neue": ["Comic Neue", "sans-serif"],
+        "comic-neue": ["Hind", "sans-serif"],
       },
       rotate: {
         270: "270deg",

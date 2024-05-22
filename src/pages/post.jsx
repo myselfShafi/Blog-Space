@@ -12,9 +12,11 @@ import {
 import { textConfig } from "../config";
 import { getDate, getReadTime } from "../utilities";
 import useImgDimensions from "../utilities/hooks/useImgDimensions";
+import NotFound from "./notFound";
 
 const Post = () => {
   const [loading, setLoading] = useState(true);
+  const [err, setErr] = useState(false);
   const [data, setData] = useState({
     category: "",
     title: "",
@@ -43,17 +45,20 @@ const Post = () => {
         const image = await dbService.getFile(postdata.thumbnail);
         setImg(image);
       } else {
-        console.log("error");
-        //redirect 404 page
+        setErr(true);
       }
     } catch (error) {
-      console.error(error);
+      setErr(true);
     }
     setLoading(false);
   };
 
   if (loading) {
-    return <LoaderPage>Loading Blog Information ...</LoaderPage>;
+    return <LoaderPage>{textConfig.loaders.dataload}</LoaderPage>;
+  }
+
+  if (err) {
+    return <NotFound internalErr />;
   }
 
   return (

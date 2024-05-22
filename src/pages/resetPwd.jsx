@@ -20,7 +20,7 @@ const ResetPass = () => {
 
   useEffect(() => {
     if (!userID || !secret) {
-      navigate("/login", { replace: true });
+      navigate("/error", { replace: true });
     } else {
       setNoAccess(false);
     }
@@ -57,7 +57,7 @@ const ResetPass = () => {
   };
 
   if (noAccess) {
-    return <LoaderPage>Authenticating ...</LoaderPage>;
+    return <LoaderPage>{textConfig.loaders.authenticate}</LoaderPage>;
   }
 
   return (

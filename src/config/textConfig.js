@@ -77,6 +77,10 @@ const textConfig = {
     line1: '"Why just read when you can write?',
     line2: 'now to share your own stories"',
   },
+  loaders: {
+    dataload: "Loading Blog Information ...",
+    authenticate: "Authenticating ...",
+  },
 };
 
 export default textConfig;
