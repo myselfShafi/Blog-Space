@@ -8,3 +8,29 @@ export const getTruncatedText = (string, maxLength) => {
     return "----";
   }
 };
+
+export const getDate = (value) => {
+  let format = {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  };
+  if (value) {
+    return new Date(value).toLocaleDateString("en-IN", format);
+  } else {
+    return new Date().toLocaleDateString("en-IN", format);
+  }
+};
+
+export const getReadTime = (content) => {
+  let avgReadSec = typeof content === "string" ? 200 : 4;
+  const words =
+    typeof content === "string"
+      ? content.trim().split(/\s+/).length
+      : content?.length;
+  if (typeof content === "string") {
+    return Math.ceil(words / avgReadMin);
+  } else {
+    return Math.ceil((words * avgReadSec) / 60);
+  }
+};

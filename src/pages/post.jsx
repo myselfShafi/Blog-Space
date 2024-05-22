@@ -1,5 +1,8 @@
-import React from "react";
+import parse from "html-react-parser";
+import React, { useEffect, useState } from "react";
 import { Share2 } from "react-feather";
+import dbService from "../appWriteService/db.service";
+import { LoaderPage } from "../components";
 import {
   DateNRead,
   Heading,
@@ -7,50 +10,74 @@ import {
   MiniCard,
 } from "../components/shared";
 import { textConfig } from "../config";
+import { getDate, getReadTime } from "../utilities";
+import useImgDimensions from "../utilities/hooks/useImgDimensions";
 
 const Post = () => {
-  const date = new Date().toLocaleDateString("en-IN", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState({
+    category: "",
+    title: "",
+    content: "",
+    thumbnail: "",
   });
+  const [img, setImg] = useState({});
+  const id = "664b7e48003d0489bb02";
+
+  const date = getDate(data?.$createdAt);
+  const readtime = getReadTime(parse(data?.content));
+
+  const { height, width } = useImgDimensions(img?.href);
+
+  useEffect(() => {
+    fetchData(id);
+    if (img) {
+    }
+  }, [id]);
+
+  const fetchData = async (postID) => {
+    try {
+      const postdata = await dbService.getPost(postID);
+      if (postdata) {
+        setData(postdata);
+        const image = await dbService.getFile(postdata.thumbnail);
+        setImg(image);
+      } else {
+        console.log("error");
+        //redirect 404 page
+      }
+    } catch (error) {
+      console.error(error);
+    }
+    setLoading(false);
+  };
+
+  if (loading) {
+    return <LoaderPage>Loading Blog Information ...</LoaderPage>;
+  }
+
   return (
     <MainContainer className={"p-0"}>
       <div className={"post-border lg:p-24"}>
-        <div className="grid xl:grid-cols-2">
-          <div>
+        <div className={`grid gap-y-6 ${height > width && "xl:grid-cols-2"}`}>
+          <div className={width > height && "center-element"}>
             <img
-              src="https://images.unsplash.com/photo-1585770536735-27993a080586"
+              src={data.thumbnail && img}
               alt="img-post"
-              className="w-full max-h-screen object-cover object-center"
+              className={`${
+                height > width ? "w-full" : "w-3/4"
+              } max-h-screen object-contain object-center`}
             />
           </div>
           <div className="px-3 py-5 lg:py-0 lg:px-14 space-y-6 overflow-y-auto lg:max-h-screen scrollbar">
-            <DateNRead
-              date={date}
-              duration={"2 min read"}
-              durationClass={"grow"}
-            >
+            <DateNRead date={date} duration={readtime} durationClass={"grow"}>
               <Share2 />
             </DateNRead>
             <h6 className="w-fit px-2 uppercase tracking-widest text-purple-600 border border-purple-600 font-bold">
-              Nature
+              {data.category}
             </h6>
-            <h4 className="text-stone-700 dark:text-stone-300">
-              iPad Pro M1 Chip: Bringing The MacBook Pro Power
-            </h4>
-            {[1, 2, 3, 4].map((each, idx) => (
-              <h6 className="font-thin" key={idx}>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Obcaecati, ipsam itaque sapiente harum temporibus, impedit
-                blanditiis maxime cum iure fuga suscipit. Ratione soluta
-                voluptas nam quidem. Velit quia iure quaerat? Lorem ipsum dolor
-                sit amet consectetur, adipisicing elit. Ipsa, perspiciatis
-                dolorem et odio praesentium quaerat tenetur maxime iusto aperiam
-                exercitationem! Eligendi blanditiis dolorem sunt quasi ipsa
-                laudantium obcaecati repellendus saepe.
-              </h6>
-            ))}
+            <h4 className="text-stone-700 dark:text-stone-300">{data.title}</h4>
+            <h6 className="font-thin">{parse(data.content)}</h6>
           </div>
         </div>
       </div>

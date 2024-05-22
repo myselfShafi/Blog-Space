@@ -82,6 +82,18 @@ class DbService {
       throw error;
     }
   }
+
+  async getFile(fileID) {
+    try {
+      return await this.storage.getFilePreview(
+        envConfig.appWriteBucketId,
+        fileID
+      );
+    } catch (error) {
+      console.error("Appwrite error ++ get Img file ++", error);
+      throw error;
+    }
+  }
 }
 
 const dbService = new DbService();

@@ -7,7 +7,7 @@ const DateNRead = ({ date, duration, durationClass, children }) => {
       {duration && (
         <>
           <div className="w-1 h-1 rounded-full bg-gray-500 mx-1"></div>
-          <p className={durationClass}>{duration}</p>
+          <p className={durationClass}>{`${duration} min read`}</p>
         </>
       )}
       {children}

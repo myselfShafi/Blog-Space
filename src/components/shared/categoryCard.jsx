@@ -41,7 +41,7 @@ const CategoryCard = ({ data }) => {
           className={`p-8 transition-colors duration-200 space-y-2 lg:space-y-4`}
         >
           <h5>{truncText}</h5>
-          <DateNRead date={date} duration={"2 min read"} />
+          <DateNRead date={date} duration={2} />
           <h6 className="font-thin group-hover/category:text-rose-500 group-hover/category:transition-colors group-hover/category:duration-300">
             {truncPara}
           </h6>
