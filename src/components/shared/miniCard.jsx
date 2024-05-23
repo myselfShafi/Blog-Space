@@ -13,11 +13,13 @@ const MiniCard = ({ wrapperClass, imgClass, titleClass, data }) => {
   return (
     <Link to={`/all-category/${data.category}/${data.$id}`} reloadDocument>
       <div className={`group/mini overflow-hidden ${wrapperClass}`}>
-        <img
-          src={dbService.getFile(data.thumbnail)}
-          alt={`post-image-${data.thumbnail}`}
-          className={`w-full object-cover object-center group-hover/mini:scale-105 transition-transform duration-200 ${imgClass}`}
-        />
+        {data.thumbnail && (
+          <img
+            src={dbService.getFile(data.thumbnail)}
+            alt={`post-image-${data.thumbnail}`}
+            className={`w-full object-cover object-center group-hover/mini:scale-105 transition-transform duration-200 ${imgClass}`}
+          />
+        )}
         <div className={`p-8 transition-colors duration-200 space-y-2`}>
           {date && <DateNRead date={date} duration={readtime} />}
           <h5 className={`${titleClass}`}>{truncText}</h5>

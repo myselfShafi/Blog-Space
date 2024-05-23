@@ -170,7 +170,7 @@ const EditPost = () => {
             isloading={loading}
             disabled={success}
             className={`${
-              success ? "btn-contain-success" : "btn-contain"
+              success ? "btn-contain-success animate-pulse" : "btn-contain"
             } w-full mt-8`}
           >
             {success ? textConfig.postEdit.success : textConfig.postEdit.save}

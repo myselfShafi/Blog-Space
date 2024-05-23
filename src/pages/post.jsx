@@ -48,7 +48,6 @@ const Post = () => {
   useEffect(() => {
     fetchData(id);
     relevantPosts(category);
-    setLoading(false);
   }, [id, category]);
 
   const fetchData = async (postID) => {
@@ -61,6 +60,7 @@ const Post = () => {
       }
     } catch (error) {
       setErr(true);
+    } finally {
     }
     setLoading(false);
   };
