@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import dbService from "../appWriteService/db.service";
 import { AnimationIcon, DayBlog } from "../components";
 import { BlogCard, Heading, MiniCard } from "../components/shared";
 import { textConfig } from "../config";
@@ -9,18 +10,21 @@ const Dashboard = () => {
   const lightMode = useSelector((state) => state.settings.lightMode);
   const { status, userData } = useSelector((state) => state.auth);
   const navigate = useNavigate();
+  const [latest, setLatest] = useState([]);
 
-  // useEffect(() => {
-  //   const run = async () => {
-  //     try {
-  //       const check = await dbService.getAllPosts();
-  //       console.log({ check });
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   run();
-  // }, []);
+  useEffect(() => {
+    const run = async () => {
+      try {
+        const allposts = await dbService.getAllPosts();
+        if (allposts) {
+          setLatest(allposts.documents?.reverse().slice(0, 4));
+        }
+      } catch (error) {
+        return;
+      }
+    };
+    run();
+  }, []);
 
   return (
     <div>
@@ -91,12 +95,7 @@ const Dashboard = () => {
       <div className="container my-32">
         <Heading>{textConfig.dashboard.latest}</Heading>
         <div className="my-10 card-grid">
-          {[
-            "https://images.unsplash.com/photo-1714409299166-de863d9598fb",
-            "https://images.unsplash.com/photo-1715090156594-aaa3ed5900b9",
-            3,
-            "https://images.unsplash.com/photo-1495615080073-6b89c9839ce0",
-          ].map((item, idx) => (
+          {latest.map((item, idx) => (
             <MiniCard
               key={idx}
               data={item}
