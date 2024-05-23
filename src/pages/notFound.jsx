@@ -3,10 +3,14 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { AnimationIcon } from "../components";
 
-const NotFound = ({ routeErr, internalErr }) => {
+const NotFound = ({ routeErr, internalErr, hasBg }) => {
   const { lightMode } = useSelector((state) => state.settings);
   return (
-    <div className="h-screen bg-gradient-light dark:bg-gradient-dark center-element flex-col lg:flex-row text-center gap-x-10">
+    <div
+      className={`h-screen ${
+        hasBg && "bg-gradient-light dark:bg-gradient-dark"
+      } center-element flex-col lg:flex-row text-center gap-x-10`}
+    >
       <AnimationIcon
         src={`/static/error404-${lightMode ? "light" : "dark"}.json`}
         autoplay

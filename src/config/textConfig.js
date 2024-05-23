@@ -80,6 +80,7 @@ const textConfig = {
   loaders: {
     dataload: "Loading Blog Information ...",
     authenticate: "Authenticating ...",
+    userpost: "Curating your personal collection ... ",
   },
 };
 

@@ -34,3 +34,18 @@ export const getReadTime = (content) => {
     return Math.ceil((words * avgReadSec) / 60);
   }
 };
+
+export const getRandomPosts = (array, total, limit) => {
+  let result = [];
+  let addIndex = new Set();
+
+  while (result.length < limit) {
+    let num = Math.floor(Math.random() * total);
+    if (!addIndex.has(num)) {
+      result.push(array[num]);
+      addIndex.add(num);
+    }
+  }
+
+  return result;
+};

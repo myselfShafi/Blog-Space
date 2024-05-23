@@ -1,25 +1,25 @@
-import React, { useState } from "react";
+import { Query } from "appwrite";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { CardLoader, UserDetail } from "../components";
+import dbService from "../appWriteService/db.service";
+import { CardLoader, LoaderPage, UserDetail } from "../components";
 import { Error, MainContainer, MiniCard } from "../components/shared";
 import { textConfig } from "../config";
+import NotFound from "./notFound";
 
 const UserPosts = () => {
   const data = useSelector((state) => state.auth.userData);
-
   const navigate = useNavigate();
   const [err, setErr] = useState(false);
+  const [collection, setCollection] = useState([]);
+  const [fetchErr, setFetchErr] = useState(false);
+  const [loading, setLoading] = useState(true);
   const img = data?.img;
-  // const img = "https://images.unsplash.com/photo-1531891437562-4301cf35b7e4";
 
-  // const data = {
-  //   name: "John Doe",
-  //   work: "UI/UX Designer",
-  //   org: "abc Org",
-  //   link: "https://github.com/myselfShafi",
-  //   posts: "20",
-  // };
+  useEffect(() => {
+    getPosts(data?.$id);
+  }, [data]);
 
   const goToEdit = () => {
     if (!data?.emailVerification) {
@@ -27,6 +27,21 @@ const UserPosts = () => {
     } else {
       navigate("/edit-post");
     }
+  };
+
+  const getPosts = async (userId) => {
+    try {
+      const resp = await dbService.getAllPosts([Query.equal("userID", userId)]);
+      if (resp) {
+        console.log({ resp });
+        setCollection(resp);
+      } else {
+        setFetchErr(true);
+      }
+    } catch (error) {
+      setFetchErr(true);
+    }
+    setLoading(false);
   };
 
   return (
@@ -40,7 +55,11 @@ const UserPosts = () => {
               className="w-36 h-36 lg:w-52 lg:h-52 rounded-full object-cover object-center"
             />
           </div>
-          <UserDetail data={data} setErr={setErr} />
+          <UserDetail
+            data={data}
+            setErr={setErr}
+            totalPosts={collection?.total}
+          />
           <div className="center-element">
             <button onClick={goToEdit} className="btn-contain">
               {textConfig.user.addPost}
@@ -49,26 +68,23 @@ const UserPosts = () => {
         </div>
         <Error showError={err}>{textConfig.auth.verify}</Error>
       </div>
-      <div className="p-3 gap-10 lg:gap-16 lg:columns-2 xl:columns-3">
-        {[
-          "https://images.unsplash.com/photo-1714409299166-de863d9598fb",
-          "https://images.unsplash.com/photo-1495615080073-6b89c9839ce0",
-          "https://images.unsplash.com/photo-1715090156594-aaa3ed5900b9",
-          2,
-          "https://images.unsplash.com/photo-1505144808419-1957a94ca61e",
-          "https://images.unsplash.com/photo-1505765050516-f72dcac9c60e",
-          3,
-        ].map((item, idx) => (
-          <MiniCard
-            key={idx}
-            data={item}
-            wrapperClass={"mx-auto"}
-            imgClass={"max-h-96"}
-            titleClass={"group-hover/mini:text-rose-500"}
-          />
-        ))}
-        <CardLoader />
-      </div>
+      {loading && <LoaderPage>{textConfig.loaders.userpost}</LoaderPage>}
+      {!loading && fetchErr && !(collection.length > 0) ? (
+        <NotFound internalErr />
+      ) : (
+        <div className="p-3 gap-10 lg:gap-16 lg:columns-2 xl:columns-3">
+          {collection.documents?.map((collectionData) => (
+            <MiniCard
+              key={collectionData.$id}
+              data={collectionData}
+              wrapperClass={"mx-auto"}
+              imgClass={"max-h-96"}
+              titleClass={"group-hover/mini:text-rose-500"}
+            />
+          ))}
+          <CardLoader />
+        </div>
+      )}
     </MainContainer>
   );
 };

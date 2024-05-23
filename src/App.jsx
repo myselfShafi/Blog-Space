@@ -91,7 +91,7 @@ const router = createBrowserRouter([
   },
   {
     path: "*",
-    element: <NotFound routeErr />,
+    element: <NotFound routeErr hasBg />,
   },
 ]);
 
