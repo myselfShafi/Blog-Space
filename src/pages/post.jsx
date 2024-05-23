@@ -1,6 +1,7 @@
 import parse from "html-react-parser";
 import React, { useEffect, useState } from "react";
 import { Share2 } from "react-feather";
+import { useParams } from "react-router-dom";
 import dbService from "../appWriteService/db.service";
 import { LoaderPage } from "../components";
 import {
@@ -15,6 +16,7 @@ import useImgDimensions from "../utilities/hooks/useImgDimensions";
 import NotFound from "./notFound";
 
 const Post = () => {
+  const { category, post } = useParams();
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState(false);
   const [data, setData] = useState({
@@ -23,8 +25,8 @@ const Post = () => {
     content: "",
     thumbnail: "",
   });
-  const [img, setImg] = useState({});
-  const id = "664b7e48003d0489bb02";
+  const [img, setImg] = useState(null);
+  const id = post ?? "664ed0ce002868ebc8f6";
 
   const date = getDate(data?.$createdAt);
   const readtime = getReadTime(parse(data?.content));
@@ -42,8 +44,10 @@ const Post = () => {
       const postdata = await dbService.getPost(postID);
       if (postdata) {
         setData(postdata);
-        const image = await dbService.getFile(postdata.thumbnail);
-        setImg(image);
+        if (postdata.thumbnail) {
+          const image = await dbService.getFile(postdata.thumbnail);
+          setImg(image);
+        }
       } else {
         setErr(true);
       }
@@ -64,16 +68,22 @@ const Post = () => {
   return (
     <MainContainer className={"p-0"}>
       <div className={"post-border lg:p-24"}>
-        <div className={`grid gap-y-6 ${height > width && "xl:grid-cols-2"}`}>
-          <div className={width > height && "center-element"}>
-            <img
-              src={data.thumbnail && img}
-              alt="img-post"
-              className={`${
-                height > width ? "w-full" : "w-3/4"
-              } max-h-screen object-contain object-center`}
-            />
-          </div>
+        <div
+          className={`grid gap-y-6 ${
+            height > width && "xl:grid-cols-2"
+          } py-10 lg:py-0`}
+        >
+          {img && (
+            <div className={width > height && "center-element"}>
+              <img
+                src={data.thumbnail && img}
+                alt="img-post"
+                className={`${
+                  height > width ? "w-full" : "w-3/4"
+                } max-h-screen object-contain object-center`}
+              />
+            </div>
+          )}
           <div className="px-3 py-5 lg:py-0 lg:px-14 space-y-6 overflow-y-auto lg:max-h-screen scrollbar">
             <DateNRead date={date} duration={readtime} durationClass={"grow"}>
               <Share2 />

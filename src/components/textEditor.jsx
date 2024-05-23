@@ -57,7 +57,9 @@ const TextEditor = ({
                   "help",
                   "wordcount",
                   "anchor",
+                  "paste",
                 ],
+                paste_as_text: true,
                 toolbar:
                   "undo redo | blocks | image | bold italic forecolor | alignleft aligncenter bold italic forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent |removeformat | help",
                 content_style:

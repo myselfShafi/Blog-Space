@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import dbService from "../appWriteService/db.service";
-import { LoadBtn, RadioGroup, TextEditor } from "../components";
+import { EditorNote, LoadBtn, RadioGroup, TextEditor } from "../components";
 import { categorylist } from "../components/navbar/categoryDrop";
 import { Error, MainContainer, OptionSelect } from "../components/shared";
 import IconInput from "../components/shared/iconInput";
@@ -21,9 +21,11 @@ const EditPost = () => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  const redirect = () => {
+  const redirect = (category, id) => {
     setTimeout(() => {
-      navigate("/all-category/sports/blog-asfgshfghgfj", { replace: true });
+      navigate(`/all-category/${category}/${id}`, {
+        replace: true,
+      });
     }, 5000);
   };
 
@@ -59,7 +61,7 @@ const EditPost = () => {
       });
       if (resp) {
         setSuccess(true);
-        redirect();
+        redirect(resp.category, resp.$id);
       } else {
         setError("root", { type: "manual", message: resp });
       }
@@ -100,11 +102,11 @@ const EditPost = () => {
             maxLength={300}
             className={"mb-8"}
             {...register("title", {
-              ...formValidate.textOnly,
               required: "Title is required",
               disabled: success || loading,
             })}
           />
+          <EditorNote />
           <TextEditor
             control={control}
             setError={setError}
