@@ -61,6 +61,31 @@ class DbService {
     }
   }
 
+  async deletePost(documentID) {
+    try {
+      const file = await this.getPost(documentID);
+      if (file?.thumbnail) {
+        const image = await this.deleteFile(file?.thumbnail);
+        if (image) {
+          return await this.databases.deleteDocument(
+            envConfig.appWriteDBId,
+            envConfig.appWriteCollectionId,
+            documentID
+          );
+        }
+      } else {
+        return await this.databases.deleteDocument(
+          envConfig.appWriteDBId,
+          envConfig.appWriteCollectionId,
+          documentID
+        );
+      }
+    } catch (error) {
+      console.error("Appwrite error ++ delete post & file ++", error);
+      throw error;
+    }
+  }
+
   async uploadFile(file) {
     try {
       return await this.storage.createFile(

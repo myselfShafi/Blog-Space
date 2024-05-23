@@ -29,9 +29,9 @@ export const getReadTime = (content) => {
       ? content.trim().split(/\s+/).length
       : content?.length;
   if (typeof content === "string") {
-    return Math.ceil(words / avgReadMin);
+    return Math.ceil(words / avgReadMin) || 1;
   } else {
-    return Math.ceil((words * avgReadSec) / 60);
+    return Math.ceil((words * avgReadSec) / 60) || 1;
   }
 };
 

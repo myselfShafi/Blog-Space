@@ -51,6 +51,11 @@ const textConfig = {
     save: "Save",
     total: "Total Posts",
     addPost: "Add a New Post",
+    delete: "Delete Post ?",
+    edit: "Edit Post",
+    deleteErr: "Error deleting the post. Try again later.",
+    deleteScs: "Post Successfully Deleted",
+    redirect: "Redirecting you to your profile . . .",
   },
   shared: {
     more: "Read More",

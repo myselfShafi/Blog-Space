@@ -60,7 +60,12 @@
     .btn-contain-success {
         @apply bg-green-500 text-green-950 rounded-md hover:opacity-80 font-bold
     }
-
+    .btn-icon {
+        @apply rounded-full hover:opacity-80 font-bold p-2
+    }
+    .slide-btn {
+        @apply font-bold overflow-hidden transition-all duration-1000 w-0 text-nowrap
+    }
     .btn-auth {
         @apply bg-teal-800/80 hover:bg-teal-900 dark:bg-amber-600/95 dark:hover:bg-amber-800 text-white uppercase font-bold rounded-full w-2/5 py-3 disabled:opacity-60 dark:disabled:opacity-60 
     }

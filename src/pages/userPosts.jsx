@@ -33,7 +33,6 @@ const UserPosts = () => {
     try {
       const resp = await dbService.getAllPosts([Query.equal("userID", userId)]);
       if (resp) {
-        console.log({ resp });
         setCollection(resp);
       } else {
         setFetchErr(true);

@@ -1,12 +1,14 @@
 import { Query } from "appwrite";
 import parse from "html-react-parser";
 import React, { useEffect, useState } from "react";
-import { Share2 } from "react-feather";
-import { useParams } from "react-router-dom";
+import { Edit3, Share2, Trash2 } from "react-feather";
+import { useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 import dbService from "../appWriteService/db.service";
-import { LoaderPage } from "../components";
+import { AnimationIcon, LoadBtn, LoaderPage } from "../components";
 import {
   DateNRead,
+  Error,
   Heading,
   MainContainer,
   MiniCard,
@@ -17,8 +19,15 @@ import useImgDimensions from "../utilities/hooks/useImgDimensions";
 import NotFound from "./notFound";
 
 const Post = () => {
+  const { userData } = useSelector((state) => state.auth);
   const { category, post } = useParams();
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
+  const [remove, setRemove] = useState({
+    loading: false,
+    error: false,
+    done: false,
+  });
   const [err, setErr] = useState(false);
   const [data, setData] = useState({
     category: "",
@@ -39,6 +48,7 @@ const Post = () => {
   useEffect(() => {
     fetchData(id);
     relevantPosts(category);
+    setLoading(false);
   }, [id, category]);
 
   const fetchData = async (postID) => {
@@ -60,16 +70,31 @@ const Post = () => {
       const resp = await dbService.getAllPosts([
         Query.equal("category", value),
       ]);
-      console.log({ resp });
       if (resp.total <= 4) {
         setRelPosts(resp.documents);
       } else if (resp.total > 4) {
         const array = getRandomPosts(resp.documents, resp.total, 4);
-        console.log({ array });
         setRelPosts(array);
       }
     } catch (error) {
       return;
+    }
+  };
+
+  const onDelete = async () => {
+    setRemove({ loading: true, error: false });
+    try {
+      const resp = await dbService.deletePost(data.$id);
+      if (resp) {
+        setRemove({ loading: false, error: false, done: true });
+        setTimeout(() => {
+          navigate("/my-blogs", { replace: true });
+        }, 5000);
+      } else {
+        setRemove({ loading: false, error: true });
+      }
+    } catch (error) {
+      setRemove({ loading: false, error: true });
     }
   };
 
@@ -81,14 +106,53 @@ const Post = () => {
     return <NotFound internalErr hasBg />;
   }
 
+  if (remove.done) {
+    return (
+      <div className="h-screen center-element flex-col gap-y-4">
+        <AnimationIcon
+          src={"/static/deleted.json"}
+          autoplay
+          loop
+          speed={0.5}
+          className={"w-56"}
+        />
+        <h3>{textConfig.user.deleteScs}</h3>
+        <h5 className="tagline animate-pulse">{textConfig.user.redirect}</h5>
+      </div>
+    );
+  }
+
   return (
     <MainContainer className={"p-0"}>
-      <div className={"post-border lg:p-24"}>
-        <div
-          className={`grid gap-y-6 ${
-            height > width && "xl:grid-cols-2"
-          } py-10 lg:py-0`}
-        >
+      <div className={"post-border lg:p-24 py-10"}>
+        {data?.userID === userData.$id && (
+          <div className=" mb-10 flex justify-end gap-x-4 pr-10  text-white">
+            <Error showError={remove.error}>{textConfig.user.deleteErr}</Error>
+            <LoadBtn
+              className={
+                "flex justify-end btn-icon bg-red-600 group/btn opacity-75 hover:opacity-100"
+              }
+              isloading={remove.loading}
+              onClick={onDelete}
+            >
+              <p className="slide-btn group-hover/btn:lg:w-full group-hover/btn:lg:mr-1">
+                {textConfig.user.delete}
+              </p>
+              <Trash2 />
+            </LoadBtn>
+            <button
+              className={
+                "flex justify-end btn-icon bg-sky-600 group/btn opacity-75 hover:opacity-100"
+              }
+            >
+              <p className="slide-btn group-hover/btn:lg:w-full group-hover/btn:lg:ml-1 ">
+                {textConfig.user.edit}
+              </p>
+              <Edit3 />
+            </button>
+          </div>
+        )}
+        <div className={`grid gap-y-6 ${height > width && "xl:grid-cols-2"} `}>
           {data.thumbnail ? (
             <div className={width > height ? "center-element" : ""}>
               <img
