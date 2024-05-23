@@ -78,6 +78,10 @@
     .bg-shade {
         @apply bg-gray-100 dark:bg-gray-800
     }
+    .bg-loader {
+        @apply bg-gray-200 dark:bg-gray-700
+        
+    }
     .text-shade {
         @apply dark:text-gray-100 text-gray-700
     }

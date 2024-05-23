@@ -49,3 +49,13 @@ export const getRandomPosts = (array, total, limit) => {
 
   return result;
 };
+
+export const getBlogOfDay = (array, length) => {
+  let overallTime = new Date().getTime();
+
+  let overallDay = Math.floor(overallTime / (1000 * 60 * 60 * 24));
+
+  const IdxOfDay = overallDay % length;
+
+  return array[IdxOfDay];
+};

@@ -5,11 +5,13 @@ import dbService from "../appWriteService/db.service";
 import { AnimationIcon, DayBlog } from "../components";
 import { BlogCard, Heading, MiniCard } from "../components/shared";
 import { textConfig } from "../config";
+import { getBlogOfDay } from "../utilities";
 
 const Dashboard = () => {
   const lightMode = useSelector((state) => state.settings.lightMode);
   const { status, userData } = useSelector((state) => state.auth);
   const navigate = useNavigate();
+  const [dayBlog, setDayBlog] = useState(null);
   const [latest, setLatest] = useState([]);
 
   useEffect(() => {
@@ -18,6 +20,7 @@ const Dashboard = () => {
         const allposts = await dbService.getAllPosts();
         if (allposts) {
           setLatest(allposts.documents?.reverse().slice(0, 4));
+          setDayBlog(getBlogOfDay(allposts?.documents, allposts.total));
         }
       } catch (error) {
         return;
@@ -91,7 +94,7 @@ const Dashboard = () => {
           </button>
         )}
       </div>
-      <DayBlog />
+      <DayBlog data={dayBlog} />
       <div className="container my-32">
         <Heading>{textConfig.dashboard.latest}</Heading>
         <div className="my-10 card-grid">
