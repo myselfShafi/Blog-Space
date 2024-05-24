@@ -25,7 +25,7 @@ const RadioGroup = ({
                   type="radio"
                   name="post_status"
                   id={list.label}
-                  defaultChecked={list?.default}
+                  defaultChecked={defaultValue === list.label ?? list?.default}
                   onClick={() => onChange(list.label)}
                 />
                 <label htmlFor={list.label} className="capitalize ml-2">

@@ -86,6 +86,7 @@ const textConfig = {
     dataload: "Loading Blog Information ...",
     authenticate: "Authenticating ...",
     userpost: "Curating your personal collection ... ",
+    edit: "Hang On, Retrieving Your Work ...",
   },
 };
 

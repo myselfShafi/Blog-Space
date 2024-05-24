@@ -1,10 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CheckCircle, XCircle } from "react-feather";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import dbService from "../appWriteService/db.service";
-import { EditorNote, LoadBtn, RadioGroup, TextEditor } from "../components";
+import {
+  EditorNote,
+  LoadBtn,
+  LoaderPage,
+  RadioGroup,
+  TextEditor,
+} from "../components";
 import { categorylist } from "../components/navbar/categoryDrop";
 import { Error, MainContainer, OptionSelect } from "../components/shared";
 import IconInput from "../components/shared/iconInput";
@@ -17,10 +23,14 @@ const statusOpt = [
 ];
 const EditPost = () => {
   const navigate = useNavigate();
+  const { state } = useLocation();
   const { userData } = useSelector((state) => state.auth);
   const [img, setImg] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [post, setPosts] = useState(null);
+  const [loader, setLoader] = useState(true);
   const [success, setSuccess] = useState(false);
+  const [imgClick, setImgClick] = useState(false);
   const bloggerName = getCapitalize(userData?.name);
 
   const redirect = (category, id) => {
@@ -30,43 +40,81 @@ const EditPost = () => {
       });
     }, 5000);
   };
-
-  const defaultValues = {
-    title: "",
-    content: "",
-    category: "",
-    thumbnail: "",
-    status: statusOpt[0]?.label,
-  };
-
   const {
     register,
     control,
     setError,
     clearErrors,
+    reset,
+    getValues,
     formState: { errors },
     handleSubmit,
-  } = useForm({ defaultValues });
+  } = useForm({
+    defaultValues: {
+      title: "",
+      content: "",
+      category: "",
+      thumbnail: "",
+      status: statusOpt[0]?.label,
+    },
+  });
+
+  useEffect(() => {
+    if (state?.docID) {
+      dbService.getPost(state.docID).then((data) => {
+        if (data) {
+          reset(data);
+          setPosts(data);
+          setLoader(false);
+          if (data?.thumbnail) {
+            setImg(dbService.getFile(data?.thumbnail));
+          }
+        }
+      });
+    } else {
+      setLoader(false);
+    }
+  }, [state]);
 
   const onPostSave = async (data) => {
     setLoading(true);
     try {
-      if (data?.thumbnail[0]) {
-        const file = await dbService.uploadFile(data?.thumbnail[0]);
-        data.thumbnail = file?.$id;
+      if (state?.docID) {
+        const file =
+          data?.thumbnail[0] instanceof File
+            ? await dbService.uploadFile(data?.thumbnail[0])
+            : null;
+        if (file && post?.thumbnail) {
+          await dbService.deleteFile(post?.thumbnail);
+        }
+        const resp = await dbService.updatePost(getValues("$id"), {
+          ...data,
+          thumbnail: file ? file.$id : post?.thumbnail,
+        });
+        if (resp) {
+          setSuccess(true);
+          redirect(resp.category, resp.$id);
+        } else {
+          setError("root", { type: "manual", message: resp });
+        }
       } else {
-        data.thumbnail = "";
-      }
-      const resp = await dbService.createPost({
-        ...data,
-        userID: userData?.$id,
-        username: bloggerName,
-      });
-      if (resp) {
-        setSuccess(true);
-        redirect(resp.category, resp.$id);
-      } else {
-        setError("root", { type: "manual", message: resp });
+        if (data?.thumbnail[0]) {
+          const file = await dbService.uploadFile(data?.thumbnail[0]);
+          data.thumbnail = file?.$id;
+        } else {
+          data.thumbnail = "";
+        }
+        const resp = await dbService.createPost({
+          ...data,
+          userID: userData?.$id,
+          username: bloggerName,
+        });
+        if (resp) {
+          setSuccess(true);
+          redirect(resp.category, resp.$id);
+        } else {
+          setError("root", { type: "manual", message: resp });
+        }
       }
     } catch (error) {
       setError("root", { type: "manual", message: error.message });
@@ -82,13 +130,19 @@ const EditPost = () => {
       file.type !== "image/jpeg" &&
       file.type !== "image/gif"
     ) {
+      setImgClick(true);
       setImg(false);
       return;
     }
-    if (e.target.files && e.target.files[0]) {
-      setImg(URL.createObjectURL(e.target.files[0]));
+    if (e.target.files && file) {
+      setImgClick(true);
+      setImg(URL.createObjectURL(file));
     }
   };
+
+  if (loader) {
+    return <LoaderPage>{textConfig.loaders.edit}</LoaderPage>;
+  }
 
   return (
     <MainContainer>
@@ -114,7 +168,7 @@ const EditPost = () => {
             control={control}
             setError={setError}
             clearErrors={clearErrors}
-            defaultValue={""}
+            defaultValue={getValues("content")}
             hasError={errors.content}
             disabled={success || loading}
           />
@@ -123,6 +177,7 @@ const EditPost = () => {
           <OptionSelect
             name={"category"}
             control={control}
+            defaultValue={getValues("category")}
             list={categorylist}
             hasError={errors.category}
             disabled={success || loading}
@@ -133,7 +188,7 @@ const EditPost = () => {
             <div className="center-element">
               <img
                 src={img}
-                alt={img.name}
+                alt={img?.name || "post-image"}
                 className="max-h-96 object-cover object-center mb-3"
               />
             </div>
@@ -147,7 +202,7 @@ const EditPost = () => {
             accept="image/png, image/jpg, image/jpeg, image/gif"
             name="thumbnail"
             {...register("thumbnail", {
-              ...formValidate.imageOnly,
+              validate: imgClick ? formValidate.imageOnly.validate : undefined,
               onChange: (e) => onImgPick(e),
             })}
           />
@@ -164,7 +219,7 @@ const EditPost = () => {
                 {textConfig.postEdit.status}
               </h4>
             }
-            defaultValue={statusOpt[0].label}
+            defaultValue={getValues("status") ?? statusOpt[0].label}
             options={statusOpt}
             control={control}
             name={"status"}

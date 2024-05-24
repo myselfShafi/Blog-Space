@@ -70,6 +70,23 @@ class DbService {
     }
   }
 
+  async updatePost(
+    documentID,
+    { title, content, thumbnail, status, category }
+  ) {
+    try {
+      return await this.databases.updateDocument(
+        envConfig.appWriteDBId,
+        envConfig.appWriteCollectionId,
+        documentID,
+        { title, content, thumbnail, status, category }
+      );
+    } catch (error) {
+      console.error("Appwrite error ++ update post ++", error);
+      throw error;
+    }
+  }
+
   async deletePost(documentID) {
     try {
       const file = await this.getPost(documentID);

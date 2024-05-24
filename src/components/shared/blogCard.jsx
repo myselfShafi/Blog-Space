@@ -2,6 +2,7 @@ import parse from "html-react-parser";
 import React from "react";
 import { Calendar, User } from "react-feather";
 import { useNavigate } from "react-router-dom";
+import dbService from "../../appWriteService/db.service";
 import { textConfig } from "../../config";
 import { getDate, getTruncatedText } from "../../utilities";
 import BlogCardLoader from "../loaders/blogCardLoader";
@@ -23,7 +24,7 @@ const BlogCard = ({ data }) => {
     <section className="lg:flex container p-5 lg:w-11/12 2xl:w-full hover:drop-shadow-lg hover:shadow-lg dark:hover:drop-shadow-gray-800 dark:hover:shadow-slate-950 group/card">
       <div className="flex-none w-full h-80 lg:w-120 lg:h-96 2xl:h-[22rem] relative">
         <img
-          src="https://images.unsplash.com/photo-1714572877777-59bf4765f462"
+          src={dbService.getFile(data?.thumbnail)}
           alt="card-img"
           className="absolute inset-0 w-full h-full object-cover"
           loading="lazy"

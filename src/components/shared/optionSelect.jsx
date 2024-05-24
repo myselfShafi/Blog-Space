@@ -8,12 +8,13 @@ const OptionSelect = ({
   label,
   list = [],
   name,
+  defaultValue,
   control,
   hasError,
   disabled,
 }) => {
   const [open, setOpen] = useState(false);
-  const [selected, setSelected] = useState(null);
+  const [selected, setSelected] = useState(defaultValue ?? null);
   const [newCategory, setNewCategory] = useState("");
 
   const otherInput = (onChange) => {

@@ -69,10 +69,11 @@ const Post = () => {
       const resp = await dbService.getAllPosts([
         Query.equal("category", value),
       ]);
-      if (resp.total <= 4) {
-        setRelPosts(resp.documents);
-      } else if (resp.total > 4) {
-        const array = getRandomPosts(resp.documents, resp.total, 4);
+      const docArray = resp.documents.filter((list) => list.$id !== post);
+      if (docArray.length <= 4) {
+        setRelPosts(docArray);
+      } else if (docArray.length > 4) {
+        const array = getRandomPosts(docArray, resp.total, 4);
         setRelPosts(array);
       }
     } catch (error) {
@@ -143,6 +144,7 @@ const Post = () => {
               className={
                 "flex justify-end btn-icon bg-sky-600 group/btn opacity-75 hover:opacity-100"
               }
+              onClick={() => navigate("/edit-post", { state: { docID: post } })}
             >
               <p className="slide-btn group-hover/btn:lg:w-full group-hover/btn:lg:ml-1 ">
                 {textConfig.user.edit}
