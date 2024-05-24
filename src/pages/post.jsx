@@ -158,7 +158,7 @@ const Post = () => {
                 src={dbService.getFile(data.thumbnail)}
                 alt="img-post"
                 className={`${
-                  height > width ? "w-full" : "w-3/4"
+                  height > width ? "w-full" : "lg:w-4/5"
                 } max-h-screen object-contain object-center`}
               />
             </div>

@@ -1,5 +1,10 @@
 export const getTruncatedText = (string, maxLength) => {
   if (string) {
+    if (Array.isArray(string)) {
+      return string[0]?.length > maxLength
+        ? string[0].substring(0, maxLength).concat(" ...")
+        : string[0];
+    }
     return string?.length > maxLength
       ? string.substring(0, maxLength).concat(" ...")
       : string;
