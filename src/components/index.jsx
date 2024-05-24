@@ -7,8 +7,10 @@ import AuthBanner from "./banner/main";
 import DayBlog from "./dayBlog";
 import EditorNote from "./editorNote";
 import Footer from "./footer/main";
+import BlogCardLoader from "./loaders/blogCardLoader";
 import CardLoader from "./loaders/cardLoader";
 import LoadBtn from "./loaders/loaderButton";
+import MiniCardLoader from "./loaders/miniCardLoader";
 import LoaderPage from "./loaders/screenLoad";
 import Navbar from "./navbar/main";
 import RadioGroup from "./shared/radioGroup";
@@ -20,6 +22,7 @@ export {
   AuthBanner,
   AuthRoute,
   AuthWrapper,
+  BlogCardLoader,
   CardLoader,
   DayBlog,
   EditorNote,
@@ -28,6 +31,7 @@ export {
   ForgotPass,
   LoadBtn,
   LoaderPage,
+  MiniCardLoader,
   Navbar,
   RadioGroup,
   TextEditor,

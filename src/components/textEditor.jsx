@@ -57,7 +57,6 @@ const TextEditor = ({
                   "help",
                   "wordcount",
                   "anchor",
-                  "paste",
                 ],
                 paste_as_text: true,
                 toolbar:

@@ -35,20 +35,19 @@ const Post = () => {
     content: "",
     thumbnail: "",
   });
-  const [relPosts, setRelPosts] = useState([]);
-  const id = post ?? "664ed0ce002868ebc8f6";
+  const [relPosts, setRelPosts] = useState(["", "", "", ""]);
 
   const date = getDate(data?.$createdAt);
-  const readtime = getReadTime(parse(data?.content));
+  const readtime = data?.content && getReadTime(parse(data?.content));
 
   const { height, width } = useImgDimensions(
     dbService.getFile(data.thumbnail)?.href
   );
 
   useEffect(() => {
-    fetchData(id);
+    fetchData(post);
     relevantPosts(category);
-  }, [id, category]);
+  }, [post, category]);
 
   const fetchData = async (postID) => {
     try {
@@ -176,27 +175,26 @@ const Post = () => {
           </div>
         </div>
       </div>
-      {relPosts && (
-        <>
-          <Heading className={"relative"}>
-            {textConfig.related}
-            <span className="absolute right-2 lg:right-0 top-1/2 -translate-y-1/2 text-base font-extralight post-border px-2 py-1">
-              <a href={`/all-category/${data?.category}`}>{textConfig.view}</a>
-            </span>
-          </Heading>
-          <div className="card-grid">
-            {relPosts?.map((item, idx) => (
-              <MiniCard
-                key={idx}
-                data={item}
-                imgClass={"h-72"}
-                wrapperClass={"post-border border-0 lg:border h-full"}
-                titleClass={"group-hover/mini:text-purple-600"}
-              />
-            ))}
-          </div>
-        </>
-      )}
+      <>
+        <Heading className={"relative"}>
+          {textConfig.related}
+          <span className="absolute right-2 lg:right-0 top-1/2 -translate-y-1/2 text-base font-extralight post-border px-2 py-1">
+            <a href={`/all-category/${data?.category}`}>{textConfig.view}</a>
+          </span>
+        </Heading>
+        <div className="card-grid">
+          {relPosts?.map((item, idx) => (
+            <MiniCard
+              key={idx}
+              data={item}
+              hasBg={true}
+              imgClass={"h-72"}
+              wrapperClass={"post-border border-0 lg:border h-full"}
+              titleClass={"group-hover/mini:text-purple-600"}
+            />
+          ))}
+        </div>
+      </>
     </MainContainer>
   );
 };

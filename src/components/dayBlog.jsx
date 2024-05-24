@@ -1,24 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import authService from "../appWriteService/auth.service";
 import dbService from "../appWriteService/db.service";
 import { textConfig } from "../config";
 import { getDate } from "../utilities";
 import { Heading } from "./shared";
 
 const DayBlog = ({ data }) => {
-  const [username, setUsername] = useState("");
   const date = getDate(data?.$createdAt);
-
-  useEffect(() => {
-    const name = async () => {
-      const getname = await authService.getCurrentUser(data?.userID);
-      if (getname) {
-        setUsername(getname?.name);
-      }
-    };
-    name();
-  }, [data?.userID]);
 
   return (
     <div className="p-0 overflow-hidden">
@@ -39,7 +27,8 @@ const DayBlog = ({ data }) => {
                 </h6>
                 <h2 className="max-w-[85%]">{data?.title}</h2>
                 <h6 className="font-extralight">
-                  by <span className="font-bold">{username}</span> - {date}
+                  by <span className="font-bold">{data?.username}</span> -{" "}
+                  {date}
                 </h6>
               </div>
             </div>

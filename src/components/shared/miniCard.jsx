@@ -3,24 +3,16 @@ import React from "react";
 import { Link } from "react-router-dom";
 import dbService from "../../appWriteService/db.service";
 import { getDate, getReadTime, getTruncatedText } from "../../utilities";
+import MiniCardLoader from "../loaders/miniCardLoader";
 import DateNRead from "./date&Read";
 
-const MiniCard = ({ wrapperClass, imgClass, titleClass, data }) => {
-  const truncText = getTruncatedText(data?.title, 48);
+const MiniCard = ({ wrapperClass, hasBg, imgClass, titleClass, data }) => {
+  const truncText = data?.title && getTruncatedText(data?.title, 48);
   const date = getDate(data?.$createdAt);
-  const readtime = getReadTime(parse(data?.content));
+  const readtime = data?.content && getReadTime(parse(data?.content));
 
   if (!data) {
-    return (
-      <div className={"animate-pulse"}>
-        <div className={`w-full h-72 bg-shade ${imgClass}`}></div>
-        <div className="p-8 space-y-2">
-          <p className={`w-[75%] h-4 rounded-lg bg-shade ${titleClass}`}></p>
-          <h6 className={`w-full h-6 rounded-lg bg-shade ${titleClass}`}></h6>
-          <h6 className={`w-full h-6 rounded-lg bg-shade ${titleClass}`}></h6>
-        </div>
-      </div>
-    );
+    return <MiniCardLoader hasBg={hasBg} />;
   }
 
   return (

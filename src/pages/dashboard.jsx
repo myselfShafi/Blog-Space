@@ -5,14 +5,15 @@ import dbService from "../appWriteService/db.service";
 import { AnimationIcon, DayBlog } from "../components";
 import { BlogCard, Heading, MiniCard } from "../components/shared";
 import { textConfig } from "../config";
-import { getBlogOfDay } from "../utilities";
+import { getBlogOfDay, getRandomPosts } from "../utilities";
 
 const Dashboard = () => {
   const lightMode = useSelector((state) => state.settings.lightMode);
   const { status, userData } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const [dayBlog, setDayBlog] = useState(null);
-  const [latest, setLatest] = useState([]);
+  const [latest, setLatest] = useState(["", "", "", ""]);
+  const [trend, setTrend] = useState(["", "", ""]);
 
   useEffect(() => {
     const run = async () => {
@@ -21,6 +22,7 @@ const Dashboard = () => {
         if (allposts) {
           setLatest(allposts.documents?.reverse().slice(0, 4));
           setDayBlog(getBlogOfDay(allposts?.documents, allposts.total));
+          setTrend(getRandomPosts(allposts.documents, allposts.total, 3));
         }
       } catch (error) {
         return;
@@ -111,9 +113,11 @@ const Dashboard = () => {
       <div className="container my-32">
         <Heading>{textConfig.dashboard.article}</Heading>
         <div className="my-10">
-          <BlogCard />
-          <BlogCard />
-          <BlogCard />
+          {trend?.map((list, idx) => (
+            <div key={idx}>
+              <BlogCard data={list} />
+            </div>
+          ))}
         </div>
         <div className="center-element">
           <button

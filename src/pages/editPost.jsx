@@ -9,6 +9,7 @@ import { categorylist } from "../components/navbar/categoryDrop";
 import { Error, MainContainer, OptionSelect } from "../components/shared";
 import IconInput from "../components/shared/iconInput";
 import { formValidate, textConfig } from "../config";
+import { getCapitalize } from "../utilities";
 
 const statusOpt = [
   { id: 1, label: "public", default: true },
@@ -20,6 +21,7 @@ const EditPost = () => {
   const [img, setImg] = useState(null);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const bloggerName = getCapitalize(userData?.name);
 
   const redirect = (category, id) => {
     setTimeout(() => {
@@ -58,6 +60,7 @@ const EditPost = () => {
       const resp = await dbService.createPost({
         ...data,
         userID: userData?.$id,
+        username: bloggerName,
       });
       if (resp) {
         setSuccess(true);

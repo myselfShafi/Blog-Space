@@ -59,3 +59,7 @@ export const getBlogOfDay = (array, length) => {
 
   return array[IdxOfDay];
 };
+
+export const getCapitalize = (string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+};

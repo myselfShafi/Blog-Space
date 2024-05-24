@@ -8,8 +8,8 @@ const CategoryCard = ({ data }) => {
   const text = "iPad Pro M1 Chip: Bringing The MacBook Pro Powersgdfh";
   const para =
     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto dolores iste dignissimos eveniet illum quaerat et delectus nostrum ipsum impedit, natus autem vel quibusdam harum amet vero animi dolorum voluptates?";
-  const truncText = getTruncatedText(text, 48);
-  const truncPara = getTruncatedText(para, 150);
+  const truncText = text && getTruncatedText(text, 48);
+  const truncPara = para && getTruncatedText(para, 150);
 
   const date = new Date().toLocaleDateString("en-IN", {
     day: "numeric",
