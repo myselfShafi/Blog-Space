@@ -2,7 +2,7 @@ import { Query } from "appwrite";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import dbService from "../appWriteService/db.service";
+import { dbService } from "../appWriteService";
 import { CardLoader, LoaderPage, UserDetail } from "../components";
 import { Error, MainContainer, MiniCard } from "../components/shared";
 import { textConfig } from "../config";

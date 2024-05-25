@@ -1,5 +1,6 @@
-import { Client, Databases, ID, Storage } from "appwrite";
+import { Client, Databases, ID, Query, Storage } from "appwrite";
 import { envConfig } from "../config";
+import authService from "./auth.service";
 
 class UserService {
   client = new Client();
@@ -31,12 +32,12 @@ class UserService {
     }
   }
 
-  async updateUser(userID, { username, profession, company, portfolioURL }) {
+  async updateUser(docID, { username, profession, company, portfolioURL }) {
     try {
-      return await this.databases.updateDocument(
+      const resp = await this.databases.updateDocument(
         envConfig.appWriteDBId,
         envConfig.appWriteUserCollectionId,
-        userID,
+        docID,
         {
           username,
           profession,
@@ -44,8 +45,25 @@ class UserService {
           portfolioURL,
         }
       );
+      if (resp) {
+        await authService.updateName(username);
+      }
+      return resp;
     } catch (error) {
       console.error("Appwrite error ++ update userDB ++", error);
+      throw error;
+    }
+  }
+
+  async getUser(userID, query = [Query.equal("userID", userID)]) {
+    try {
+      return await this.databases.listDocuments(
+        envConfig.appWriteDBId,
+        envConfig.appWriteUserCollectionId,
+        query
+      );
+    } catch (error) {
+      console.error("Appwrite error ++ get userDB ++", error);
       throw error;
     }
   }

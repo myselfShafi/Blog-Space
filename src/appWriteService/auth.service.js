@@ -104,6 +104,16 @@ class AuthService {
       throw error;
     }
   }
+
+  async updateName(name) {
+    try {
+      return await this.account.updateName(name);
+      // handle err in frontend comp.
+    } catch (error) {
+      console.error("Appwrite error ++ update name ++", error);
+      throw error;
+    }
+  }
 }
 
 const authService = new AuthService();

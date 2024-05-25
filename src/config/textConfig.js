@@ -49,6 +49,8 @@ const textConfig = {
   },
   user: {
     save: "Save",
+    saved: "Profile Information successfully updated",
+    saving: "Saving your changes",
     total: "Total Posts",
     addPost: "Add a New Post",
     delete: "Delete Post ?",
@@ -87,6 +89,9 @@ const textConfig = {
     authenticate: "Authenticating ...",
     userpost: "Curating your personal collection ... ",
     edit: "Hang On, Retrieving Your Work ...",
+  },
+  errs: {
+    profile: "Something went wrong. Please try later!",
   },
 };
 
