@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import dbService from "../../appWriteService/db.service";
 import { textConfig } from "../../config";
 import { getDate, getTruncatedText } from "../../utilities";
+import useUsername from "../../utilities/hooks/useUsername";
 import BlogCardLoader from "../loaders/blogCardLoader";
 
 const BlogCard = ({ data }) => {
@@ -15,6 +16,7 @@ const BlogCard = ({ data }) => {
     data?.content &&
     getTruncatedText(parse(data?.content)[0].props.children, 160);
   const date = getDate(data.$createdAt);
+  const username = useUsername(data?.userID);
 
   if (!data) {
     return <BlogCardLoader />;
@@ -49,7 +51,7 @@ const BlogCard = ({ data }) => {
         <div className="flex gap-x-6">
           <div className="flex items-center gap-x-2">
             <User />
-            <p>{data?.username}</p>
+            <p>{username}</p>
           </div>
           <div className="flex items-center gap-x-2">
             <Calendar />

@@ -3,10 +3,12 @@ import { Link } from "react-router-dom";
 import dbService from "../appWriteService/db.service";
 import { textConfig } from "../config";
 import { getDate } from "../utilities";
+import useUsername from "../utilities/hooks/useUsername";
 import { Heading } from "./shared";
 
 const DayBlog = ({ data }) => {
   const date = getDate(data?.$createdAt);
+  const username = useUsername(data?.userID);
 
   return (
     <div className="p-0 overflow-hidden">
@@ -27,8 +29,7 @@ const DayBlog = ({ data }) => {
                 </h6>
                 <h2 className="max-w-[85%]">{data?.title}</h2>
                 <h6 className="font-extralight">
-                  by <span className="font-bold">{data?.username}</span> -{" "}
-                  {date}
+                  by <span className={`font-bold`}>{username}</span>- {date}
                 </h6>
               </div>
             </div>

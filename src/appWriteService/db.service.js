@@ -40,15 +40,7 @@ class DbService {
     }
   }
 
-  async createPost({
-    title,
-    content,
-    thumbnail,
-    status,
-    userID,
-    category,
-    username,
-  }) {
+  async createPost({ title, content, thumbnail, status, userID, category }) {
     try {
       return await this.databases.createDocument(
         envConfig.appWriteDBId,
@@ -61,7 +53,6 @@ class DbService {
           status,
           userID,
           category,
-          username,
         }
       );
     } catch (error) {
