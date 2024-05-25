@@ -11,13 +11,17 @@ import {
   XCircle,
 } from "react-feather";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
 import { AnimationIcon } from ".";
 import { userService } from "../appWriteService";
 import { textConfig } from "../config";
+import { authlogin } from "../store/slices/authSlice";
 import UserDataLoader from "./loaders/userDataLoader";
 import { IconInput } from "./shared";
 
 const UserDetail = ({ data, setErr }) => {
+  const dispatch = useDispatch();
+  const { userData } = useSelector((state) => state.auth);
   const [edit, setEdit] = useState(false);
   const [loading, setLoading] = useState({ state: true, err: false });
   const [updating, setUpdating] = useState({ load: false, saved: false });
@@ -61,6 +65,7 @@ const UserDetail = ({ data, setErr }) => {
       const resp = await userService.updateUser(docID, userdata);
       if (resp) {
         setUpdating({ load: false, saved: true });
+        dispatch(authlogin({ ...userData, name: userdata?.username }));
       } else {
         setUpdating({ load: false, saved: false });
         setLoading({ state: false, err: true });
