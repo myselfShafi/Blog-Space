@@ -3,6 +3,7 @@ import CategoryCard from "./categoryCard";
 import MainContainer from "./container";
 import DateNRead from "./date&Read";
 import Dropdown from "./dropdown";
+import EmptySection from "./emptySection";
 import Error from "./errorElement";
 import Heading from "./heading";
 import IconInput from "./iconInput";
@@ -14,6 +15,7 @@ export {
   CategoryCard,
   DateNRead,
   Dropdown,
+  EmptySection,
   Error,
   Heading,
   IconInput,
