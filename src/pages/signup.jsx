@@ -3,7 +3,7 @@ import { Key, Mail, User } from "react-feather";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import authService from "../appWriteService/auth.service";
+import { authService } from "../appWriteService";
 import { AuthWrapper, LoadBtn } from "../components";
 import { Error, IconInput } from "../components/shared";
 import { formValidate, textConfig } from "../config";
@@ -27,10 +27,8 @@ const SignupPanel = () => {
   const onSignup = async (data) => {
     setLoading(true);
     data = { name: data.fullname, email: data.email, password: data.password };
-    console.log({ data });
     try {
       const resp = await authService.createAccount(data);
-      console.log({ resp });
       if (resp) {
         const userData = await authService.getCurrentUser();
         if (userData) {

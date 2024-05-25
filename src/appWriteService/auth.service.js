@@ -1,5 +1,6 @@
 import { Account, Client, ID } from "appwrite";
 import envConfig from "../config/envConfig";
+import userService from "./user.service";
 
 class AuthService {
   client = new Client();
@@ -21,9 +22,12 @@ class AuthService {
         name
       );
       if (resp) {
-        const loggedIn = await this.login({ email, password });
-        if (loggedIn) {
-          return this.account.createVerification(envConfig.verifyURL);
+        const savedb = await userService.createUser(name, resp.$id);
+        if (savedb) {
+          const loggedIn = await this.login({ email, password });
+          if (loggedIn) {
+            return this.account.createVerification(envConfig.verifyURL);
+          }
         }
       } else {
         console.error("Appwrite error ++ account creation resp failed!");

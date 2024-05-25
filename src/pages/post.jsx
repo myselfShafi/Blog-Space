@@ -125,7 +125,7 @@ const Post = () => {
   return (
     <MainContainer className={"p-0"}>
       <div className={"post-border lg:p-24 py-10"}>
-        {data?.userID === userData.$id && (
+        {data?.userID === userData?.$id && (
           <div className=" mb-10 flex justify-end gap-x-4 pr-10  text-white">
             <Error showError={remove.error}>{textConfig.user.deleteErr}</Error>
             <LoadBtn
