@@ -1,10 +1,30 @@
-import React from "react";
+import { Query } from "appwrite";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { categoryService } from "../appWriteService";
 import { categorylist } from "../components/navbar/categoryDrop";
 import { MainContainer } from "../components/shared";
 import { textConfig } from "../config";
 
 const Category = () => {
+  useEffect(() => {
+    const run = async () => {
+      try {
+        const categories = await categoryService.getCategories([
+          Query.greaterThan("count", 0),
+        ]);
+        if (categories) {
+          console.log({ categories });
+        } else {
+          console.log("error fetching......");
+        }
+      } catch (error) {
+        console.log("error fetching......", error);
+      }
+    };
+    run();
+  }, []);
+
   return (
     <MainContainer>
       <h3 className="text-center font-extrabold">{textConfig.allcategory}</h3>

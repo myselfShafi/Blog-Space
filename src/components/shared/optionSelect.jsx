@@ -2,6 +2,7 @@ import React, { forwardRef, useState } from "react";
 import { ChevronDown } from "react-feather";
 import { Controller } from "react-hook-form";
 import { textConfig } from "../../config";
+import { getCapitalize } from "../../utilities";
 import Dropdown from "./dropdown";
 
 const OptionSelect = ({
@@ -19,7 +20,7 @@ const OptionSelect = ({
 
   const otherInput = (onChange) => {
     if (newCategory.match(/[^A-Za-z\s]/g)) {
-      alert("Post Category: special chars and no. not allowed");
+      alert("Post Category: special chars and num not allowed");
     } else {
       onChange(newCategory);
       setSelected(newCategory), setOpen(!open);
@@ -93,7 +94,9 @@ const OptionSelect = ({
                   pattern="[A-Za-z\s]+"
                   className="dark:text-gray-900"
                   value={newCategory}
-                  onChange={(e) => setNewCategory(e.target.value)}
+                  onChange={(e) => {
+                    setNewCategory(getCapitalize(e.target.value));
+                  }}
                   onClick={(e) => e.stopPropagation()}
                 />
               </OptionList>

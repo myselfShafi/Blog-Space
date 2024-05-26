@@ -75,7 +75,7 @@ const UserPosts = () => {
       {loading && <LoaderPage>{textConfig.loaders.userpost}</LoaderPage>}
       {!loading && fetchErr ? (
         <NotFound internalErr />
-      ) : !(collection.length > 0) ? (
+      ) : collection.length === 0 ? (
         <EmptySection isProfile />
       ) : (
         <div className="p-3 gap-10 lg:gap-16 lg:columns-2 xl:columns-3">

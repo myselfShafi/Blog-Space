@@ -1,5 +1,6 @@
 import { Client, Databases, ID, Query, Storage } from "appwrite";
 import { envConfig } from "../config";
+import categoryService from "./category.service";
 
 class DbService {
   client = new Client();
@@ -42,7 +43,7 @@ class DbService {
 
   async createPost({ title, content, thumbnail, status, userID, category }) {
     try {
-      return await this.databases.createDocument(
+      const created = await this.databases.createDocument(
         envConfig.appWriteDBId,
         envConfig.appWriteCollectionId,
         ID.unique(),
@@ -55,6 +56,13 @@ class DbService {
           category,
         }
       );
+      if (created) {
+        await categoryService.addCategory({
+          categoryName: category,
+          defaultImage: thumbnail,
+        });
+      }
+      return created;
     } catch (error) {
       console.error("Appwrite error ++ create post ++", error);
       throw error;
@@ -82,21 +90,17 @@ class DbService {
     try {
       const file = await this.getPost(documentID);
       if (file?.thumbnail) {
-        const image = await this.deleteFile(file?.thumbnail);
-        if (image) {
-          return await this.databases.deleteDocument(
-            envConfig.appWriteDBId,
-            envConfig.appWriteCollectionId,
-            documentID
-          );
-        }
-      } else {
-        return await this.databases.deleteDocument(
-          envConfig.appWriteDBId,
-          envConfig.appWriteCollectionId,
-          documentID
-        );
+        await this.deleteFile(file?.thumbnail);
       }
+      let deleteDoc = await this.databases.deleteDocument(
+        envConfig.appWriteDBId,
+        envConfig.appWriteCollectionId,
+        documentID
+      );
+      if (deleteDoc) {
+        await categoryService.deleteCategory(file?.thumbnail, file?.category);
+      }
+      return deleteDoc;
     } catch (error) {
       console.error("Appwrite error ++ delete post & file ++", error);
       throw error;

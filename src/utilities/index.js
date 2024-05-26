@@ -9,8 +9,7 @@ export const getTruncatedText = (string, maxLength) => {
       ? string.substring(0, maxLength).concat(" ...")
       : string;
   } else {
-    console.error("Invalid text sentence");
-    return "----";
+    return "Open to read more . . .";
   }
 };
 
