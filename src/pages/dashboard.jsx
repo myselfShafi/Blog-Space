@@ -12,8 +12,8 @@ const Dashboard = () => {
   const { status, userData } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const [dayBlog, setDayBlog] = useState(null);
-  const [latest, setLatest] = useState(["", "", "", ""]);
-  const [trend, setTrend] = useState(["", "", ""]);
+  const [latest, setLatest] = useState(new Array(4).fill(null));
+  const [trend, setTrend] = useState(new Array(3).fill(null));
 
   useEffect(() => {
     const run = async () => {

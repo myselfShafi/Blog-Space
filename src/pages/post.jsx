@@ -35,7 +35,7 @@ const Post = () => {
     content: "",
     thumbnail: "",
   });
-  const [relPosts, setRelPosts] = useState(["", "", "", ""]);
+  const [relPosts, setRelPosts] = useState(new Array(4).fill(null));
 
   const date = getDate(data?.$createdAt);
   const readtime = data?.content && getReadTime(parse(data?.content));

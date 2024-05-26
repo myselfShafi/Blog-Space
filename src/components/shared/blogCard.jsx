@@ -15,7 +15,7 @@ const BlogCard = ({ data }) => {
   const TruncText =
     data?.content &&
     getTruncatedText(parse(data?.content)[0]?.props.children, 160);
-  const date = getDate(data.$createdAt);
+  const date = getDate(data?.$createdAt);
   const username = useUsername(data?.userID);
 
   if (!data) {
