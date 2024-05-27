@@ -23,6 +23,7 @@ const CategoryPosts = () => {
       try {
         const allposts = await dbService.getAllPosts([
           Query.equal("category", state?.title),
+          Query.equal("status", "public"),
         ]);
         if (allposts) {
           setPosts(allposts.documents?.reverse());

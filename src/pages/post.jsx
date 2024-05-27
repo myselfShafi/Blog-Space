@@ -36,6 +36,7 @@ const Post = () => {
     thumbnail: "",
   });
   const [relPosts, setRelPosts] = useState(new Array(4).fill(null));
+  const [imgLoad, setImgLoad] = useState(true);
 
   const date = getDate(data?.$createdAt);
   const readtime = data?.content && getReadTime(parse(data?.content));
@@ -155,11 +156,17 @@ const Post = () => {
         )}
         <div className={`grid gap-y-6 ${height > width && "xl:grid-cols-2"} `}>
           {data.thumbnail ? (
-            <div className={width > height ? "center-element" : ""}>
+            <div
+              className={`${width > height ? "center-element" : ""} ${
+                imgLoad &&
+                "h-96 w-full lg:w-4/5 bg-loader animate-pulse mx-auto"
+              }`}
+            >
               <img
                 src={dbService.getFile(data.thumbnail)}
                 alt="img-post"
-                className={`${
+                onLoad={() => setImgLoad(false)}
+                className={`${imgLoad ? "hidden" : "block"}${
                   height > width ? "w-full" : "lg:w-4/5"
                 } max-h-screen object-contain object-center`}
               />

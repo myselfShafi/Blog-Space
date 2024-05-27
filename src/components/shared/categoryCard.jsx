@@ -40,10 +40,14 @@ const CategoryCard = ({ data, isloading }) => {
         >
           <h5>{truncText}</h5>
           <DateNRead date={date} duration={2} />
-          <h6 className="font-thin group-hover/category:text-rose-500 group-hover/category:transition-colors group-hover/category:duration-300">
+          <h6 className="font-thin group-hover/category:text-rose-500 group-hover/category:transition-colors group-hover/category:duration-300 ">
             {truncPara}
           </h6>
-          <p className="text-center overline">
+          <p
+            className={`text-center overline ${
+              username ? "visible" : "invisible"
+            }`}
+          >
             {textConfig.by} <span className="font-bold">{username}</span>
           </p>
         </div>

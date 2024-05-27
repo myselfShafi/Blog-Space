@@ -81,6 +81,7 @@ const UserPosts = () => {
         <div className="p-3 gap-10 lg:gap-16 lg:columns-2 xl:columns-3">
           {collection.documents?.map((collectionData) => (
             <MiniCard
+              showStatus
               key={collectionData.$id}
               data={collectionData}
               wrapperClass={"mx-auto"}

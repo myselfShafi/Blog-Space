@@ -2,11 +2,23 @@ import parse from "html-react-parser";
 import React from "react";
 import { Link } from "react-router-dom";
 import dbService from "../../appWriteService/db.service";
-import { getDate, getReadTime, getTruncatedText } from "../../utilities";
+import {
+  getCapitalize,
+  getDate,
+  getReadTime,
+  getTruncatedText,
+} from "../../utilities";
 import MiniCardLoader from "../loaders/miniCardLoader";
 import DateNRead from "./date&Read";
 
-const MiniCard = ({ wrapperClass, hasBg, imgClass, titleClass, data }) => {
+const MiniCard = ({
+  wrapperClass,
+  hasBg,
+  imgClass,
+  titleClass,
+  data,
+  showStatus,
+}) => {
   const truncText = data?.title && getTruncatedText(data?.title, 48);
   const date = getDate(data?.$createdAt);
   const readtime = data?.content && getReadTime(parse(data?.content));
@@ -26,6 +38,16 @@ const MiniCard = ({ wrapperClass, hasBg, imgClass, titleClass, data }) => {
           />
         )}
         <div className={`p-8 transition-colors duration-200 space-y-2`}>
+          {showStatus && (
+            <div className="font-bold post-border w-fit px-1.5 center-element gap-x-1">
+              <div
+                className={`w-2 h-2 ${
+                  data?.status === "private" ? "bg-orange-500" : "bg-green-600"
+                } rounded-full`}
+              ></div>
+              <p>{getCapitalize(data?.status)}</p>
+            </div>
+          )}
           {date && <DateNRead date={date} duration={readtime} />}
           <h5 className={`${titleClass}`}>{truncText}</h5>
         </div>
