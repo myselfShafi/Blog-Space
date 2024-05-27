@@ -1,33 +1,31 @@
+import parse from "html-react-parser";
 import React from "react";
 import { Link } from "react-router-dom";
+import { dbService } from "../../appWriteService";
 import { textConfig } from "../../config";
-import { getTruncatedText } from "../../utilities";
+import { getDate, getTruncatedText } from "../../utilities";
+import useUsername from "../../utilities/hooks/useUsername";
+import CategoryLoader from "../loaders/categoryLoader";
 import DateNRead from "./date&Read";
 
-const CategoryCard = ({ data }) => {
-  const text = "iPad Pro M1 Chip: Bringing The MacBook Pro Powersgdfh";
-  const para =
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto dolores iste dignissimos eveniet illum quaerat et delectus nostrum ipsum impedit, natus autem vel quibusdam harum amet vero animi dolorum voluptates?";
-  const truncText = text && getTruncatedText(text, 48);
-  const truncPara = para && getTruncatedText(para, 150);
+const CategoryCard = ({ data, isloading }) => {
+  const truncText = data?.title && getTruncatedText(data?.title, 48);
+  const truncPara =
+    data?.content &&
+    getTruncatedText(parse(data?.content)[0]?.props.children, 150);
+  const date = getDate(data?.$createdAt);
+  const username = useUsername(data?.userID);
 
-  const date = new Date().toLocaleDateString("en-IN", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
-  const postId = "asfgshfghgfj";
+  if (isloading) {
+    return <CategoryLoader />;
+  }
 
   return (
-    <Link to={`/all-category/sports/blog-${postId}`}>
+    <Link to={`/all-category/${data?.category}/${data?.$id}`}>
       <div className="bg-shade break-inside-avoid mb-10 lg:mb-16 group/category overflow-hidden hover:shadow-lg dark:hover:shadow-slate-950">
         <div className="relative group-hover/category:scale-105 transition-transform duration-300">
           <img
-            src={
-              typeof data === "string"
-                ? data
-                : "https://images.unsplash.com/photo-1653103674098-6ed995323607"
-            }
+            src={data?.thumbnail && dbService.getFile(data?.thumbnail)}
             alt="category-card"
             className={`w-full object-cover object-center `}
           />
@@ -46,7 +44,7 @@ const CategoryCard = ({ data }) => {
             {truncPara}
           </h6>
           <p className="text-center overline">
-            {textConfig.by} <span className="font-bold">John Doe</span>
+            {textConfig.by} <span className="font-bold">{username}</span>
           </p>
         </div>
       </div>

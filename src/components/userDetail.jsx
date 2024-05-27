@@ -12,12 +12,11 @@ import {
 } from "react-feather";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { AnimationIcon } from ".";
 import { userService } from "../appWriteService";
 import { textConfig } from "../config";
 import { authlogin } from "../store/slices/authSlice";
 import UserDataLoader from "./loaders/userDataLoader";
-import { IconInput } from "./shared";
+import { CustomErr, IconInput } from "./shared";
 
 const UserDetail = ({ data, setErr }) => {
   const dispatch = useDispatch();
@@ -90,18 +89,7 @@ const UserDetail = ({ data, setErr }) => {
   }
 
   if (loading.err) {
-    return (
-      <div className="relative grow center-element text-center flex-col gap-y-2">
-        <AnimationIcon
-          src={`/static/error.json`}
-          speed={0.4}
-          loop
-          autoplay
-          className={"w-36 h-36"}
-        />
-        <h6>{textConfig.errs.profile}</h6>
-      </div>
-    );
+    return <CustomErr />;
   }
 
   return (

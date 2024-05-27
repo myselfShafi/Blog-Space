@@ -2,11 +2,15 @@ import { Query } from "appwrite";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { categoryService, dbService } from "../appWriteService";
+import { LoaderPage } from "../components";
 import { MainContainer } from "../components/shared";
 import { textConfig } from "../config";
+import NotFound from "./notFound";
 
 const Category = () => {
   const [categories, setCategories] = useState(new Array(6).fill(null));
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     const run = async () => {
@@ -17,14 +21,23 @@ const Category = () => {
         if (fetchCategory) {
           setCategories(fetchCategory.documents);
         } else {
-          console.log("error fetching......");
+          setError(true);
         }
       } catch (error) {
-        console.log("error fetching......", error);
+        setError(true);
       }
+      setLoading(false);
     };
     run();
   }, []);
+
+  if (loading) {
+    return <LoaderPage>{textConfig.loaders.category}</LoaderPage>;
+  }
+
+  if (error) {
+    return <NotFound internalErr />;
+  }
 
   return (
     <MainContainer>

@@ -89,6 +89,7 @@ const textConfig = {
     authenticate: "Authenticating ...",
     userpost: "Curating your personal collection ... ",
     edit: "Hang On, Retrieving Your Work ...",
+    category: "Gathering categories . . . Just a moment.",
   },
   errs: {
     profile: "Something went wrong. Please try later!",
