@@ -1,8 +1,8 @@
 import { Query } from "appwrite";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
-import { dbService } from "../appWriteService";
+import { useParams } from "react-router-dom";
+import { categoryService, dbService } from "../appWriteService";
 import {
   CategoryCard,
   EmptySection,
@@ -11,30 +11,44 @@ import {
 
 const CategoryPosts = () => {
   const { status, userData } = useSelector((state) => state.auth);
-  const { state, pathname } = useLocation();
+  const { category } = useParams();
+  const [banner, setBanner] = useState(null);
   const [posts, setPosts] = useState(new Array(6).fill(null));
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState(false);
 
   useEffect(() => {
-    const fetch = async () => {
-      setLoading(true);
-      setErr(false);
-      try {
-        const allposts = await dbService.getAllPosts([
-          Query.equal("category", state?.title),
-          Query.equal("status", "public"),
-        ]);
-        if (allposts) {
-          setPosts(allposts.documents?.reverse());
-          setLoading(false);
-        }
-      } catch (error) {
-        setErr(true);
+    fetchCategory();
+    fetchPosts();
+  }, [category]);
+
+  const fetchCategory = async () => {
+    try {
+      const categoryData = await categoryService.getCategories([
+        Query.equal("categoryName", category),
+      ]);
+      if (categoryData.total > 0) {
+        setBanner(categoryData.documents[0]);
       }
-    };
-    fetch();
-  }, [pathname]);
+    } catch (error) {}
+  };
+
+  const fetchPosts = async () => {
+    setLoading(true);
+    setErr(false);
+    try {
+      const allposts = await dbService.getAllPosts([
+        Query.equal("category", category),
+        Query.equal("status", "public"),
+      ]);
+      if (allposts) {
+        setPosts(allposts.documents?.reverse());
+        setLoading(false);
+      }
+    } catch (error) {
+      setErr(true);
+    }
+  };
 
   return (
     <div
@@ -48,12 +62,12 @@ const CategoryPosts = () => {
         className="w-full h-96 lg:h-[50vh] bg-cover bg-center center-element"
         style={{
           backgroundImage: `url(${
-            state?.img && dbService.getFile(state?.img)
+            banner?.defaultImage && dbService.getFile(banner?.defaultImage)
           })`,
         }}
       >
         <h2 className="mix-blend-screen center-element bg-white/75 dark:bg-gray-900/75 min-w-56 min-h-56 px-3  rounded-full font-extrabold text-center">
-          {state?.title}
+          {banner?.categoryName}
         </h2>
       </div>
       <MainContainer className={"lg:mt-40 p-0"}>
