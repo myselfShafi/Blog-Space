@@ -28,6 +28,7 @@ const CategoryCard = ({ data, isloading }) => {
             src={data?.thumbnail && dbService.getFile(data?.thumbnail)}
             alt="category-card"
             className={`w-full object-cover object-center `}
+            loading="lazy"
           />
           <div className="absolute bg-gray-900/75 center-element lg:hidden lg:group-hover/category:center-element transition  h-20 lg:h-full bottom-0 left-0 right-0 ">
             <h6 className="text-white underline underline-offset-8 decoration-rose-500/50 hover:decoration-rose-500">
