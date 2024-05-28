@@ -158,9 +158,7 @@ const Post = () => {
           {data.thumbnail ? (
             <LazyImage
               wrapperClass={`${width > height ? "center-element" : ""}`}
-              loaderClass={
-                "h-96 w-full lg:w-4/5 bg-loader animate-pulse mx-auto"
-              }
+              loaderClass={"h-96 w-full lg:w-4/5 bg-loader mx-auto"}
               src={data?.thumbnail && dbService.getFile(data.thumbnail)}
               alt="img-post"
               className={`${

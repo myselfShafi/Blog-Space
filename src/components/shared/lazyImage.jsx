@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ImageLoader from "../loaders/imgLoader";
 
 const LazyImage = ({
   wrapperClass,
@@ -12,18 +13,9 @@ const LazyImage = ({
   return (
     <div className={`relative ${wrapperClass}`}>
       {loading && (
-        <div
-          className={`animate-pulse ${loaderClass} ${loaderHeight} center-element gap-x-1.5`}
-        >
-          {new Array(3).fill(null).map((_, idx) => (
-            <div
-              key={idx}
-              className={`w-4 h-4 footer-color rounded-full animate-bounce 
-              }`}
-              style={{ animationDelay: `${idx * 0.2}s` }}
-            ></div>
-          ))}
-        </div>
+        <ImageLoader
+          className={`animate-pulse ${loaderClass} ${loaderHeight} `}
+        />
       )}
       <img
         onLoad={() => {

@@ -7,6 +7,7 @@ import { CardLoader, LoaderPage, UserDetail } from "../components";
 import {
   EmptySection,
   Error,
+  LazyImage,
   MainContainer,
   MiniCard,
 } from "../components/shared";
@@ -53,7 +54,8 @@ const UserPosts = () => {
       <div className="bg-shade p-10 lg:px-20 mb-20">
         <div className="flex flex-col lg:flex-row gap-5 lg:gap-10 mb-2">
           <div className="center-element flex-col gap-4">
-            <img
+            <LazyImage
+              loaderClass={"w-36 h-36 lg:w-52 lg:h-52 rounded-full bg-loader"}
               src={img ? img : "/static/placeholder.jpg"}
               alt="profile-image"
               className="w-36 h-36 lg:w-52 lg:h-52 rounded-full object-cover object-center"
@@ -82,6 +84,7 @@ const UserPosts = () => {
           {collection.documents?.map((collectionData) => (
             <MiniCard
               showStatus
+              loaderHeight={"h-72"}
               key={collectionData.$id}
               data={collectionData}
               wrapperClass={"mx-auto"}

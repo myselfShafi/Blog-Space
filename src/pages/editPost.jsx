@@ -12,7 +12,12 @@ import {
   TextEditor,
 } from "../components";
 import { categorylist } from "../components/navbar/categoryDrop";
-import { Error, MainContainer, OptionSelect } from "../components/shared";
+import {
+  Error,
+  LazyImage,
+  MainContainer,
+  OptionSelect,
+} from "../components/shared";
 import IconInput from "../components/shared/iconInput";
 import { formValidate, textConfig } from "../config";
 
@@ -182,13 +187,13 @@ const EditPost = () => {
           />
           <h4 className="mt-8 mb-1.5 font-bold">{textConfig.postEdit.img}</h4>
           {img && (
-            <div className="center-element">
-              <img
-                src={img}
-                alt={img?.name || "post-image"}
-                className="max-h-96 object-cover object-center mb-3"
-              />
-            </div>
+            <LazyImage
+              wrapperClass={"center-element"}
+              loaderClass={"h-72 w-full bg-shade"}
+              src={img}
+              alt={img?.name || "post-image"}
+              className="max-h-96 object-cover object-center mb-3"
+            />
           )}
           <input
             type="file"

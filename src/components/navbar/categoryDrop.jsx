@@ -4,7 +4,7 @@ import { ChevronDown } from "react-feather";
 import { Link } from "react-router-dom";
 import { categoryService, dbService } from "../../appWriteService";
 import { textConfig } from "../../config";
-import { CustomErr, Dropdown } from "../shared";
+import { CustomErr, Dropdown, LazyImage } from "../shared";
 
 export const categorylist = [
   {
@@ -46,7 +46,7 @@ export const categorylist = [
 ];
 
 export const CategoryDropdown = () => {
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState(new Array(6).fill(null));
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
@@ -118,12 +118,13 @@ export const CategoryDropdown = () => {
                   state={{ img: list?.defaultImage, title: list?.categoryName }}
                 >
                   <section className="relative border dark:border-gray-900 w-fit h-fit hover:shadow-2xl group/category after:content-[''] after:absolute after:top-3 after:bottom-3 after:left-3 after:right-3 hover:after:border hover:after:dark:border-gray-900">
-                    <img
+                    <LazyImage
+                      loaderClass={"w-56 h-48 bg-loader"}
                       src={`${
                         list?.defaultImage &&
                         dbService.getFile(list?.defaultImage)
                       }`}
-                      className="w-56 h-48"
+                      className="w-56 h-48 object-cover object-center"
                     />
                     <h6 className="bg-white/75 dark:bg-gray-900/75 text-center px-2 py-1 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition duration-500 group-hover/category:-translate-y-6 group-hover/category:scale-110 text-nowrap">
                       {list?.categoryName}

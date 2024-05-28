@@ -7,6 +7,7 @@ import { textConfig } from "../../config";
 import { getDate, getTruncatedText } from "../../utilities";
 import useUsername from "../../utilities/hooks/useUsername";
 import BlogCardLoader from "../loaders/blogCardLoader";
+import LazyImage from "./lazyImage";
 
 const BlogCard = ({ data }) => {
   const navigate = useNavigate();
@@ -24,14 +25,15 @@ const BlogCard = ({ data }) => {
 
   return (
     <section className="lg:flex container p-5 lg:w-11/12 2xl:w-full hover:drop-shadow-lg hover:shadow-lg dark:hover:drop-shadow-gray-800 dark:hover:shadow-slate-950 group/card">
-      <div className="flex-none w-full h-80 lg:w-120 lg:h-96 2xl:h-[22rem] relative">
-        <img
-          src={dbService.getFile(data?.thumbnail)}
-          alt="card-img"
-          className="absolute inset-0 w-full h-full object-cover"
-          loading="lazy"
-        />
-      </div>
+      <LazyImage
+        wrapperClass={
+          "flex-none w-full h-80 lg:w-120 lg:h-96 2xl:h-[22rem] relative"
+        }
+        loaderClass={"h-full bg-loader"}
+        src={data?.thumbnail && dbService.getFile(data?.thumbnail)}
+        alt={`card-${data?.thumbnail}`}
+        className="absolute inset-0 w-full h-full object-cover"
+      />
       <div className="py-3 px-6 space-y-4">
         <h6 className="uppercase tracking-widest text-purple-600 font-bold">
           {data?.category}
