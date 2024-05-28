@@ -9,6 +9,7 @@ import Error from "./errorElement";
 import Heading from "./heading";
 import IconInput from "./iconInput";
 import LazyImage from "./lazyImage";
+import LazyBg from "./lazybg";
 import MiniCard from "./miniCard";
 import OptionSelect from "./optionSelect";
 
@@ -22,6 +23,7 @@ export {
   Error,
   Heading,
   IconInput,
+  LazyBg,
   LazyImage,
   MainContainer,
   MiniCard,

@@ -21,7 +21,9 @@ const LazyImage = ({
         onLoad={() => {
           setLoading(false);
         }}
-        className={` ${loading ? "hidden" : className}`}
+        className={`transition-opacity duration-1000 ${
+          loading ? "h-0 opacity-0" : `${className} opacity-100`
+        }`}
         {...props}
         loading="lazy"
       />

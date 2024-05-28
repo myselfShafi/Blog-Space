@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { categoryService, dbService } from "../appWriteService";
 import { LoaderPage } from "../components";
-import { MainContainer } from "../components/shared";
+import { LazyBg, MainContainer } from "../components/shared";
 import { textConfig } from "../config";
 import NotFound from "./notFound";
 
@@ -49,18 +49,19 @@ const Category = () => {
             to={`/all-category/${list?.categoryName}`}
             state={{ img: list?.defaultImage, title: list?.categoryName }}
           >
-            <div
+            <LazyBg
+              wrapperClass={
+                "relative mx-auto rounded-3xl center-element w-full lg:w-96 h-40 lg:h-96 overflow-hidden"
+              }
               className="relative mx-auto rounded-3xl center-element w-full lg:w-96 h-40 lg:h-96 bg-cover bg-center hover:shadow-2xl dark:hover:shadow-slate-950 before:absolute before:content-[''] before:bg-white/30 before:h-full before:w-full before:-translate-x-full hover:before:translate-x-full before:transition-transform before:duration-500 overflow-hidden"
-              style={{
-                backgroundImage: `url(${
-                  list?.defaultImage && dbService.getFile(list?.defaultImage)
-                })`,
-              }}
+              imgURL={
+                list?.defaultImage && dbService.getFile(list?.defaultImage)
+              }
             >
               <h2 className="font-extrabold text-center text-white ">
                 {list?.categoryName}
               </h2>
-            </div>
+            </LazyBg>
           </Link>
         ))}
       </div>
