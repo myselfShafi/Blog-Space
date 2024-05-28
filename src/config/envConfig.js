@@ -13,6 +13,7 @@ const envConfig = {
     import.meta.env.VITE_APPWRITE_CATEGORY_COLLECTION_ID
   ),
   appWriteBucketId: String(import.meta.env.VITE_APPWRITE_BUCKET_ID),
+  appWriteUserBucketId: String(import.meta.env.VITE_APPWRITE_USER_BUCKET_ID),
 
   tinymceApi: String(import.meta.env.VITE_TINYMCE_API),
 

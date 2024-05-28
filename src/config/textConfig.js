@@ -49,6 +49,7 @@ const textConfig = {
   },
   user: {
     save: "Save",
+    upload: "Upload",
     saved: "Profile Information successfully updated",
     saving: "Saving your changes",
     total: "Total Posts",

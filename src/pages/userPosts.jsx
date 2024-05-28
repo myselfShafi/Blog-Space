@@ -1,9 +1,11 @@
 import { Query } from "appwrite";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { AlertTriangle, Edit3 } from "react-feather";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { dbService } from "../appWriteService";
+import { dbService, userService } from "../appWriteService";
 import { CardLoader, LoaderPage, UserDetail } from "../components";
+import ImageLoader from "../components/loaders/imgLoader";
 import {
   EmptySection,
   Error,
@@ -21,10 +23,14 @@ const UserPosts = () => {
   const [collection, setCollection] = useState([]);
   const [fetchErr, setFetchErr] = useState(false);
   const [loading, setLoading] = useState(true);
-  const img = data?.img;
+  const [user, setUser] = useState(null);
+  const [img, setImg] = useState(null);
+  const [imgStatus, setImgStatus] = useState({ loading: true, err: false });
+  let dpRef = useRef(null);
 
   useEffect(() => {
     getPosts(data?.$id);
+    getImg(data?.$id);
   }, [data]);
 
   const goToEdit = () => {
@@ -49,16 +55,90 @@ const UserPosts = () => {
     setLoading(false);
   };
 
+  const getImg = async (userId) => {
+    try {
+      const resp = await userService.getUser(userId);
+      if (resp) {
+        const array = resp.documents[0];
+        setUser(array);
+        setImg(
+          array?.displayImg
+            ? userService.getFile(array?.displayImg)
+            : "/static/placeholder.jpg"
+        );
+        setImgStatus({ loading: false, err: false });
+      } else {
+        setImgStatus({ loading: false, err: true });
+      }
+    } catch (error) {
+      setImgStatus({ loading: false, err: true });
+    }
+  };
+
+  const ondpChange = async (e) => {
+    const file = e.target.files[0];
+    setImgStatus({ loading: true, err: false });
+    try {
+      if (user?.displayImg) {
+        await userService.deleteFile(user?.displayImg);
+      }
+      const resp = await userService.uploadprofile(file);
+      if (resp) {
+        await userService.updateUser(user?.$id, { displayImg: resp?.$id });
+        setImg(URL.createObjectURL(file));
+        setImgStatus({ loading: false, err: false });
+      } else {
+        setImgStatus({ loading: false, err: true });
+      }
+    } catch (error) {
+      console.log({ error });
+      setImgStatus({ loading: false, err: true });
+    }
+  };
+
   return (
     <MainContainer>
       <div className="bg-shade p-10 lg:px-20 mb-20">
         <div className="flex flex-col lg:flex-row gap-5 lg:gap-10 mb-2">
-          <div className="center-element flex-col gap-4">
+          <div className="relative mx-auto rounded-full w-fit group/div">
+            <input
+              type="file"
+              className="hidden"
+              ref={dpRef}
+              accept="image/png, image/jpg, image/jpeg"
+              onChange={ondpChange}
+            />
             <LazyImage
               loaderClass={"w-36 h-36 lg:w-52 lg:h-52 rounded-full bg-loader"}
-              src={img ? img : "/static/placeholder.jpg"}
+              src={img}
               alt="profile-image"
-              className="w-36 h-36 lg:w-52 lg:h-52 rounded-full object-cover object-center"
+              className="w-36 h-36 lg:w-52 lg:h-52 object-cover rounded-full object-center "
+            />
+            <div
+              onClick={() => {
+                !imgStatus.loading && !imgStatus.err && dpRef.current.click();
+              }}
+              className={`absolute top-0 center-element rounded-full w-full h-full bg-slate-900/60 z-10  ${
+                !imgStatus.loading &&
+                !imgStatus.err &&
+                "opacity-0 cursor-pointer"
+              } group-hover/div:opacity-100 transition-opacity duration-300`}
+            >
+              {imgStatus.loading ? (
+                <ImageLoader />
+              ) : imgStatus.err ? (
+                <AlertTriangle className="text-red-600" />
+              ) : (
+                <h5 className="px-2 footer-color rounded-xl">
+                  {textConfig.user.upload}
+                </h5>
+              )}
+            </div>
+            <Edit3
+              className="absolute top-0 right-0 lg:hidden"
+              onClick={() => {
+                !imgStatus.loading && !imgStatus.err && dpRef.current.click();
+              }}
             />
           </div>
           <UserDetail

@@ -32,7 +32,10 @@ class UserService {
     }
   }
 
-  async updateUser(docID, { username, profession, company, portfolioURL }) {
+  async updateUser(
+    docID,
+    { username, profession, company, portfolioURL, displayImg }
+  ) {
     try {
       const resp = await this.databases.updateDocument(
         envConfig.appWriteDBId,
@@ -43,9 +46,10 @@ class UserService {
           profession,
           company,
           portfolioURL,
+          displayImg,
         }
       );
-      if (resp) {
+      if (resp && username) {
         await authService.updateName(username);
       }
       return resp;
@@ -66,6 +70,38 @@ class UserService {
       console.error("Appwrite error ++ get userDB ++", error);
       throw error;
     }
+  }
+
+  async uploadprofile(fileID) {
+    try {
+      return await this.userStorage.createFile(
+        envConfig.appWriteUserBucketId,
+        ID.unique(),
+        fileID
+      );
+    } catch (error) {
+      console.error("Appwrite error ++ upload dp ++", error);
+      throw error;
+    }
+  }
+
+  async deleteFile(fileID) {
+    try {
+      return await this.userStorage.deleteFile(
+        envConfig.appWriteUserBucketId,
+        fileID
+      );
+    } catch (error) {
+      console.error("Appwrite error ++ delete dp ++", error);
+      throw error;
+    }
+  }
+
+  getFile(fileID) {
+    return this.userStorage.getFilePreview(
+      envConfig.appWriteUserBucketId,
+      fileID
+    );
   }
 }
 

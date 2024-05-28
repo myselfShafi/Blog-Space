@@ -23,7 +23,6 @@ const LazyImage = ({
         if (entry.isIntersecting) {
           setUrl(src);
           self.unobserve(entry.target);
-          console.log("is intersecting...");
         }
       });
     }, options);
