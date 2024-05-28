@@ -10,6 +10,7 @@ import {
 } from "../../utilities";
 import MiniCardLoader from "../loaders/miniCardLoader";
 import DateNRead from "./date&Read";
+import LazyImage from "./lazyImage";
 
 const MiniCard = ({
   wrapperClass,
@@ -17,6 +18,7 @@ const MiniCard = ({
   imgClass,
   titleClass,
   data,
+  loaderHeight,
   showStatus,
 }) => {
   const truncText = data?.title && getTruncatedText(data?.title, 48);
@@ -31,8 +33,10 @@ const MiniCard = ({
     <Link to={`/all-category/${data.category}/${data.$id}`} reloadDocument>
       <div className={`group/mini overflow-hidden ${wrapperClass}`}>
         {data.thumbnail && (
-          <img
-            src={dbService.getFile(data.thumbnail)}
+          <LazyImage
+            loaderClass={`${imgClass} bg-loader`}
+            loaderHeight={loaderHeight}
+            src={data?.thumbnail && dbService.getFile(data.thumbnail)}
             alt={`post-image-${data.thumbnail}`}
             className={`w-full object-cover object-center group-hover/mini:scale-105 transition-transform duration-200 ${imgClass}`}
           />

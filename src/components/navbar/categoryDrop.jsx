@@ -80,7 +80,6 @@ export const CategoryDropdown = () => {
     fetch();
     const fetchInterval = setInterval(() => {
       fetch();
-      console.log("check");
     }, 10000);
 
     return () => {

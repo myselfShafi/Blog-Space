@@ -105,6 +105,7 @@ const Dashboard = () => {
               key={idx}
               data={item}
               imgClass={"max-h-96"}
+              loaderHeight={"h-72"}
               titleClass={"uppercase group-hover/mini:text-rose-500"}
             />
           ))}

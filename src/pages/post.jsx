@@ -10,6 +10,7 @@ import {
   DateNRead,
   Error,
   Heading,
+  LazyImage,
   MainContainer,
   MiniCard,
 } from "../components/shared";
@@ -36,13 +37,12 @@ const Post = () => {
     thumbnail: "",
   });
   const [relPosts, setRelPosts] = useState(new Array(4).fill(null));
-  const [imgLoad, setImgLoad] = useState(true);
 
   const date = getDate(data?.$createdAt);
   const readtime = data?.content && getReadTime(parse(data?.content));
 
   const { height, width } = useImgDimensions(
-    dbService.getFile(data.thumbnail)?.href
+    data.thumbnail && dbService.getFile(data.thumbnail)?.href
   );
 
   useEffect(() => {
@@ -156,21 +156,17 @@ const Post = () => {
         )}
         <div className={`grid gap-y-6 ${height > width && "xl:grid-cols-2"} `}>
           {data.thumbnail ? (
-            <div
-              className={`${width > height ? "center-element" : ""} ${
-                imgLoad &&
+            <LazyImage
+              wrapperClass={`${width > height ? "center-element" : ""}`}
+              loaderClass={
                 "h-96 w-full lg:w-4/5 bg-loader animate-pulse mx-auto"
-              }`}
-            >
-              <img
-                src={dbService.getFile(data.thumbnail)}
-                alt="img-post"
-                onLoad={() => setImgLoad(false)}
-                className={`${imgLoad ? "hidden" : "block"}${
-                  height > width ? "w-full" : "lg:w-4/5"
-                } max-h-screen object-contain object-center`}
-              />
-            </div>
+              }
+              src={data?.thumbnail && dbService.getFile(data.thumbnail)}
+              alt="img-post"
+              className={`${
+                height > width ? "w-full" : "lg:w-4/5"
+              } max-h-screen object-contain object-center`}
+            />
           ) : null}
           <div className="px-3 py-5 lg:py-0 lg:px-14 space-y-6 overflow-y-auto lg:max-h-screen scrollbar">
             <DateNRead date={date} duration={readtime} durationClass={"grow"}>
