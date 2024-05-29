@@ -55,7 +55,9 @@ const Category = () => {
               }
               className="relative mx-auto rounded-3xl center-element w-full lg:w-96 h-40 lg:h-96 bg-cover bg-center hover:shadow-2xl dark:hover:shadow-slate-950 before:absolute before:content-[''] before:bg-white/30 before:h-full before:w-full before:-translate-x-full hover:before:translate-x-full before:transition-transform before:duration-500 overflow-hidden"
               imgURL={
-                list?.defaultImage && dbService.getFile(list?.defaultImage)
+                list?.defaultImage
+                  ? dbService.getFile(list?.defaultImage)
+                  : "/static/logo.png"
               }
             >
               <h2 className="font-extrabold text-center text-white ">

@@ -6,45 +6,6 @@ import { categoryService, dbService } from "../../appWriteService";
 import { textConfig } from "../../config";
 import { CustomErr, Dropdown, LazyImage } from "../shared";
 
-export const categorylist = [
-  {
-    id: 1,
-    img: "https://images.unsplash.com/photo-1713502359486-d3611d924f61",
-    title: "Nature",
-    href: "/all-category/nature",
-  },
-  {
-    id: 2,
-    img: "https://images.unsplash.com/photo-1594909122845-11baa439b7bf",
-    title: "Film",
-    href: "/all-category/film",
-  },
-  {
-    id: 3,
-    img: "https://images.unsplash.com/photo-1688217161165-6ba7a54ec38e",
-    title: "Travel",
-    href: "/all-category/travel",
-  },
-  {
-    id: 4,
-    img: "https://images.unsplash.com/photo-1551225894-d26fc7d4e286",
-    title: "Food & Drink",
-    href: "/all-category/food-&-drink",
-  },
-  {
-    id: 5,
-    img: "https://images.unsplash.com/photo-1588596588734-3e1d408452ab",
-    title: "Fashion",
-    href: "/all-category/fashion",
-  },
-  {
-    id: 6,
-    img: "https://images.unsplash.com/photo-1638193625184-fd7b6d313eb9",
-    title: "Sports",
-    href: "/all-category/sports",
-  },
-];
-
 export const CategoryDropdown = () => {
   const [categories, setCategories] = useState(new Array(6).fill(null));
   const [loading, setLoading] = useState(true);
@@ -121,8 +82,9 @@ export const CategoryDropdown = () => {
                     <LazyImage
                       loaderClass={"w-56 h-48 bg-loader"}
                       src={`${
-                        list?.defaultImage &&
-                        dbService.getFile(list?.defaultImage)
+                        list?.defaultImage
+                          ? dbService.getFile(list?.defaultImage)
+                          : "/static/logo.png"
                       }`}
                       className="w-56 h-48 object-cover object-center"
                       loading={"eager"}

@@ -24,19 +24,21 @@ const CategoryCard = ({ data, isloading }) => {
   return (
     <Link to={`/all-category/${data?.category}/${data?.$id}`}>
       <div className="bg-shade break-inside-avoid mb-10 lg:mb-16 group/category overflow-hidden hover:shadow-lg dark:hover:shadow-slate-950">
-        <div className="relative group-hover/category:scale-105 transition-transform duration-300">
-          <LazyImage
-            loaderClass={"h-72 lg:h-80 bg-loader"}
-            src={data?.thumbnail && dbService.getFile(data?.thumbnail)}
-            alt={`post-${data?.$id}`}
-            className={`w-full object-cover object-center`}
-          />
-          <div className="absolute bg-gray-900/75 center-element lg:hidden lg:group-hover/category:center-element transition  h-20 lg:h-full bottom-0 left-0 right-0 ">
-            <h6 className="text-white underline underline-offset-8 decoration-rose-500/50 hover:decoration-rose-500">
-              {textConfig.read}
-            </h6>
+        {data?.thumbnail && (
+          <div className="relative group-hover/category:scale-105 transition-transform duration-300">
+            <LazyImage
+              loaderClass={"h-72 lg:h-80 bg-loader"}
+              src={data?.thumbnail && dbService.getFile(data?.thumbnail)}
+              alt={`post-${data?.$id}`}
+              className={`w-full object-cover object-center`}
+            />
+            <div className="absolute bg-gray-900/75 center-element lg:hidden lg:group-hover/category:center-element transition  h-20 lg:h-full bottom-0 left-0 right-0 ">
+              <h6 className="text-white underline underline-offset-8 decoration-rose-500/50 hover:decoration-rose-500">
+                {textConfig.read}
+              </h6>
+            </div>
           </div>
-        </div>
+        )}
         <div
           className={`p-8 transition-colors duration-200 space-y-2 lg:space-y-4`}
         >

@@ -18,6 +18,7 @@ const MiniCard = ({
   imgClass,
   titleClass,
   data,
+  showImage = false,
   loaderHeight,
   showStatus,
 }) => {
@@ -32,11 +33,15 @@ const MiniCard = ({
   return (
     <Link to={`/all-category/${data.category}/${data.$id}`} reloadDocument>
       <div className={`group/mini overflow-hidden ${wrapperClass}`}>
-        {data.thumbnail && (
+        {(showImage || data.thumbnail) && (
           <LazyImage
             loaderClass={`${imgClass} bg-loader`}
             loaderHeight={loaderHeight}
-            src={data?.thumbnail && dbService.getFile(data.thumbnail)}
+            src={
+              data?.thumbnail
+                ? dbService.getFile(data.thumbnail)
+                : "/static/logo.png"
+            }
             alt={`post-image-${data.thumbnail}`}
             className={`w-full object-cover object-center group-hover/mini:scale-105 transition-transform duration-200 ${imgClass}`}
           />

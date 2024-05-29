@@ -65,19 +65,19 @@ const OptionSelect = ({
           >
             <ul className="divide-y divide-gray-300 dark:divide-gray-600">
               <div>
-                {list.map((li) => (
+                {list.map((li, idx) => (
                   <OptionList
-                    key={li.id}
+                    key={idx}
                     selected={selected}
-                    tabIndex={li.id || "-1"}
-                    id={li.id || "id-0"}
+                    tabIndex={idx || "-1"}
+                    id={idx || "id-0"}
                     onClick={() => {
-                      setSelected(li?.title), setOpen(!open);
-                      onChange(li?.title);
+                      setSelected(li), setOpen(!open);
+                      onChange(li);
                     }}
                     value={value}
                   >
-                    {li?.title}
+                    {li}
                   </OptionList>
                 ))}
               </div>

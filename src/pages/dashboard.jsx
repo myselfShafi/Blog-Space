@@ -1,3 +1,4 @@
+import { Query } from "appwrite";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -18,7 +19,9 @@ const Dashboard = () => {
   useEffect(() => {
     const run = async () => {
       try {
-        const allposts = await dbService.getAllPosts();
+        const allposts = await dbService.getAllPosts([
+          Query.equal("status", "public"),
+        ]);
         if (allposts) {
           setLatest(allposts.documents?.reverse().slice(0, 4));
           setDayBlog(getBlogOfDay(allposts?.documents, allposts.total));
@@ -104,6 +107,7 @@ const Dashboard = () => {
             <MiniCard
               key={idx}
               data={item}
+              showImage
               imgClass={"max-h-96"}
               loaderHeight={"h-72"}
               titleClass={"uppercase group-hover/mini:text-rose-500"}

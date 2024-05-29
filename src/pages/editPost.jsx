@@ -11,7 +11,6 @@ import {
   RadioGroup,
   TextEditor,
 } from "../components";
-import { categorylist } from "../components/navbar/categoryDrop";
 import {
   Error,
   LazyImage,
@@ -19,7 +18,7 @@ import {
   OptionSelect,
 } from "../components/shared";
 import IconInput from "../components/shared/iconInput";
-import { formValidate, textConfig } from "../config";
+import { categoryList, formValidate, textConfig } from "../config";
 
 const statusOpt = [
   { id: 1, label: "public", default: true },
@@ -105,7 +104,7 @@ const EditPost = () => {
           const file = await dbService.uploadFile(data?.thumbnail[0]);
           data.thumbnail = file?.$id;
         } else {
-          data.thumbnail = "";
+          data.thumbnail = null;
         }
         const resp = await dbService.createPost({
           ...data,
@@ -180,7 +179,7 @@ const EditPost = () => {
             name={"category"}
             control={control}
             defaultValue={getValues("category")}
-            list={categorylist}
+            list={categoryList}
             hasError={errors.category}
             disabled={success || loading}
             label={textConfig.postEdit.category}

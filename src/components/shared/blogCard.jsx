@@ -30,10 +30,15 @@ const BlogCard = ({ data }) => {
           "flex-none w-full h-80 lg:w-120 lg:h-96 2xl:h-[22rem] relative"
         }
         loaderClass={"h-full bg-loader"}
-        src={data?.thumbnail && dbService.getFile(data?.thumbnail)}
+        src={
+          data?.thumbnail
+            ? dbService.getFile(data?.thumbnail)
+            : "/static/logo.png"
+        }
         alt={`card-${data?.thumbnail}`}
         className="absolute inset-0 w-full h-full object-cover"
       />
+
       <div className="py-3 px-6 space-y-4">
         <h6 className="uppercase tracking-widest text-purple-600 font-bold">
           {data?.category}
