@@ -9,6 +9,7 @@ const LazyBg = ({ wrapperClass, className, imgURL, children, ...props }) => {
     image.loading = "lazy";
 
     image.onload = () => setLoading(false);
+    image.onerror = () => setLoading(false);
   }, [imgURL]);
 
   return (
@@ -24,7 +25,11 @@ const LazyBg = ({ wrapperClass, className, imgURL, children, ...props }) => {
         className={`transition-opacity duration-1000 ${
           loading ? "h-0 opacity-0" : `${className} opacity-100`
         }`}
-        style={loading ? {} : { backgroundImage: `url(${imgURL})` }}
+        style={
+          loading
+            ? {}
+            : { backgroundImage: `url(${imgURL ?? "/static/banner.jpg"})` }
+        }
         {...props}
       >
         {children}

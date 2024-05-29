@@ -64,7 +64,7 @@ const OptionSelect = ({
             isOpen={open}
           >
             <ul className="divide-y divide-gray-300 dark:divide-gray-600">
-              <div>
+              <div className="max-h-96 overflow-y-auto scrollbar">
                 {list.map((li, idx) => (
                   <OptionList
                     key={idx}
