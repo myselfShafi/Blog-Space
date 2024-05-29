@@ -10,6 +10,7 @@ const LazyImage = ({
   loaderClass,
   loaderHeight,
   src,
+  dotClass,
   className,
   ...props
 }) => {
@@ -40,6 +41,7 @@ const LazyImage = ({
     <div className={`relative ${wrapperClass}`}>
       {loading && (
         <ImageLoader
+          dotClass={dotClass}
           className={`animate-pulse ${loaderClass} ${loaderHeight} `}
         />
       )}
@@ -50,7 +52,7 @@ const LazyImage = ({
         ref={ImageRef}
         src={url}
         className={`transition-opacity duration-1000 ${
-          loading ? "h-0 opacity-0" : `${className} opacity-100`
+          loading ? "h-0 w-0 opacity-0" : `${className} opacity-100`
         }`}
         {...props}
         loading="lazy"

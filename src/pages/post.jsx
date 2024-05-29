@@ -17,6 +17,7 @@ import {
 import { textConfig } from "../config";
 import { getDate, getRandomPosts, getReadTime } from "../utilities";
 import useImgDimensions from "../utilities/hooks/useImgDimensions";
+import useUserInfo from "../utilities/hooks/useUserInfo";
 import NotFound from "./notFound";
 
 const Post = () => {
@@ -44,6 +45,7 @@ const Post = () => {
   const { height, width } = useImgDimensions(
     data.thumbnail && dbService.getFile(data.thumbnail)?.href
   );
+  const { username, profileImg } = useUserInfo(data && data?.userID);
 
   useEffect(() => {
     fetchData(post);
@@ -167,12 +169,35 @@ const Post = () => {
             />
           ) : null}
           <div className="px-3 py-5 lg:py-0 lg:px-14 space-y-6 overflow-y-auto lg:max-h-screen scrollbar">
-            <DateNRead date={date} duration={readtime} durationClass={"grow"}>
-              <Share2 />
-            </DateNRead>
-            <h6 className="w-fit px-2 uppercase tracking-widest text-purple-600 border border-purple-600 font-bold">
-              {data.category}
-            </h6>
+            <div className="flex items-center gap-x-6">
+              <LazyImage
+                loaderClass={"h-20 w-20 rounded-full bg-loader"}
+                dotClass={"w-1 h-1"}
+                src={profileImg}
+                alt={data?.userID}
+                className={"h-20 w-20 rounded-full object-cover object-center"}
+              />
+              <div className="grow ">
+                {username ? (
+                  <p className="mb-1 underline underline-offset-4">
+                    {textConfig.by}{" "}
+                    <span className="font-bold">{username}</span>
+                  </p>
+                ) : (
+                  <p className="bg-loader mb-1 w-16 rounded-lg h-5 animate-pulse"></p>
+                )}
+                <DateNRead
+                  date={date}
+                  duration={readtime}
+                  durationClass={"grow"}
+                >
+                  <Share2 />
+                </DateNRead>
+                <h6 className="w-fit px-2 mt-1 uppercase tracking-widest text-purple-600 border border-purple-600 font-bold">
+                  {data.category}
+                </h6>
+              </div>
+            </div>
             <h4 className="text-stone-700 dark:text-stone-300">{data.title}</h4>
             <h6 className="font-thin">{parse(data.content)}</h6>
           </div>

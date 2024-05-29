@@ -66,7 +66,7 @@ const textConfig = {
   related: "Related Posts",
   view: "View All",
   read: "Read Article ...",
-  by: "by",
+  by: "By",
   allcategory: "All Categories",
   postEdit: {
     title: "Post Title :",

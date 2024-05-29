@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { dbService } from "../../appWriteService";
 import { textConfig } from "../../config";
 import { getDate, getTruncatedText } from "../../utilities";
-import useUsername from "../../utilities/hooks/useUsername";
+import useUserInfo from "../../utilities/hooks/useUserInfo";
 import CategoryLoader from "../loaders/categoryLoader";
 import DateNRead from "./date&Read";
 import LazyImage from "./lazyImage";
@@ -15,7 +15,7 @@ const CategoryCard = ({ data, isloading }) => {
     data?.content &&
     getTruncatedText(parse(data?.content)[0]?.props.children, 150);
   const date = getDate(data?.$createdAt);
-  const username = useUsername(data?.userID);
+  const { username, profileImg } = useUserInfo(data?.userID);
 
   if (isloading) {
     return <CategoryLoader />;
@@ -45,13 +45,22 @@ const CategoryCard = ({ data, isloading }) => {
           <h6 className="font-thin group-hover/category:text-rose-500 group-hover/category:transition-colors group-hover/category:duration-300 ">
             {truncPara}
           </h6>
-          <p
-            className={`text-center overline ${
-              username ? "visible" : "invisible"
-            }`}
-          >
-            {textConfig.by} <span className="font-bold">{username}</span>
-          </p>
+          <div className="center-element gap-x-4 mt-4">
+            <LazyImage
+              loaderClass={"h-14 w-14 rounded-full bg-loader"}
+              dotClass={"w-1 h-1"}
+              src={profileImg}
+              alt={data?.userID}
+              className={"h-14 w-14 rounded-full object-cover object-center"}
+            />
+            {username ? (
+              <p className={`text-center overline`}>
+                {textConfig.by} <span className="font-bold">{username}</span>
+              </p>
+            ) : (
+              <p className="bg-loader w-16 rounded-lg h-5 animate-pulse"></p>
+            )}
+          </div>
         </div>
       </div>
     </Link>

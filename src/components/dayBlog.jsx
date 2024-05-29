@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 import dbService from "../appWriteService/db.service";
 import { textConfig } from "../config";
 import { getDate } from "../utilities";
-import useUsername from "../utilities/hooks/useUsername";
-import { Heading } from "./shared";
+import useUserInfo from "../utilities/hooks/useUserInfo";
+import { Heading, LazyImage } from "./shared";
 import LazyBg from "./shared/lazybg";
 
 const DayBlog = ({ data }) => {
   const date = getDate(data?.$createdAt);
-  const username = useUsername(data?.userID);
+  const { username, profileImg } = useUserInfo(data?.userID);
 
   return (
     <div className="p-0 overflow-hidden">
@@ -28,15 +28,25 @@ const DayBlog = ({ data }) => {
                   {data?.category}
                 </h6>
                 <h2 className="max-w-[85%]">{data?.title}</h2>
-                <h6 className="font-extralight">
-                  {username && (
-                    <>
+                <div className="flex items-center gap-x-6">
+                  <LazyImage
+                    loaderClass={"h-20 w-20 rounded-full bg-loader"}
+                    dotClass={"w-1 h-1"}
+                    src={profileImg}
+                    alt={data?.userID}
+                    className={
+                      "h-20 w-20 rounded-full object-cover object-center"
+                    }
+                  />
+                  {username ? (
+                    <h6 className="font-extralight">
                       {textConfig.by}{" "}
-                      <span className={`font-bold`}>{username}</span> -{" "}
-                    </>
+                      <span className={`font-bold`}>{username}</span> - {date}
+                    </h6>
+                  ) : (
+                    <p className="bg-loader mb-1 w-48 rounded-lg h-6 animate-pulse"></p>
                   )}
-                  {date}
-                </h6>
+                </div>
               </div>
             </div>
           </div>

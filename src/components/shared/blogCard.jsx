@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import dbService from "../../appWriteService/db.service";
 import { textConfig } from "../../config";
 import { getDate, getTruncatedText } from "../../utilities";
-import useUsername from "../../utilities/hooks/useUsername";
+import useUserInfo from "../../utilities/hooks/useUserInfo";
 import BlogCardLoader from "../loaders/blogCardLoader";
 import LazyImage from "./lazyImage";
 
@@ -17,7 +17,7 @@ const BlogCard = ({ data }) => {
     data?.content &&
     getTruncatedText(parse(data?.content)[0]?.props.children, 160);
   const date = getDate(data?.$createdAt);
-  const username = useUsername(data?.userID);
+  const { username } = useUserInfo(data?.userID);
 
   if (!data) {
     return <BlogCardLoader />;
