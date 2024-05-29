@@ -24,7 +24,7 @@ const LoginPanel = () => {
     clearErrors,
     setError,
   } = useForm({
-    defaultValues: { email: "abc@gmail.com", password: "qwertyuiop" },
+    defaultValues: { email: "", password: "" },
   });
 
   const togglefgtPwd = () => {

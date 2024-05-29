@@ -51,7 +51,7 @@ const LazyImage = ({
           setIsLoading(false);
         }}
         ref={ImageRef}
-        src={url}
+        src={loading ? src : url}
         className={`transition-opacity duration-1000 ${
           isLoading ? "h-0 w-0 opacity-0" : `${className} opacity-100`
         }`}
