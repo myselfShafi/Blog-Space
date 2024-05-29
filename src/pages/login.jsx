@@ -96,7 +96,6 @@ const LoginPanel = () => {
           >
             {textConfig.auth.login}
           </LoadBtn>
-
           <Error showError={Object.entries(errors).length != 0}>
             {Object.values(errors)[0]?.message}
           </Error>
