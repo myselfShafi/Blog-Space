@@ -203,26 +203,28 @@ const Post = () => {
           </div>
         </div>
       </div>
-      <>
-        <Heading className={"relative"}>
-          {textConfig.related}
-          <span className="absolute right-2 lg:right-0 top-1/2 -translate-y-1/2 text-base font-extralight post-border px-2 py-1">
-            <a href={`/all-category/${data?.category}`}>{textConfig.view}</a>
-          </span>
-        </Heading>
-        <div className="card-grid">
-          {relPosts?.map((item, idx) => (
-            <MiniCard
-              key={idx}
-              data={item}
-              hasBg={true}
-              imgClass={"h-72"}
-              wrapperClass={"post-border border-0 lg:border h-full"}
-              titleClass={"group-hover/mini:text-purple-600"}
-            />
-          ))}
-        </div>
-      </>
+      {relPosts.length > 0 && (
+        <>
+          <Heading className={"relative"}>
+            {textConfig.related}
+            <span className="absolute right-2 lg:right-0 top-1/2 -translate-y-1/2 text-base font-extralight post-border px-2 py-1">
+              <a href={`/all-category/${data?.category}`}>{textConfig.view}</a>
+            </span>
+          </Heading>
+          <div className="card-grid">
+            {relPosts?.map((item, idx) => (
+              <MiniCard
+                key={idx}
+                data={item}
+                hasBg={true}
+                imgClass={"h-72"}
+                wrapperClass={"post-border border-0 lg:border h-full"}
+                titleClass={"group-hover/mini:text-purple-600"}
+              />
+            ))}
+          </div>
+        </>
+      )}
     </MainContainer>
   );
 };
