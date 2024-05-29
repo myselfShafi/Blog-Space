@@ -198,7 +198,7 @@ const Post = () => {
                 </h6>
               </div>
             </div>
-            <h4 className="text-stone-700 dark:text-stone-300">{data.title}</h4>
+            <h2 className="text-stone-700 dark:text-stone-300">{data.title}</h2>
             <h6 className="font-thin">{parse(data.content)}</h6>
           </div>
         </div>

@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 
 const useImgDimensions = (imgURL = null) => {
   const [dimensions, setDimensions] = useState({});
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!imgURL) return;
 
     let img = new Image();
