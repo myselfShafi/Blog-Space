@@ -8,4 +8,8 @@ export default async ({ req, res, log, error }) => {
   client
     .setEndpoint(envConfig.appWriteURL)
     .setProject(envConfig.appWriteProjectId);
+
+  const { status, category } = req.payload;
+
+  return res.json(status, category);
 };
