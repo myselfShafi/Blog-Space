@@ -57,7 +57,7 @@ const textConfig = {
     addPost: "Add a New Post",
     delete: "Delete Post ?",
     edit: "Edit Post",
-    deleteErr: "Error deleting the post. Try again later.",
+    deleteErr: "Error deleting the post. Try later.",
     deleteScs: "Post Successfully Deleted",
     redirect: "Redirecting you to your profile . . .",
   },

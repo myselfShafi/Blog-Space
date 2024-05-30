@@ -15,7 +15,12 @@ import {
   MiniCard,
 } from "../components/shared";
 import { textConfig } from "../config";
-import { getDate, getRandomPosts, getReadTime } from "../utilities";
+import {
+  getCapitalize,
+  getDate,
+  getRandomPosts,
+  getReadTime,
+} from "../utilities";
 import useImgDimensions from "../utilities/hooks/useImgDimensions";
 import useUserInfo from "../utilities/hooks/useUserInfo";
 import NotFound from "./notFound";
@@ -129,31 +134,45 @@ const Post = () => {
     <MainContainer className={"p-0"}>
       <div className={"post-border lg:p-24 py-10"}>
         {data?.userID === userData?.$id && (
-          <div className=" mb-10 flex justify-end gap-x-4 pr-10  text-white">
-            <Error showError={remove.error}>{textConfig.user.deleteErr}</Error>
-            <LoadBtn
-              className={
-                "flex justify-end btn-icon bg-red-600 group/btn opacity-75 hover:opacity-100"
-              }
-              isloading={remove.loading}
-              onClick={onDelete}
-            >
-              <p className="slide-btn group-hover/btn:lg:w-full group-hover/btn:lg:mr-1">
-                {textConfig.user.delete}
-              </p>
-              <Trash2 />
-            </LoadBtn>
-            <button
-              className={
-                "flex justify-end btn-icon bg-sky-600 group/btn opacity-75 hover:opacity-100"
-              }
-              onClick={() => navigate("/edit-post", { state: { docID: post } })}
-            >
-              <p className="slide-btn group-hover/btn:lg:w-full group-hover/btn:lg:ml-1 ">
-                {textConfig.user.edit}
-              </p>
-              <Edit3 />
-            </button>
+          <div className=" mb-10 flex justify-between gap-x-4 px-2 lg:px-10">
+            <div className="font-bold post-border w-fit px-2 center-element gap-x-1">
+              <div
+                className={`w-2 h-2 ${
+                  data?.status === "private" ? "bg-orange-500" : "bg-green-600"
+                } rounded-full`}
+              ></div>
+              <p>{getCapitalize(data?.status)}</p>
+            </div>
+            <div className="flex gap-x-4 text-white">
+              <Error showError={remove.error}>
+                {textConfig.user.deleteErr}
+              </Error>
+              <LoadBtn
+                className={
+                  "flex justify-end h-fit btn-icon bg-red-600 group/btn opacity-75 hover:opacity-100"
+                }
+                isloading={remove.loading}
+                onClick={onDelete}
+              >
+                <p className="slide-btn group-hover/btn:lg:w-full group-hover/btn:lg:mr-1">
+                  {textConfig.user.delete}
+                </p>
+                <Trash2 />
+              </LoadBtn>
+              <button
+                className={
+                  "flex justify-end h-fit btn-icon bg-sky-600 group/btn opacity-75 hover:opacity-100"
+                }
+                onClick={() =>
+                  navigate("/edit-post", { state: { docID: post } })
+                }
+              >
+                <p className="slide-btn group-hover/btn:lg:w-full group-hover/btn:lg:ml-1 ">
+                  {textConfig.user.edit}
+                </p>
+                <Edit3 />
+              </button>
+            </div>
           </div>
         )}
         <div className={`grid gap-y-6 ${height > width && "xl:grid-cols-2"} `}>

@@ -83,7 +83,7 @@ const EditPost = () => {
     try {
       if (state?.docID) {
         const file =
-          data?.thumbnail[0] instanceof File
+          data?.thumbnail !== null && data?.thumbnail[0] instanceof File
             ? await dbService.uploadFile(data?.thumbnail[0])
             : null;
         if (file && post?.thumbnail) {
@@ -119,6 +119,7 @@ const EditPost = () => {
       }
     } catch (error) {
       setError("root", { type: "manual", message: error.message });
+      console.error(error);
     }
     setLoading(false);
   };
