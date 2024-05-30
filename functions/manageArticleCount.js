@@ -11,5 +11,11 @@ export default async ({ req, res, log, error }) => {
 
   const { status, category } = req.payload;
 
-  return res.json(status, category);
+  const getData = await databases.listDocuments(
+    envConfig.appWriteDBId,
+    envConfig.appWriteCollectionId
+  );
+
+  console.log(status, category);
+  return res.json(getData.documents);
 };
