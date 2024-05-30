@@ -3,6 +3,10 @@ import { useSelector } from "react-redux";
 import { Outlet, useLocation } from "react-router-dom";
 import { AuthBanner, Footer, Navbar } from "../../components";
 
+import "prismjs";
+import "prismjs/components/prism-jsx";
+import "prismjs/themes/prism-tomorrow.css";
+
 const RootLayout = () => {
   const { status } = useSelector((state) => state.auth);
   const { pathname } = useLocation();

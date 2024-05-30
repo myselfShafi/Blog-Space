@@ -18,7 +18,7 @@ const DayBlog = ({ data }) => {
         <Link to={`/all-category/${data?.category}/${data?.$id}`}>
           <div className="relative my-10 h-[40rem] overflow-hidden group/wrapper">
             <LazyBg
-              className="h-full bg-cover bg-center group-hover/wrapper:scale-105 transition-transform duration-200 shadow-inner-3xl"
+              className="h-full bg-cover bg-center group-hover/wrapper:scale-105 transition-transform duration-200 shadow-inner-3xl group-hover/wrapper:brightness-50 brightness-50 lg:brightness-100"
               imgURL={data?.thumbnail && dbService.getFile(data?.thumbnail)}
               wrapperClass={"h-[40rem] w-full"}
             />

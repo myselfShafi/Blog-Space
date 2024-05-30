@@ -3,6 +3,7 @@ const categoryList = [
   "Film",
   "Travel",
   "Food & Drink",
+  "Technology",
   "Fashion",
   "Sports",
   "Science",

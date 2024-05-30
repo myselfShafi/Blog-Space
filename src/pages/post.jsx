@@ -1,5 +1,6 @@
 import { Query } from "appwrite";
 import parse from "html-react-parser";
+import Prism from "prismjs";
 import React, { useEffect, useState } from "react";
 import { Edit3, Share2, Trash2 } from "react-feather";
 import { useSelector } from "react-redux";
@@ -56,6 +57,10 @@ const Post = () => {
     fetchData(post);
     relevantPosts(category);
   }, [post, category]);
+
+  useEffect(() => {
+    Prism.highlightAll();
+  }, [data]);
 
   const fetchData = async (postID) => {
     try {
