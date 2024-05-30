@@ -17,14 +17,11 @@ export default async ({ req, res }) => {
   client.setEndpoint(appWriteURL).setProject(appWriteProjectId);
 
   try {
-    const { status, category } = req.payload;
-
     const getData = await databases.listDocuments(
       appWriteDBId,
       appWriteCollectionId
     );
 
-    console.log({ status, category });
     return res.json(getData.documents);
   } catch (error) {
     console.error("An error occurred:", error);
