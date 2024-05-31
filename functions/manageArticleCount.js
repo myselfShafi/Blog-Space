@@ -20,8 +20,6 @@ export default async ({ req, res, log, error }) => {
     const event = req.headers["x-appwrite-event"];
     log(`event - ${event}`);
     const { status, category, thumbnail, $id } = req.body;
-    log(`req - ${req}`);
-    log(`req body - ${req.body}`);
     log(`check - ${status}---${category}---${thumbnail}---${$id}`);
 
     const currCategory = await databases.listDocuments(
@@ -32,7 +30,6 @@ export default async ({ req, res, log, error }) => {
     let currDoc;
     if (currCategory.total > 0 && currCategory.documents.length > 0) {
       currDoc = currCategory.documents[0];
-      log(`currDoc 1 - ${currCategory.documents[0]}`);
     }
     if (currCategory.total === 0 && currCategory.documents.length === 0) {
       if (status === "public") {
@@ -50,8 +47,8 @@ export default async ({ req, res, log, error }) => {
         log(`currDoc 2 - ${currDoc}`);
       }
     }
-    log(`event - ${currDoc}`);
-    let newCount = currDoc.counter ?? 0;
+    let newCount = currDoc.counter ?? 100;
+    log(`counter intial: ${currDoc.counter}`);
     if (
       event ===
       `databases.${appWriteDBId}.collections.${appWriteCollectionId}.documents.${$id}.create`
@@ -71,7 +68,7 @@ export default async ({ req, res, log, error }) => {
       `databases.${appWriteDBId}.collections.${appWriteCollectionId}.documents.${$id}.update`
     ) {
     }
-    log(`newcount - ${newCount}`);
+    log(`newcount after- ${newCount}`);
 
     if (currDoc) {
       await databases.updateDocument(
@@ -85,7 +82,6 @@ export default async ({ req, res, log, error }) => {
     return res.send({ success: true });
   } catch (err) {
     error(`error: ${err}`);
-    console.error("An error occurred:", err);
-    return res.status(500).json({ error: "Internal server error..." });
+    return res.json({ error: "Internal server error..." });
   }
 };
