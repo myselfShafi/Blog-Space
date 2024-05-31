@@ -22,8 +22,7 @@ export default async ({ req, res, log, error }) => {
 
   try {
     const event = req.headers["x-appwrite-event"];
-    log(`event - ${event}`);
-    const { status, category, thumbnail, $id } = req.body;
+    const { status, statusUpdated, category, thumbnail, $id } = req.body;
     log(`check - ${status}---${category}---${thumbnail}---${$id}`);
 
     const currCategory = await databases.listDocuments(
@@ -31,6 +30,7 @@ export default async ({ req, res, log, error }) => {
       appWriteCategoryCollectionId,
       [Query.contains("categoryName", category)]
     );
+
     let currDoc;
     if (currCategory.total > 0 && currCategory.documents.length > 0) {
       currDoc = currCategory.documents[0];
@@ -48,7 +48,6 @@ export default async ({ req, res, log, error }) => {
             counter: 0,
           }
         );
-        log(`currDoc 2 - ${currDoc}`);
       }
     }
     let newCount = currDoc.counter ?? 100;
@@ -71,6 +70,13 @@ export default async ({ req, res, log, error }) => {
       event ===
       `databases.${appWriteDBId}.collections.${appWriteCollectionId}.documents.${$id}.update`
     ) {
+      if (statusUpdated && status === "public") {
+        newCount += 1;
+      }
+      if (statusUpdated && status === "private") {
+        newCount -= 1;
+      }
+      log(`updating:   ${statusUpdated} ${status}`);
     }
     log(`newcount after- ${newCount}`);
 

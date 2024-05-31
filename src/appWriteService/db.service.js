@@ -71,14 +71,14 @@ class DbService {
 
   async updatePost(
     documentID,
-    { title, content, thumbnail, status, category }
+    { title, content, thumbnail, status, category, statusUpdated }
   ) {
     try {
       return await this.databases.updateDocument(
         envConfig.appWriteDBId,
         envConfig.appWriteCollectionId,
         documentID,
-        { title, content, thumbnail, status, category }
+        { title, content, thumbnail, status, category, statusUpdated }
       );
     } catch (error) {
       console.error("Appwrite error ++ update post ++", error);

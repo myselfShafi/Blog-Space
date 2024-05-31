@@ -91,6 +91,7 @@ const EditPost = () => {
         }
         const resp = await dbService.updatePost(getValues("$id"), {
           ...data,
+          statusUpdated: data.status === post?.status ? false : true,
           thumbnail: file ? file.$id : post?.thumbnail,
         });
         if (resp) {
