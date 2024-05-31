@@ -19,17 +19,20 @@ export default async ({ req, res, log, error }) => {
   try {
     const event = req.headers["x-appwrite-event"];
     log(`event - ${event}`);
-    const { status, category, thumbnail } = req.body;
+    const { status, category, thumbnail, $id } = req.body;
     log(`req - ${req}`);
+    log(`req body - ${req.body}`);
+    log(`check - ${status}---${category}---${thumbnail}---${$id}`);
+
     const currCategory = await databases.listDocuments(
       appWriteDBId,
       appWriteCategoryCollectionId,
       [Query.contains("categoryName", category)]
     );
-    log(`currCategory - ${currCategory}`);
     let currDoc;
     if (currCategory.total > 0 && currCategory.documents.length > 0) {
       currDoc = currCategory.documents[0];
+      log(`currDoc 1 - ${currCategory.documents[0]}`);
     }
     if (currCategory.total === 0 && currCategory.documents.length === 0) {
       if (status === "public") {
@@ -44,27 +47,28 @@ export default async ({ req, res, log, error }) => {
             counter: 0,
           }
         );
+        log(`currDoc 2 - ${currDoc}`);
       }
     }
     log(`event - ${currDoc}`);
     let newCount = currDoc.counter ?? 0;
     if (
       event ===
-      `databases.${appWriteDBId}.collections.${appWriteCollectionId}.documents.*.create`
+      `databases.${appWriteDBId}.collections.${appWriteCollectionId}.documents.${$id}.create`
     ) {
       if (status === "public") {
         newCount += 1;
       }
     } else if (
       event ===
-      `databases.${appWriteDBId}.collections.${appWriteCollectionId}.documents.*.delete`
+      `databases.${appWriteDBId}.collections.${appWriteCollectionId}.documents.${$id}.delete`
     ) {
       if (status === "public") {
         newCount -= 1;
       }
     } else if (
       event ===
-      `databases.${appWriteDBId}.collections.${appWriteCollectionId}.documents.*.update`
+      `databases.${appWriteDBId}.collections.${appWriteCollectionId}.documents.${$id}.update`
     ) {
     }
     log(`newcount - ${newCount}`);
