@@ -4,11 +4,8 @@ const appWriteURL = process.env.APPWRITE_URL;
 const appWriteProjectId = process.env.APPWRITE_PROJECT_ID;
 const appWriteDBId = process.env.APPWRITE_DB_ID;
 const appWriteCollectionId = process.env.APPWRITE_COLLECTION_ID;
-const appWriteUserCollectionId = process.env.APPWRITE_USER_COLLECTION_ID;
 const appWriteCategoryCollectionId =
   process.env.APPWRITE_CATEGORY_COLLECTION_ID;
-const appWriteBucketId = process.env.APPWRITE_BUCKET_ID;
-const appWriteUserBucketId = process.env.APPWRITE_USER_BUCKET_ID;
 const appWriteApiKey = process.env.APPWRITE_API_KEY_FUNC;
 
 export default async ({ req, res, log, error }) => {
@@ -23,7 +20,6 @@ export default async ({ req, res, log, error }) => {
   try {
     const event = req.headers["x-appwrite-event"];
     const { status, statusUpdated, category, thumbnail, $id } = req.body;
-    log(`check - ${status}---${category}---${thumbnail}---${$id}`);
 
     const currCategory = await databases.listDocuments(
       appWriteDBId,
@@ -43,15 +39,15 @@ export default async ({ req, res, log, error }) => {
           ID.unique(),
           {
             categoryName: category,
-            defaultImage: thumbnail,
-            count: 0,
-            counter: 0,
+            defaultImage: thumbnail ?? null,
           }
         );
       }
     }
-    let newCount = currDoc.counter ?? 100;
-    log(`counter intial: ${currDoc.counter}`);
+
+    let newCount = currDoc.count ?? 0;
+    let img = currDoc.defaultImage ?? null;
+
     if (
       event ===
       `databases.${appWriteDBId}.collections.${appWriteCollectionId}.documents.${$id}.create`
@@ -66,6 +62,13 @@ export default async ({ req, res, log, error }) => {
       if (status === "public") {
         newCount -= 1;
       }
+      if (currDoc.defaultImage === thumbnail) {
+        img = (
+          await databases.listDocuments(appWriteDBId, appWriteCollectionId, [
+            Query.contains("thumbnail"),
+          ])
+        ).documents[0].thumbnail;
+      }
     } else if (
       event ===
       `databases.${appWriteDBId}.collections.${appWriteCollectionId}.documents.${$id}.update`
@@ -75,21 +78,31 @@ export default async ({ req, res, log, error }) => {
       }
       if (statusUpdated && status === "private") {
         newCount -= 1;
+        if (currDoc.defaultImage === thumbnail) {
+          img = (
+            await databases.listDocuments(appWriteDBId, appWriteCollectionId, [
+              Query.contains("thumbnail"),
+            ])
+          ).documents[0].thumbnail;
+        }
       }
-      log(`updating:   ${statusUpdated} ${status}`);
     }
-    log(`newcount after- ${newCount}`);
 
     if (currDoc) {
-      const update = await databases.updateDocument(
-        appWriteDBId,
-        appWriteCategoryCollectionId,
-        currDoc.$id,
-        { counter: newCount }
-      );
-
-      log(`updated resp: ${update}`);
-      log(`updated id: ${update.$id}`);
+      if (newCount <= 0) {
+        await databases.deleteDocument(
+          appWriteDBId,
+          appWriteCategoryCollectionId,
+          currDoc.$id
+        );
+      } else {
+        await databases.updateDocument(
+          appWriteDBId,
+          appWriteCategoryCollectionId,
+          currDoc.$id,
+          { count: newCount, defaultImage: img }
+        );
+      }
     }
 
     return res.send({ success: true });
