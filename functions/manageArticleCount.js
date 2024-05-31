@@ -10,7 +10,7 @@ const appWriteCategoryCollectionId =
 const appWriteBucketId = process.env.APPWRITE_BUCKET_ID;
 const appWriteUserBucketId = process.env.APPWRITE_USER_BUCKET_ID;
 
-export default async ({ req, res }) => {
+export default async ({ req, res, log, error }) => {
   const client = new Client();
   const databases = new Databases(client);
 
@@ -18,12 +18,15 @@ export default async ({ req, res }) => {
 
   try {
     const event = req.headers["x-appwrite-event"];
+    log(`event - ${event}`);
     const { status, category, thumbnail } = req.body;
+    log(`req - ${req}`);
     const currCategory = await databases.listDocuments(
       appWriteDBId,
       appWriteCategoryCollectionId,
       [Query.contains("categoryName", category)]
     );
+    log(`currCategory - ${currCategory}`);
     let currDoc;
     if (currCategory.total > 0 && currCategory.documents.length > 0) {
       currDoc = currCategory.documents[0];
@@ -43,6 +46,7 @@ export default async ({ req, res }) => {
         );
       }
     }
+    log(`event - ${currDoc}`);
     let newCount = currDoc.counter ?? 0;
     if (
       event ===
@@ -63,6 +67,7 @@ export default async ({ req, res }) => {
       `databases.${appWriteDBId}.collections.${appWriteCollectionId}.documents.*.update`
     ) {
     }
+    log(`newcount - ${newCount}`);
 
     if (currDoc) {
       await databases.updateDocument(
@@ -74,8 +79,9 @@ export default async ({ req, res }) => {
     }
 
     return res.send({ success: true });
-  } catch (error) {
-    console.error("An error occurred:", error);
+  } catch (err) {
+    error(`error: ${err}`);
+    console.error("An error occurred:", err);
     return res.status(500).json({ error: "Internal server error..." });
   }
 };
