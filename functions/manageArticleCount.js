@@ -65,7 +65,7 @@ export default async ({ req, res, log, error }) => {
       if (currDoc.defaultImage === thumbnail) {
         img = (
           await databases.listDocuments(appWriteDBId, appWriteCollectionId, [
-            Query.contains("thumbnail"),
+            Query.isNotNull("thumbnail"),
           ])
         ).documents[0].thumbnail;
       }
@@ -81,7 +81,7 @@ export default async ({ req, res, log, error }) => {
         if (currDoc.defaultImage === thumbnail) {
           img = (
             await databases.listDocuments(appWriteDBId, appWriteCollectionId, [
-              Query.contains("thumbnail"),
+              Query.isNotNull("thumbnail"),
             ])
           ).documents[0].thumbnail;
         }
