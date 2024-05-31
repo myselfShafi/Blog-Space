@@ -73,7 +73,7 @@ export default async ({ req, res }) => {
       );
     }
 
-    res.send({ success: true });
+    return res.send({ success: true });
   } catch (error) {
     console.error("An error occurred:", error);
     return res.status(500).json({ error: "Internal server error..." });
