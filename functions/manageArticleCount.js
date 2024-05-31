@@ -9,12 +9,16 @@ const appWriteCategoryCollectionId =
   process.env.APPWRITE_CATEGORY_COLLECTION_ID;
 const appWriteBucketId = process.env.APPWRITE_BUCKET_ID;
 const appWriteUserBucketId = process.env.APPWRITE_USER_BUCKET_ID;
+const appWriteApiKey = process.env.APPWRITE_API_KEY_FUNC;
 
 export default async ({ req, res, log, error }) => {
   const client = new Client();
   const databases = new Databases(client);
 
-  client.setEndpoint(appWriteURL).setProject(appWriteProjectId);
+  client
+    .setEndpoint(appWriteURL)
+    .setProject(appWriteProjectId)
+    .setKey(appWriteApiKey);
 
   try {
     const event = req.headers["x-appwrite-event"];
@@ -71,12 +75,15 @@ export default async ({ req, res, log, error }) => {
     log(`newcount after- ${newCount}`);
 
     if (currDoc) {
-      await databases.updateDocument(
+      const update = await databases.updateDocument(
         appWriteDBId,
         appWriteCategoryCollectionId,
         currDoc.$id,
         { counter: newCount }
       );
+
+      log(`updated resp: ${update}`);
+      log(`updated id: ${update.$id}`);
     }
 
     return res.send({ success: true });
