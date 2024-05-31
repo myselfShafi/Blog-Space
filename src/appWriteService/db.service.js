@@ -1,5 +1,6 @@
 import { Client, Databases, ID, Query, Storage } from "appwrite";
 import { envConfig } from "../config";
+import categoryService from "./category.service";
 
 class DbService {
   client = new Client();
@@ -110,6 +111,12 @@ class DbService {
 
   async deleteFile(fileID) {
     try {
+      const check = await categoryService.getCategories([
+        Query.contains("defaultImage", fileID),
+      ]);
+      if (check.total > 0 && check.documents.length > 0) {
+        await categoryService.updateImageID(check.documents[0].$id);
+      }
       return await this.storage.deleteFile(envConfig.appWriteBucketId, fileID);
     } catch (error) {
       console.error("Appwrite error ++ delete file ++", error);

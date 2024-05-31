@@ -48,6 +48,12 @@ export default async ({ req, res, log, error }) => {
     let newCount = currDoc.count ?? 0;
     let img = currDoc.defaultImage ?? null;
 
+    let checkOtherThumb = await databases.listDocuments(
+      appWriteDBId,
+      appWriteCollectionId,
+      [Query.isNotNull("thumbnail"), Query.equal("category", category)]
+    );
+
     if (
       event ===
       `databases.${appWriteDBId}.collections.${appWriteCollectionId}.documents.${$id}.create`
@@ -63,11 +69,10 @@ export default async ({ req, res, log, error }) => {
         newCount -= 1;
       }
       if (currDoc.defaultImage === thumbnail) {
-        img = (
-          await databases.listDocuments(appWriteDBId, appWriteCollectionId, [
-            Query.isNotNull("thumbnail"),
-          ])
-        ).documents[0].thumbnail;
+        img =
+          checkOtherThumb.total > 0
+            ? checkOtherThumb.documents[0].thumbnail
+            : null;
       }
     } else if (
       event ===
@@ -79,11 +84,10 @@ export default async ({ req, res, log, error }) => {
       if (statusUpdated && status === "private") {
         newCount -= 1;
         if (currDoc.defaultImage === thumbnail) {
-          img = (
-            await databases.listDocuments(appWriteDBId, appWriteCollectionId, [
-              Query.isNotNull("thumbnail"),
-            ])
-          ).documents[0].thumbnail;
+          img =
+            checkOtherThumb.total > 0
+              ? checkOtherThumb.documents[0].thumbnail
+              : null;
         }
       }
     }
