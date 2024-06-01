@@ -152,7 +152,12 @@ const UserPosts = () => {
             </button>
           </div>
         </div>
-        <Error showError={err}>{textConfig.auth.verify}</Error>
+        <Error showError={err}>
+          {textConfig.auth.verify}
+          <span className="block lg:text-center">
+            {textConfig.auth.verify2}
+          </span>
+        </Error>
       </div>
       {loading && <LoaderPage>{textConfig.loaders.userpost}</LoaderPage>}
       {!loading && fetchErr ? (

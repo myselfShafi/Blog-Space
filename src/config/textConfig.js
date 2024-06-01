@@ -44,6 +44,7 @@ const textConfig = {
     note: "Password security begins with a strong password: at least 10 characters, including uppercase letters, lowercase letters, numbers, and symbols.",
     verifying: "Verifying your account ...",
     verify: "Feature Locked: Verify your account to unlock this action.",
+    verify2: "Kindly relogin if already verified.",
     verified: "Email Verified",
     verified2: "Your account is now verified. Kindly Logout and Re-login.",
     registered: "Account Registration Done",
