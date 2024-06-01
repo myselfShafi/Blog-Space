@@ -44,7 +44,10 @@ class AuthService {
       return await this.account.createEmailPasswordSession(email, password);
       // handle err in frontend comp.
     } catch (error) {
-      //console.error("Appwrite error ++ session Login ++", error);
+      if (error.code === 401) {
+        throw new Error("Logged in on another tab. Log out to proceed.");
+      }
+      // console.error("Appwrite error ++ session Login ++", error, error.code);
       throw error;
     }
   }

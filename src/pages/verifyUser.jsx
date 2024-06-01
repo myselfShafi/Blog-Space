@@ -60,7 +60,9 @@ const VerifyUser = () => {
               <p className="text-teal-500">{textConfig.auth.verified2}</p>
               <button
                 className="btn-auth w-fit"
-                onClick={() => navigate("/login", { replace: true })}
+                onClick={() =>
+                  navigate(`${status ? "/" : "/login"}`, { replace: true })
+                }
               >
                 {textConfig.auth.login2}
               </button>{" "}
