@@ -45,7 +45,7 @@ const textConfig = {
     verifying: "Verifying your account ...",
     verify: "Feature Locked: Verify your account to unlock this action.",
     verified: "Email Verified",
-    verified2: "Your account is now verified. Proceed to Login.",
+    verified2: "Your account is now verified. Kindly Logout and Re-login.",
     registered: "Account Registration Done",
   },
   user: {

@@ -1,21 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import LoaderPage from "./loaders/screenLoad";
 
 const AuthRoute = ({ authenticated, children }) => {
-  const loginStatus = useSelector((state) => state.auth.status);
+  const { status } = useSelector((state) => state.auth);
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const [loader, setLoader] = useState(true);
 
   useEffect(() => {
-    if (authenticated && loginStatus !== authenticated) {
+    if (pathname === "/user-verification") {
+      setLoader(false);
+      return;
+    } else if (authenticated && status !== authenticated) {
       navigate("/login");
-    } else if (!authenticated && loginStatus !== authenticated) {
+    } else if (!authenticated && status !== authenticated) {
       navigate("/");
     }
     setLoader(false);
-  }, [loader, loginStatus, authenticated]);
+  }, [loader, status, authenticated]);
 
   return loader ? <LoaderPage /> : <React.Fragment>{children}</React.Fragment>;
 };
