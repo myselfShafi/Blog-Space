@@ -89,7 +89,7 @@ export const CategoryDropdown = () => {
                       className="w-56 h-48 object-cover object-center"
                       loading={"eager"}
                     />
-                    <h6 className="bg-white/75 dark:bg-gray-900/75 text-center px-2 py-1 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition duration-500 group-hover/category:-translate-y-6 group-hover/category:scale-110 text-nowrap">
+                    <h6 className="bg-white/75 dark:bg-gray-900/75 text-center px-2 py-1 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition duration-500 group-hover/category:-translate-y-6 group-hover/category:scale-110">
                       {list?.categoryName}
                     </h6>
                   </section>

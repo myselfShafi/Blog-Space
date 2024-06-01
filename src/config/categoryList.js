@@ -7,6 +7,7 @@ const categoryList = [
   "Fashion",
   "Sports",
   "Science",
+  "Software Development",
   "Health & Wellness",
   "Personal Growth",
   "Home Decor",
