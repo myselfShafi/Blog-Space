@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import authService from "../appWriteService/auth.service";
 import { AnimationIcon, AuthWrapper } from "../components";
@@ -8,6 +9,7 @@ import { textConfig } from "../config";
 const VerifyUser = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { status } = useSelector((state) => state.auth);
   const params = new URLSearchParams(location.search);
   const userID = params.get("userId") || null;
   const secret = params.get("secret") || null;
