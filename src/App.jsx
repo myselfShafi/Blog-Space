@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/react";
 import { Provider } from "react-redux";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { PersistGate } from "redux-persist/integration/react";
@@ -98,6 +99,7 @@ const router = createBrowserRouter([
 function App() {
   return (
     <Provider store={store}>
+      <Analytics />
       <PersistGate loading={<LoaderPage />} persistor={persistor}>
         <RouterProvider router={router} />
       </PersistGate>
