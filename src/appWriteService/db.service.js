@@ -83,7 +83,7 @@ class DbService {
     try {
       const file = await this.getPost(documentID);
       if (file?.thumbnail) {
-        await this.deleteFile(file?.thumbnail);
+        await this.deleteFile(file?.thumbnail, file?.category);
       }
       return await this.databases.deleteDocument(
         envConfig.appWriteDBId,
@@ -109,13 +109,13 @@ class DbService {
     }
   }
 
-  async deleteFile(fileID) {
+  async deleteFile(fileID, category) {
     try {
       const check = await categoryService.getCategories([
         Query.contains("defaultImage", fileID),
       ]);
       if (check.total > 0 && check.documents.length > 0) {
-        await categoryService.updateImageID(check.documents[0].$id);
+        await categoryService.updateImageID(check.documents[0].$id, category);
       }
       return await this.storage.deleteFile(envConfig.appWriteBucketId, fileID);
     } catch (error) {

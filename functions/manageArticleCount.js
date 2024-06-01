@@ -60,6 +60,9 @@ export default async ({ req, res, log, error }) => {
     ) {
       if (status === "public") {
         newCount += 1;
+        if (!currDoc.defaultImage) {
+          img = thumbnail;
+        }
       }
     } else if (
       event ===

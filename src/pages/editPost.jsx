@@ -87,7 +87,7 @@ const EditPost = () => {
             ? await dbService.uploadFile(data?.thumbnail[0])
             : null;
         if (file && post?.thumbnail) {
-          await dbService.deleteFile(post?.thumbnail);
+          await dbService.deleteFile(post?.thumbnail, data?.category);
         }
         const resp = await dbService.updatePost(getValues("$id"), {
           ...data,
