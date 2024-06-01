@@ -120,7 +120,6 @@ const EditPost = () => {
       }
     } catch (error) {
       setError("root", { type: "manual", message: error.message });
-      console.error(error);
     }
     setLoading(false);
   };

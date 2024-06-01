@@ -27,7 +27,7 @@ class UserService {
         }
       );
     } catch (error) {
-      console.error("Appwrite error ++ create userDB ++", error);
+      //console.error("Appwrite error ++ create userDB ++", error);
       throw error;
     }
   }
@@ -54,7 +54,7 @@ class UserService {
       }
       return resp;
     } catch (error) {
-      console.error("Appwrite error ++ update userDB ++", error);
+      //console.error("Appwrite error ++ update userDB ++", error);
       throw error;
     }
   }
@@ -67,7 +67,7 @@ class UserService {
         query
       );
     } catch (error) {
-      console.error("Appwrite error ++ get userDB ++", error);
+      //console.error("Appwrite error ++ get userDB ++", error);
       throw error;
     }
   }
@@ -80,7 +80,7 @@ class UserService {
         fileID
       );
     } catch (error) {
-      console.error("Appwrite error ++ upload dp ++", error);
+      //console.error("Appwrite error ++ upload dp ++", error);
       throw error;
     }
   }
@@ -92,7 +92,7 @@ class UserService {
         fileID
       );
     } catch (error) {
-      console.error("Appwrite error ++ delete dp ++", error);
+      //console.error("Appwrite error ++ delete dp ++", error);
       throw error;
     }
   }

@@ -30,11 +30,11 @@ class AuthService {
           }
         }
       } else {
-        console.error("Appwrite error ++ account creation resp failed!");
+        //console.error("Appwrite error ++ account creation resp failed!");
         return resp;
       }
     } catch (error) {
-      console.error("Appwrite error ++ account create ++", error);
+      //console.error("Appwrite error ++ account create ++", error);
       throw error;
     }
   }
@@ -44,7 +44,7 @@ class AuthService {
       return await this.account.createEmailPasswordSession(email, password);
       // handle err in frontend comp.
     } catch (error) {
-      console.error("Appwrite error ++ session Login ++", error);
+      //console.error("Appwrite error ++ session Login ++", error);
       throw error;
     }
   }
@@ -55,7 +55,7 @@ class AuthService {
       // use deleteSessions() to logout across all devices
       // handle err in frontend comp.
     } catch (error) {
-      console.error("Appwrite error ++ session Logout ++", error);
+      //console.error("Appwrite error ++ session Logout ++", error);
       throw error;
     }
   }
@@ -65,7 +65,7 @@ class AuthService {
       return await this.account.get();
       // handle err in frontend comp.
     } catch (error) {
-      console.error("Appwrite error ++ currently loggedIn ++", error);
+      //console.error("Appwrite error ++ currently loggedIn ++", error);
       throw error;
     }
   }
@@ -75,7 +75,7 @@ class AuthService {
       return await this.account.createRecovery(email, resetURL);
       // handle err in frontend comp.
     } catch (error) {
-      console.error("Appwrite error ++ reset-pwd email ++", error);
+      //console.error("Appwrite error ++ reset-pwd email ++", error);
       throw error;
     }
   }
@@ -90,7 +90,7 @@ class AuthService {
       );
       // handle err in frontend comp.
     } catch (error) {
-      console.error("Appwrite error ++ password update ++", error);
+      //console.error("Appwrite error ++ password update ++", error);
       throw error;
     }
   }
@@ -100,7 +100,7 @@ class AuthService {
       return await this.account.updateVerification(userID, secret);
       // handle err in frontend comp.
     } catch (error) {
-      console.error("Appwrite error ++ verify account ++", error);
+      //console.error("Appwrite error ++ verify account ++", error);
       throw error;
     }
   }
@@ -110,7 +110,7 @@ class AuthService {
       return await this.account.updateName(name);
       // handle err in frontend comp.
     } catch (error) {
-      console.error("Appwrite error ++ update name ++", error);
+      //console.error("Appwrite error ++ update name ++", error);
       throw error;
     }
   }

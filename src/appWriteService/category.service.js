@@ -23,7 +23,7 @@ class CategoryService {
         query
       );
     } catch (error) {
-      console.error("Appwrite error ++ get categories ++", error);
+      //console.error("Appwrite error ++ get categories ++", error);
       throw error;
     }
   }
@@ -36,7 +36,7 @@ class CategoryService {
         docID
       );
     } catch (error) {
-      console.error("Appwrite error ++ get categories ++", error);
+      //console.error("Appwrite error ++ get categories ++", error);
       throw error;
     }
   }

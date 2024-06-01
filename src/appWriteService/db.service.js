@@ -23,7 +23,7 @@ class DbService {
         query
       );
     } catch (error) {
-      console.error("Appwrite error ++ get all posts ++", error);
+      //console.error("Appwrite error ++ get all posts ++", error);
       throw error;
     }
   }
@@ -36,7 +36,7 @@ class DbService {
         documentID
       );
     } catch (error) {
-      console.error("Appwrite error ++ get current post ++", error);
+      //console.error("Appwrite error ++ get current post ++", error);
       throw error;
     }
   }
@@ -57,7 +57,7 @@ class DbService {
         }
       );
     } catch (error) {
-      console.error("Appwrite error ++ create post ++", error);
+      //console.error("Appwrite error ++ create post ++", error);
       throw error;
     }
   }
@@ -74,7 +74,7 @@ class DbService {
         { title, content, thumbnail, status, category, statusUpdated }
       );
     } catch (error) {
-      console.error("Appwrite error ++ update post ++", error);
+      //console.error("Appwrite error ++ update post ++", error);
       throw error;
     }
   }
@@ -91,7 +91,7 @@ class DbService {
         documentID
       );
     } catch (error) {
-      console.error("Appwrite error ++ delete post & file ++", error);
+      //console.error("Appwrite error ++ delete post & file ++", error);
       throw error;
     }
   }
@@ -104,7 +104,7 @@ class DbService {
         file
       );
     } catch (error) {
-      console.error("Appwrite error ++ upload file ++", error);
+      //console.error("Appwrite error ++ upload file ++", error);
       throw error;
     }
   }
@@ -119,7 +119,7 @@ class DbService {
       }
       return await this.storage.deleteFile(envConfig.appWriteBucketId, fileID);
     } catch (error) {
-      console.error("Appwrite error ++ delete file ++", error);
+      //console.error("Appwrite error ++ delete file ++", error);
       throw error;
     }
   }
