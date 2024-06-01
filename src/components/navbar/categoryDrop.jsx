@@ -81,6 +81,7 @@ export const CategoryDropdown = () => {
                   <section className="relative border dark:border-gray-900 w-fit h-fit hover:shadow-2xl group/category after:content-[''] after:absolute after:top-3 after:bottom-3 after:left-3 after:right-3 hover:after:border hover:after:dark:border-gray-900">
                     <LazyImage
                       loaderClass={"w-56 h-48 bg-loader"}
+                      dotClass={"w-2 h-2"}
                       src={`${
                         list?.defaultImage
                           ? dbService.getFile(list?.defaultImage)

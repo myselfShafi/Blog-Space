@@ -41,7 +41,7 @@ class CategoryService {
     }
   }
 
-  async updateImageID(docID, category) {
+  async updateImageID(docID, category, newDoc) {
     try {
       const getImage = await dbService.getAllPosts([
         Query.isNotNull("thumbnail"),
@@ -53,7 +53,8 @@ class CategoryService {
         docID,
         {
           defaultImage:
-            getImage.total > 0 ? getImage.documents[0].thumbnail : null,
+            newDoc ||
+            (getImage.total > 0 ? getImage.documents[0].thumbnail : null),
         }
       );
     } catch (error) {

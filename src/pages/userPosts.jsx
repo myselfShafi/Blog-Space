@@ -91,7 +91,6 @@ const UserPosts = () => {
         setImgStatus({ loading: false, err: true });
       }
     } catch (error) {
-      console.log({ error });
       setImgStatus({ loading: false, err: true });
     }
   };
