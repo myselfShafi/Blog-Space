@@ -8,27 +8,28 @@ import { textConfig } from "../config";
 import NotFound from "./notFound";
 
 const Category = () => {
-  const [categories, setCategories] = useState(new Array(6).fill(null));
+  const [categories, setCategories] = useState(Array(6).fill(null));
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
-  useEffect(() => {
-    const run = async () => {
-      try {
-        const fetchCategory = await categoryService.getCategories([
-          Query.greaterThan("count", 0),
-        ]);
-        if (fetchCategory) {
-          setCategories(fetchCategory.documents);
-        } else {
-          setError(true);
-        }
-      } catch (error) {
+  const fetchCategories = async () => {
+    try {
+      const fetchCategory = await categoryService.getCategories([
+        Query.greaterThan("count", 0),
+      ]);
+      if (fetchCategory) {
+        setCategories(fetchCategory.documents);
+      } else {
         setError(true);
       }
-      setLoading(false);
-    };
-    run();
+    } catch (error) {
+      setError(true);
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    fetchCategories();
   }, []);
 
   if (loading) {

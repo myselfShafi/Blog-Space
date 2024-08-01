@@ -16,22 +16,23 @@ const Dashboard = () => {
   const [latest, setLatest] = useState(new Array(4).fill(null));
   const [trend, setTrend] = useState(new Array(3).fill(null));
 
-  useEffect(() => {
-    const run = async () => {
-      try {
-        const allposts = await dbService.getAllPosts([
-          Query.equal("status", "public"),
-        ]);
-        if (allposts) {
-          setLatest(allposts.documents?.reverse().slice(0, 4));
-          setDayBlog(getBlogOfDay(allposts?.documents, allposts.total));
-          setTrend(getRandomPosts(allposts.documents, allposts.total, 3));
-        }
-      } catch (error) {
-        return;
+  const fetchData = async () => {
+    try {
+      const allposts = await dbService.getAllPosts([
+        Query.equal("status", "public"),
+      ]);
+      if (allposts) {
+        setLatest(allposts.documents?.reverse().slice(0, 4));
+        setDayBlog(getBlogOfDay(allposts?.documents, allposts.total));
+        setTrend(getRandomPosts(allposts.documents, allposts.total, 3));
       }
-    };
-    run();
+    } catch (error) {
+      return;
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
   }, []);
 
   return (

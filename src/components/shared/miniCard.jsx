@@ -1,5 +1,5 @@
 import parse from "html-react-parser";
-import React from "react";
+import React, { useMemo } from "react";
 import { Link } from "react-router-dom";
 import dbService from "../../appWriteService/db.service";
 import {
@@ -22,9 +22,15 @@ const MiniCard = ({
   loaderHeight,
   showStatus,
 }) => {
-  const truncText = data?.title && getTruncatedText(data?.title, 48);
-  const date = getDate(data?.$createdAt);
-  const readtime = data?.content && getReadTime(parse(data?.content));
+  const truncText = useMemo(
+    () => data?.title && getTruncatedText(data?.title, 48),
+    [data?.title]
+  );
+  const date = useMemo(() => getDate(data?.$createdAt), [data?.$createdAt]);
+  const readtime = useMemo(
+    () => data?.content && getReadTime(parse(data?.content)),
+    [data?.content]
+  );
 
   if (!data) {
     return <MiniCardLoader hasBg={hasBg} />;

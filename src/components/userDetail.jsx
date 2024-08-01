@@ -169,15 +169,15 @@ const UserDetail = ({ data, setErr }) => {
               } ${updating.saved && "text-green-600 no-underline"}`}
             >
               {updating.load ? (
-                <div className="center-element gap-x-2">
+                <span className="center-element gap-x-2">
                   <span>{textConfig.user.saving}</span>
                   <Loader className="animate-spin" />
-                </div>
+                </span>
               ) : updating.saved ? (
-                <div className="center-element gap-x-2">
+                <span className="center-element gap-x-2">
                   <span>{textConfig.user.saved}</span>
                   <CheckSquare />
-                </div>
+                </span>
               ) : (
                 textConfig.user.save
               )}
