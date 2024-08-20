@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Menu, XSquare } from "react-feather";
 import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
@@ -15,38 +15,42 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [scroll, setScroll] = useState(false);
 
-  const navlist = [
-    {
-      id: 1,
-      title: textConfig.navMenu.home,
-      href: "/",
-      access: true,
-    },
-    {
-      id: 2,
-      title: <CategoryDropdown />,
-      access: true,
-    },
-    {
-      id: 3,
-      title: textConfig.navMenu.myblog,
-      href: "/my-blogs",
-      access: status,
-    },
-    {
-      id: 4,
-      title: <LogoutBtn />,
-      access: status,
-    },
-    {
-      id: 5,
-      title: textConfig.navMenu.auth,
-      href: "/login",
-      access: !status,
-    },
-  ];
+  const navlist = useMemo(
+    () => [
+      {
+        id: 1,
+        title: textConfig.navMenu.home,
+        href: "/",
+        access: true,
+      },
+      {
+        id: 2,
+        title: <CategoryDropdown />,
+        access: true,
+      },
+      {
+        id: 3,
+        title: textConfig.navMenu.myblog,
+        href: "/my-blogs",
+        access: status,
+      },
+      {
+        id: 4,
+        title: <LogoutBtn />,
+        access: status,
+      },
+      {
+        id: 5,
+        title: textConfig.navMenu.auth,
+        href: "/login",
+        access: !status,
+      },
+    ],
+    []
+  );
 
   const setBg = () => {
+    console.log("first");
     if (window.scrollY > 250) {
       setScroll(true);
     } else {

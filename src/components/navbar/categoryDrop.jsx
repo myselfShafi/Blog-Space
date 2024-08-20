@@ -1,50 +1,47 @@
 import { Query } from "appwrite";
-import React, { useEffect, useState } from "react";
+import React, { memo, useCallback, useEffect, useState } from "react";
 import { ChevronDown } from "react-feather";
 import { Link } from "react-router-dom";
 import { categoryService, dbService } from "../../appWriteService";
 import { textConfig } from "../../config";
 import { CustomErr, Dropdown, LazyImage } from "../shared";
 
-export const CategoryDropdown = () => {
+export const CategoryDropdown = memo(() => {
   const [categories, setCategories] = useState(new Array(6).fill(null));
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
-  useEffect(() => {
-    let isMounted = true;
-    const fetch = async () => {
-      try {
-        const fetchCategory = await categoryService.getCategories([
-          Query.greaterThan("count", 0),
-        ]);
-        if (isMounted && fetchCategory) {
-          setCategories((prevCategory) => {
-            if (
-              JSON.stringify(prevCategory) !==
-              JSON.stringify(fetchCategory.documents)
-            ) {
-              return fetchCategory.documents;
-            }
-            return prevCategory;
-          });
-        } else {
-          if (isMounted) setError(true);
-        }
-      } catch (error) {
-        if (isMounted) setError(true);
-      } finally {
-        if (!isMounted) setError(false);
-        setLoading(false);
+  const fetch = useCallback(async () => {
+    try {
+      const fetchCategory = await categoryService.getCategories([
+        Query.greaterThan("count", 0),
+      ]);
+      if (fetchCategory) {
+        setCategories((prevCategory) => {
+          if (
+            JSON.stringify(prevCategory) !==
+            JSON.stringify(fetchCategory.documents)
+          ) {
+            return fetchCategory.documents;
+          }
+          return prevCategory;
+        });
+      } else {
+        setError(true);
       }
-    };
+    } catch (error) {
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
     fetch();
     const fetchInterval = setInterval(() => {
       fetch();
     }, 10000);
-
     return () => {
-      isMounted = false;
       clearInterval(fetchInterval);
     };
   }, []);
@@ -105,4 +102,4 @@ export const CategoryDropdown = () => {
       </Link>
     </div>
   );
-};
+});
