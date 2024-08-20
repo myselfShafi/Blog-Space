@@ -50,7 +50,6 @@ const Navbar = () => {
   );
 
   const setBg = () => {
-    console.log("first");
     if (window.scrollY > 250) {
       setScroll(true);
     } else {

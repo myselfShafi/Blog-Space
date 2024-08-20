@@ -129,7 +129,21 @@ class DbService {
   }
 
   getFile(fileID) {
-    return this.storage.getFilePreview(envConfig.appWriteBucketId, fileID);
+    return this.storage.getFilePreview(
+      envConfig.appWriteBucketId,
+      fileID,
+      undefined,
+      undefined,
+      undefined,
+      "80", //quality
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      "webp" //image output format
+    );
   }
 }
 
