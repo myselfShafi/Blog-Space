@@ -59,15 +59,21 @@ const CategoryPosts = () => {
           : "my-20 lg:my-40"
       }`}
     >
-      <LazyBg
-        wrapperClass={"w-full h-96 lg:h-[50vh]"}
-        className="w-full h-96 lg:h-[50vh] bg-cover bg-center center-element"
-        thumbnail={banner?.defaultImage ?? "/static/banner.jpg"}
-      >
-        <h2 className="mix-blend-screen center-element bg-white/75 dark:bg-gray-900/75 min-w-56 min-h-56 px-3  rounded-full font-extrabold text-center">
-          {banner?.categoryName}
-        </h2>
-      </LazyBg>
+      {banner ? (
+        <LazyBg
+          wrapperClass={"w-full h-96 lg:h-[50vh]"}
+          className="w-full h-96 lg:h-[50vh] bg-cover bg-center center-element"
+          thumbnail={banner?.defaultImage ?? "/static/banner.jpg"}
+        >
+          <h2 className="mix-blend-screen center-element bg-white/75 dark:bg-gray-900/75 min-w-56 min-h-56 px-3  rounded-full font-extrabold text-center">
+            {banner?.categoryName}
+          </h2>
+        </LazyBg>
+      ) : (
+        <div className="relative w-full h-96 lg:h-[50vh] center-element bg-loader animate-pulse">
+          <h2 className="bg-shade min-w-56 min-h-56 rounded-full"></h2>
+        </div>
+      )}
       <MainContainer className={"lg:mt-40 p-0"}>
         {err ? (
           <EmptySection isProfile />

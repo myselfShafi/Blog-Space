@@ -11,6 +11,9 @@ const LazyBg = ({ wrapperClass, className, thumbnail, children, ...props }) => {
 
     image.onload = () => setLoading(false);
     image.onerror = () => setLoading(false);
+    return () => {
+      image.src = "";
+    };
   }, [dbService.getFile(thumbnail)]);
 
   return (
