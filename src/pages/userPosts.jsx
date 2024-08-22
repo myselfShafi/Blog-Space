@@ -9,7 +9,6 @@ import ImageLoader from "../components/loaders/imgLoader";
 import {
   EmptySection,
   Error,
-  LazyImage,
   MainContainer,
   MiniCard,
 } from "../components/shared";
@@ -26,6 +25,7 @@ const UserPosts = () => {
   const [user, setUser] = useState(null);
   const [img, setImg] = useState(null);
   const [imgStatus, setImgStatus] = useState({ loading: true, err: false });
+  const [profileLoading, setProfileLoading] = useState(true);
   let dpRef = useRef(null);
 
   useEffect(() => {
@@ -107,12 +107,24 @@ const UserPosts = () => {
               accept="image/png, image/jpg, image/jpeg"
               onChange={ondpChange}
             />
-            <LazyImage
-              loaderClass={"w-36 h-36 lg:w-52 lg:h-52 rounded-full bg-loader"}
-              src={img}
-              alt="profile-image"
-              className="w-36 h-36 lg:w-52 lg:h-52 object-cover rounded-full object-center "
-            />
+
+            <div className={`relative center-element`}>
+              {profileLoading && (
+                <ImageLoader
+                  className={"w-36 h-36 lg:w-52 lg:h-52 rounded-full bg-loader"}
+                />
+              )}
+              <img
+                onLoad={() => setProfileLoading(false)}
+                src={img}
+                alt="profile-image"
+                className={`transition-opacity duration-500 ${
+                  profileLoading
+                    ? "h-0 w-0 opacity-0"
+                    : " w-36 h-36 lg:w-52 lg:h-52 object-cover rounded-full object-center opacity-100"
+                }`}
+              />
+            </div>
             <div
               onClick={() => {
                 !imgStatus.loading && !imgStatus.err && dpRef.current.click();

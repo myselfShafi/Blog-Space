@@ -1,7 +1,6 @@
 import parse from "html-react-parser";
 import React from "react";
 import { Link } from "react-router-dom";
-import { dbService } from "../../appWriteService";
 import { textConfig } from "../../config";
 import { getDate, getTruncatedText } from "../../utilities";
 import useUserInfo from "../../utilities/hooks/useUserInfo";
@@ -15,7 +14,7 @@ const CategoryCard = ({ data, isloading }) => {
     data?.content &&
     getTruncatedText(parse(data?.content)[0]?.props.children, 150);
   const date = getDate(data?.$createdAt);
-  const { username, profileImg } = useUserInfo(data?.userID);
+  const { username, userThumbnail } = useUserInfo(data?.userID);
 
   if (isloading) {
     return <CategoryLoader />;
@@ -24,11 +23,11 @@ const CategoryCard = ({ data, isloading }) => {
   return (
     <Link to={`/all-category/${data?.category}/${data?.$id}`}>
       <div className="bg-shade break-inside-avoid mb-10 lg:mb-16 group/category overflow-hidden hover:shadow-lg dark:hover:shadow-slate-950">
-        {data?.thumbnail && (
+        {data?.thumbnail && ( // to hide image-div for posts with no images
           <div className="relative group-hover/category:scale-105 transition-transform duration-300">
             <LazyImage
               loaderClass={"h-72 lg:h-80 bg-loader"}
-              src={data?.thumbnail && dbService.getFile(data?.thumbnail)}
+              thumbnail={data?.thumbnail}
               alt={`post-${data?.$id}`}
               className={`w-full object-cover object-center`}
             />
@@ -51,7 +50,7 @@ const CategoryCard = ({ data, isloading }) => {
             <LazyImage
               loaderClass={"h-14 w-14 rounded-full bg-loader"}
               dotClass={"w-1 h-1"}
-              src={profileImg}
+              userThumbnail={userThumbnail}
               alt={data?.userID}
               className={"h-14 w-14 rounded-full object-cover object-center"}
             />

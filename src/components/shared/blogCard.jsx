@@ -2,7 +2,6 @@ import parse from "html-react-parser";
 import React from "react";
 import { Calendar, User } from "react-feather";
 import { useNavigate } from "react-router-dom";
-import dbService from "../../appWriteService/db.service";
 import { textConfig } from "../../config";
 import { getDate, getTruncatedText } from "../../utilities";
 import useUserInfo from "../../utilities/hooks/useUserInfo";
@@ -30,11 +29,7 @@ const BlogCard = ({ data }) => {
           "flex-none w-full h-80 lg:w-120 lg:h-96 2xl:h-[22rem] relative"
         }
         loaderClass={"h-full bg-loader"}
-        src={
-          data?.thumbnail
-            ? dbService.getFile(data?.thumbnail)
-            : "/static/logo.png"
-        }
+        thumbnail={data.thumbnail ?? "/static/logo.png"}
         alt={`card-${data?.thumbnail}`}
         className="absolute inset-0 w-full h-full object-cover"
       />

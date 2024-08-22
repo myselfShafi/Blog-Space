@@ -97,10 +97,21 @@ class UserService {
     }
   }
 
-  getFile(fileID) {
+  getFile(fileID, quality = 100) {
     return this.userStorage.getFilePreview(
       envConfig.appWriteUserBucketId,
-      fileID
+      fileID,
+      undefined,
+      undefined,
+      undefined,
+      quality,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      "webp"
     );
   }
 }

@@ -1,7 +1,6 @@
 import parse from "html-react-parser";
 import React, { useMemo } from "react";
 import { Link } from "react-router-dom";
-import dbService from "../../appWriteService/db.service";
 import {
   getCapitalize,
   getDate,
@@ -43,11 +42,7 @@ const MiniCard = ({
           <LazyImage
             loaderClass={`${imgClass} bg-loader`}
             loaderHeight={loaderHeight}
-            src={
-              data?.thumbnail
-                ? dbService.getFile(data.thumbnail)
-                : "/static/logo.png"
-            }
+            thumbnail={data.thumbnail ?? "/static/logo.png"}
             alt={`post-image-${data.thumbnail}`}
             className={`w-full object-cover object-center group-hover/mini:scale-105 transition-transform duration-200 ${imgClass}`}
           />

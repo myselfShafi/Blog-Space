@@ -49,9 +49,9 @@ const Post = () => {
   const readtime = data?.content && getReadTime(parse(data?.content));
 
   const { height, width } = useImgDimensions(
-    data.thumbnail && dbService.getFile(data.thumbnail)?.href
+    data.thumbnail && dbService.getFile(data.thumbnail, 10)?.href
   );
-  const { username, profileImg } = useUserInfo(data && data?.userID);
+  const { username, userThumbnail } = useUserInfo(data && data?.userID);
 
   useEffect(() => {
     fetchData(post);
@@ -184,8 +184,10 @@ const Post = () => {
           {data.thumbnail ? (
             <LazyImage
               wrapperClass={`${width > height ? "center-element" : ""}`}
-              loaderClass={"h-96 w-full lg:w-4/5 bg-loader mx-auto"}
-              src={data?.thumbnail && dbService.getFile(data.thumbnail)}
+              loaderClass={`${
+                height > width ? "w-full" : "lg:w-4/5"
+              } max-h-screen object-contain object-center`}
+              thumbnail={data.thumbnail}
               alt="img-post"
               className={`${
                 height > width ? "w-full" : "lg:w-4/5"
@@ -197,7 +199,7 @@ const Post = () => {
               <LazyImage
                 loaderClass={"h-20 w-20 rounded-full bg-loader"}
                 dotClass={"w-1 h-1"}
-                src={profileImg}
+                userThumbnail={userThumbnail}
                 alt={data?.userID}
                 className={"h-20 w-20 rounded-full object-cover object-center"}
               />

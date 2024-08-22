@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import dbService from "../appWriteService/db.service";
 import { textConfig } from "../config";
 import { getDate } from "../utilities";
 import useUserInfo from "../utilities/hooks/useUserInfo";
@@ -9,7 +8,7 @@ import LazyBg from "./shared/lazybg";
 
 const DayBlog = ({ data }) => {
   const date = getDate(data?.$createdAt);
-  const { username, profileImg } = useUserInfo(data?.userID);
+  const { username, userThumbnail } = useUserInfo(data?.userID);
 
   return (
     <div className="p-0 overflow-hidden">
@@ -19,7 +18,7 @@ const DayBlog = ({ data }) => {
           <div className="relative my-10 h-[40rem] overflow-hidden group/wrapper">
             <LazyBg
               className="h-full bg-cover bg-center group-hover/wrapper:scale-105 transition-transform duration-200 shadow-inner-3xl group-hover/wrapper:brightness-50 brightness-50 lg:brightness-100"
-              imgURL={data?.thumbnail && dbService.getFile(data?.thumbnail)}
+              thumbnail={data?.thumbnail ?? "/static/banner.jpg"}
               wrapperClass={"h-[40rem] w-full"}
             />
             <div className="absolute top-0 left-0 h-full w-full lg:opacity-50 group-hover/wrapper:opacity-100 group-hover/wrapper:backdrop-blur-sm p-10 lg:p-16 flex flex-col justify-end transition delay-100">
@@ -32,7 +31,7 @@ const DayBlog = ({ data }) => {
                   <LazyImage
                     loaderClass={"h-20 w-20 rounded-full bg-loader"}
                     dotClass={"w-1 h-1"}
-                    src={profileImg}
+                    userThumbnail={userThumbnail}
                     alt={data?.userID}
                     className={
                       "h-20 w-20 rounded-full object-cover object-center"

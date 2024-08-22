@@ -1,65 +1,82 @@
-import React, { useEffect, useRef, useState } from "react";
-import ImageLoader from "../loaders/imgLoader";
+import React, { memo, useEffect, useRef, useState } from "react";
+import { dbService, userService } from "../../appWriteService";
 
 const options = {
   rootMargin: "0px 0px 300px",
 };
 
-const LazyImage = ({
-  wrapperClass,
-  loaderClass,
-  loaderHeight,
-  src,
-  dotClass,
-  loading,
-  className,
-  ...props
-}) => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [url, setUrl] = useState("");
-  let ImageRef = useRef(null);
+const LazyImage = memo(
+  ({
+    wrapperClass,
+    loaderClass,
+    loaderHeight,
+    dotClass,
+    thumbnail,
+    userThumbnail,
+    loading,
+    alt,
+    className,
+    ...props
+  }) => {
+    const [isLoading, setIsLoading] = useState(true);
+    const [url, setUrl] = useState("");
+    let ImageRef = useRef(null);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries, self) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setUrl(src);
-          self.unobserve(entry.target);
+    let src = thumbnail
+      ? dbService.getFile(thumbnail)
+      : userThumbnail
+      ? userService.getFile(userThumbnail)
+      : null;
+
+    useEffect(() => {
+      const observer = new IntersectionObserver((entries, self) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setUrl(src);
+            self.unobserve(entry.target);
+          }
+        });
+      }, options);
+
+      observer.observe(ImageRef.current);
+
+      return () => {
+        if (ImageRef && ImageRef.current) {
+          observer.unobserve(ImageRef.current);
         }
-      });
-    }, options);
+      };
+    }, [src]);
 
-    observer.observe(ImageRef.current);
-
-    return () => {
-      if (ImageRef && ImageRef.current) {
-        observer.unobserve(ImageRef.current);
-      }
-    };
-  }, [src]);
-
-  return (
-    <div className={`relative ${wrapperClass}`}>
-      {isLoading && (
-        <ImageLoader
-          dotClass={dotClass}
-          className={`animate-pulse ${loaderClass} ${loaderHeight} `}
+    return (
+      <div className={`relative ${wrapperClass}`}>
+        {isLoading && (
+          <img
+            src={
+              thumbnail
+                ? dbService.getFile(thumbnail, 10)
+                : userThumbnail
+                ? userService.getFile(userThumbnail, 10)
+                : null
+            }
+            alt={alt}
+            loading="eager"
+            className={`blur-sm animate-pulse ${className} `}
+          />
+        )}
+        <img
+          onLoad={() => {
+            setIsLoading(false);
+          }}
+          ref={ImageRef}
+          src={loading !== "lazy" ? src : url}
+          className={` ${isLoading ? "h-0 w-0" : `${className}`}`}
+          alt={alt}
+          loading={loading ?? "lazy"}
+          {...props}
         />
-      )}
-      <img
-        onLoad={() => {
-          setIsLoading(false);
-        }}
-        ref={ImageRef}
-        src={loading ? src : url}
-        className={`transition-opacity duration-1000 ${
-          isLoading ? "h-0 w-0 opacity-0" : `${className} opacity-100`
-        }`}
-        {...props}
-        loading={loading ?? "lazy"}
-      />
-    </div>
-  );
-};
+      </div>
+    );
+  }
+);
 
 export default LazyImage;

@@ -2,7 +2,7 @@ import { Query } from "appwrite";
 import React, { memo, useCallback, useEffect, useState } from "react";
 import { ChevronDown } from "react-feather";
 import { Link } from "react-router-dom";
-import { categoryService, dbService } from "../../appWriteService";
+import { categoryService } from "../../appWriteService";
 import { textConfig } from "../../config";
 import { CustomErr, Dropdown, LazyImage } from "../shared";
 
@@ -79,11 +79,7 @@ export const CategoryDropdown = memo(() => {
                     <LazyImage
                       loaderClass={"w-56 h-48 bg-loader"}
                       dotClass={"w-2 h-2"}
-                      src={`${
-                        list?.defaultImage
-                          ? dbService.getFile(list?.defaultImage)
-                          : "/static/logo.png"
-                      }`}
+                      thumbnail={list?.defaultImage ?? "/static/logo.png"}
                       className="w-56 h-48 object-cover object-center"
                       loading={"eager"}
                     />

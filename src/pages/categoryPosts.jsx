@@ -62,11 +62,7 @@ const CategoryPosts = () => {
       <LazyBg
         wrapperClass={"w-full h-96 lg:h-[50vh]"}
         className="w-full h-96 lg:h-[50vh] bg-cover bg-center center-element"
-        imgURL={
-          banner?.defaultImage
-            ? dbService.getFile(banner?.defaultImage)
-            : "/static/banner.jpg"
-        }
+        thumbnail={banner?.defaultImage ?? "/static/banner.jpg"}
       >
         <h2 className="mix-blend-screen center-element bg-white/75 dark:bg-gray-900/75 min-w-56 min-h-56 px-3  rounded-full font-extrabold text-center">
           {banner?.categoryName}
